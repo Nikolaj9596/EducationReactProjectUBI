@@ -1,9 +1,8 @@
 import React from "react";
-import style from "./MainPage.module.scss";
 
 const MainPage = () => {
   return (
-    <div className={style.selectorName}>
+    <div className="main-page">
       <h2>Main Page</h2>
     </div>
   );
