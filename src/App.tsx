@@ -1,3 +1,4 @@
+import { classNames } from './helpers/classNames/classNames';
 import React, { Suspense } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { AboutAsync } from './About/About.async';
@@ -8,7 +9,7 @@ import { useTheme } from './theme/useTheme';
 const App = () => {
   const {theme, toggleTheme} = useTheme();
   return (
-    <div className={`app ${theme}`}>
+    <div className={classNames('app', {}, [theme])}>
       <button onClick={toggleTheme} >Toggle</button>
       <Link to={'/'}>Главная</Link>
       <Link to={'/about'}>О нас</Link>
