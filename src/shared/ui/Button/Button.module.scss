@@ -9,3 +9,41 @@
   background: none;
   outline: none;
 }
+
+.outline {
+  padding: 10px 15px;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background: none
+}
+
+.background {
+  background: var(--bg-color);
+  color: var(--primary-color);
+  border: none;
+}
+
+.backgroundInverted {
+  background: var(--inverted-bg-color);
+  color: var(--inverted-primary-color);
+  border: none;
+}
+
+.square {
+  padding: 0;
+}
+
+.square.size_m {
+  height: var(--font-line-m);
+  width: var(--font-line-m);
+}
+
+.square.size_l {
+  height: var(--font-line-l);
+  width: var(--font-line-l);
+}
+
+.square.size_xl {
+  height: var(--font-line-xl);
+  width: var(--font-line-xl);
+}
