@@ -2,4 +2,4 @@
 //lib
 export { classNames } from "./lib"
 //ui
-export { AppLink, AppLinkTheme, Button, ThemeButton, Loader } from "./ui"
+export { AppLink, AppLinkTheme, Button, ThemeButton, Loader, ButtonSize } from "./ui"

@@ -5,9 +5,10 @@ import { Button, classNames, ThemeButton } from "../../../shared";
 
 interface LangSwitcherProps {
   className?: string;
+  short?: boolean;
 }
 
-export const LangSwitcher = ({ className }: LangSwitcherProps) => {
+export const LangSwitcher = ({ className=cls.ThemeSwitcher, short=false }: LangSwitcherProps) => {
   const { t, i18n } = useTranslation();
   const toggle = () => {
     i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
@@ -16,9 +17,9 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
     <Button
       theme={ThemeButton.CLEAR}
       onClick={toggle}
-      className={classNames(cls.ThemeSwitcher, {}, [className ? className : ''])}
+      className={classNames(cls.ThemeSwitcher, {}, [className])}
     >
-        {t('Язык')}
+        {t(short ? 'Короткая версия языка' : 'Язык')}
     </Button>
   );
 };

@@ -1,6 +1,9 @@
 {
   "Язык": "English",
+  "Короткая версия языка": "En",
   "Страница не найдена": "Page not found",
   "Произошла непредвиденная ошибка": "An unexpected error occurred",
-  "Обновить страницу": "Refresh the page"
+  "Обновить страницу": "Refresh the page",
+  "Главная": "Main",
+  "О нас": "About"
 }
