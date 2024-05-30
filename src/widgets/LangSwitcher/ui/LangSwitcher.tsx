@@ -15,7 +15,7 @@ export const LangSwitcher = ({ className=cls.ThemeSwitcher, short=false }: LangS
   }
   return (
     <Button
-      theme={ThemeButton.CLEAR}
+      theme={ThemeButton.BACKGROUND_INVERTED}
       onClick={toggle}
       className={classNames(cls.ThemeSwitcher, {}, [className])}
     >
