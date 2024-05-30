@@ -1,4 +1,3 @@
-import { useTheme } from "../../../app/providers";
 import React, { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { classNames } from "../../lib";
 import { Portal } from "../Portal/Portal";
