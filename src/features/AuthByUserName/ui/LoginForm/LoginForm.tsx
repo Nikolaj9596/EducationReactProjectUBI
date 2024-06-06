@@ -15,9 +15,14 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
         props.className ? props.className : "",
       ])}
     >
-      <Input placeholder="Введите логин" type="text" className={cls.input} />
+      <Input 
+        placeholder={t("Введите логин")}
+        type="text"
+        className={cls.input}
+        autofocus
+      />
       <Input
-        placeholder="Введите пароль"
+        placeholder={t("Введите пароль")}
         type="password"
         className={cls.input}
       />

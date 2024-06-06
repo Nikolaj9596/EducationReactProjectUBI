@@ -6,5 +6,7 @@
   "Обновить страницу": "Refresh the page",
   "Главная": "Main",
   "О нас": "About",
-  "Войти": "Login"
+  "Войти": "Login",
+  "Введите пароль": "Enter password",
+  "Введите логин": "Enter login"
 }
