@@ -20,6 +20,7 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
   const onChangePassword = useCallback((value: string) => {
     dispatch(loginActions.setPassword(value))
   }, [dispatch])
+  const onLoginClick = useCallback(() => {}, [])
 
   return (
     <div
@@ -42,7 +43,11 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
         onChange={onChangePassword}
         value={password}
       />
-      <Button theme={ThemeButton.OUTLINE} className={cls.loginBtn}>
+      <Button
+        theme={ThemeButton.OUTLINE}
+        className={cls.loginBtn}
+        onClick={onLoginClick}
+      >
         {t("Boйти")}
       </Button>
     </div>
