@@ -1,9 +1,11 @@
 import { loginActions, getLoginState } from "../../../../features/AuthByUserName";
 import React, { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, classNames, Input, ThemeButton } from "../../../../shared";
+import { useSelector } from "react-redux";
+import { Button, classNames, Input, ThemeButton, TextTheme, Text } from "../../../../shared";
 import cls from "./LoginForm.module.scss";
+import { loginByUsername } from "../../../../features/AuthByUserName";
+import { useAppDispatch } from "../../../../app/providers";
 
 interface LoginFormProps {
   className?: string;
@@ -11,8 +13,8 @@ interface LoginFormProps {
 
 export const LoginForm: FC<LoginFormProps> = memo((props) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch()
-  const {userName, password} = useSelector(getLoginState)
+  const dispatch = useAppDispatch()
+  const { userName, password, isLoading, error} = useSelector(getLoginState)
   const onChangeUserName = useCallback((value: string) => {
     dispatch(loginActions.setUserName(value))
   }, [dispatch])
@@ -20,7 +22,10 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
   const onChangePassword = useCallback((value: string) => {
     dispatch(loginActions.setPassword(value))
   }, [dispatch])
-  const onLoginClick = useCallback(() => {}, [])
+
+  const onLoginClick = useCallback(() => {
+    dispatch(loginByUsername({ userName, password}))
+  }, [dispatch, userName, password])
 
   return (
     <div
@@ -28,6 +33,9 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
         props.className ? props.className : "",
       ])}
     >
+      <Text title={t('Форма авторизации')}/>
+      {error && <Text text={error} theme={TextTheme.ERROR} />}
+
       <Input
         placeholder={t("Введите логин")}
         type="text"
@@ -47,6 +55,7 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
         theme={ThemeButton.OUTLINE}
         className={cls.loginBtn}
         onClick={onLoginClick}
+        disabled={isLoading}
       >
         {t("Boйти")}
       </Button>

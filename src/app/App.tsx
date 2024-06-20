@@ -4,12 +4,13 @@ import { Navbar } from "../widgets/Navbar/ui/Navbar";
 import { Sidebar } from "../widgets";
 import { AppRouter } from "./providers";
 import { Suspense } from "react";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const { theme } = useTheme();
   document.body.className = theme;
   return (
-    <div className={classNames("app", {}, [theme])}>
+   <div className={classNames("app", {}, [theme])}>
       <Suspense fallback="loadding...">
         <Navbar />
         <div className="content-page">
