@@ -1,0 +1,1 @@
+export const USER_LOCLA_STORAGE_KEY = 'user';

@@ -1,20 +1,29 @@
-import { loginActions, getLoginState } from "../../../../features/AuthByUserName";
-import React, { FC, memo, useCallback } from "react";
+import React, { FC, memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 import { Button, classNames, Input, ThemeButton, TextTheme, Text } from "../../../../shared";
 import cls from "./LoginForm.module.scss";
 import { loginByUsername } from "../../../../features/AuthByUserName";
 import { useAppDispatch } from "../../../../app/providers";
+import { ReduxStoreWithManager } from "../../../../app/providers/StoreProvider";
+import { loginActions, loginReducer } from "../../modal/slice/loginSlice";
+import { getLoginState } from "../../modal/selectors/getLoginState/getLoginState";
 
-interface LoginFormProps {
+export interface LoginFormProps {
   className?: string;
 }
 
-export const LoginForm: FC<LoginFormProps> = memo((props) => {
+const LoginForm: FC<LoginFormProps> = memo((props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch()
-  const { userName, password, isLoading, error} = useSelector(getLoginState)
+  const store = useStore() as ReduxStoreWithManager;
+  const { userName, password, isLoading, error } = useSelector(getLoginState)
+  useEffect(() => {
+    store.reducerManager.add('loginForm', loginReducer)
+    return () => {
+      store.reducerManager.remove('loginForm')
+    }
+  }, [])
   const onChangeUserName = useCallback((value: string) => {
     dispatch(loginActions.setUserName(value))
   }, [dispatch])
@@ -24,7 +33,7 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
   }, [dispatch])
 
   const onLoginClick = useCallback(() => {
-    dispatch(loginByUsername({ userName, password}))
+    dispatch(loginByUsername({ userName, password }))
   }, [dispatch, userName, password])
 
   return (
@@ -33,7 +42,7 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
         props.className ? props.className : "",
       ])}
     >
-      <Text title={t('Форма авторизации')}/>
+      <Text title={t('Форма авторизации')} />
       {error && <Text text={error} theme={TextTheme.ERROR} />}
 
       <Input
@@ -62,3 +71,5 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
     </div>
   );
 })
+
+export default LoginForm;
