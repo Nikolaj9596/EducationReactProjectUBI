@@ -1,7 +1,7 @@
 import { UserSchema } from "../../../../entities/User";
 import { CounterStateSchema } from "../../../../entities/Counter";
 import { LoginSchema } from "../../../../features/AuthByUserName";
-import { Action, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
+import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from "@reduxjs/toolkit";
 
 type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -23,7 +23,7 @@ export type StateSchemeKey = keyof StateScheme;
 
 export interface ReducerManager {
   getReducerMap: () => ReducersMapObject<StateScheme>;
-  reduce: (state: StateScheme, action: Action) => CombinedState<StateScheme>;
+  reduce: (state: StateScheme, action: UnknownAction) => CombinedState<StateScheme>;
   add: (key: StateSchemeKey, reducer: Reducer) => void;
   remove: (key: StateSchemeKey) => void;
 }

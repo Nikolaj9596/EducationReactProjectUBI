@@ -1,6 +1,6 @@
 
 //lib
-export { classNames } from "./lib"
+export { classNames, DynamicModuleLoader } from "./lib"
 //ui
 export {
   AppLink,
