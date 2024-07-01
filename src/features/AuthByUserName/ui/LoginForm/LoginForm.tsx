@@ -18,9 +18,11 @@ import { getLoginPassword } from "../../modal/selectors/getLoginPassword/getLogi
 import { getLoginError } from "../../modal/selectors/getLoginError/getLoginError";
 import { getLoginIsLoading } from "../../modal/selectors/getLoginIsLoading/getLoginIsLoading";
 import type { ReducersList } from "../../../../shared/lib/components/DynamicModuleLoader/DynamicModuleLoader";
+import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
 
 export interface LoginFormProps {
   className?: string;
+  onSuccess: () => void;
 }
 
 const intialReducers: ReducersList = {
@@ -29,7 +31,7 @@ const intialReducers: ReducersList = {
 
 const LoginForm: FC<LoginFormProps> = memo((props) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const userName = useSelector(getLoginUsername)
   const password = useSelector(getLoginPassword)
   const error = useSelector(getLoginError)
@@ -43,13 +45,18 @@ const LoginForm: FC<LoginFormProps> = memo((props) => {
     dispatch(loginActions.setPassword(value))
   }, [dispatch])
 
-  const onLoginClick = useCallback(() => {
+  const onLoginClick = useCallback(async () => {
     // @ts-ignore
-    dispatch(loginByUsername({ userName, password }))
-  }, [dispatch, userName, password])
+    const result = await dispatch(loginByUsername({ userName, password }))
+    // @ts-ignore
+    if (result.meta.requestStatus === 'fulfilled') {
+      props.onSuccess()
+    }
+
+  }, [props.onSuccess, dispatch, userName, password])
 
   return (
-    <DynamicModuleLoader  reducers={intialReducers}>
+    <DynamicModuleLoader reducers={intialReducers}>
       <div
         className={classNames(cls.LoginForm, {}, [
           props.className ? props.className : "",
