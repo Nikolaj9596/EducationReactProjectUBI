@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, memo, useState } from "react";
 import { ThemeSwitcher } from "../../../ThemeSwitcher";
 import {
   Button,
@@ -15,7 +15,7 @@ interface SidebarProps {
   className?: string;
 }
 
-export const Sidebar: FC<SidebarProps> = (props) => {
+export const Sidebar: FC<SidebarProps> = memo((props) => {
   const [collapsed, setCollapsed] = useState(false);
   const onToggle = () => {
     setCollapsed(prev => !prev)
@@ -37,9 +37,10 @@ export const Sidebar: FC<SidebarProps> = (props) => {
       </Button>
       <div className={cls.items}>
         {SidebarItemsList.map((item) => {
-          <SidebarItem 
-            item={item} 
+          return <SidebarItem
+            item={item}
             collapsed={collapsed}
+            key={item.path}
           />
         })}
       </div>
@@ -49,4 +50,4 @@ export const Sidebar: FC<SidebarProps> = (props) => {
       </div>
     </div >
   );
-};
+});

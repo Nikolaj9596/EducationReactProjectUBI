@@ -2,6 +2,7 @@ import { UserSchema } from "../../../../entities/User";
 import { CounterStateSchema } from "../../../../entities/Counter";
 import { LoginSchema } from "../../../../features/AuthByUserName";
 import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from "@reduxjs/toolkit";
+import { ProfileScheme } from "../../../../entities/Profile";
 
 type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -16,6 +17,7 @@ export interface StateScheme {
   user: UserSchema
   // Async Reducers
   loginForm: LoginSchema
+  profile: ProfileScheme
 }
 
 export type StateSchemeKey = keyof StateScheme;

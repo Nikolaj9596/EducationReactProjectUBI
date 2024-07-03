@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes, memo, useEffect, useRef, useState } from "react";
+import React, { InputHTMLAttributes, memo, useEffect, useRef, useState } from "react";
 import { classNames } from "../../lib";
 import cls from "./Input.module.scss";
 
