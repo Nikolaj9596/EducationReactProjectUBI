@@ -1,4 +1,4 @@
-import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { loginReducer } from '../../../../features/AuthByUserName/modal/slice/loginSlice';
 import { counterReducer } from "../../../../entities/Counter";
 import { userReducer } from "../../../../entities/User";

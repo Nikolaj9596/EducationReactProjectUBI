@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PROFILE_LOCLA_STORAGE_KEY } from '../../../../shared/const/LocalStorage'
+import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData'
 import { Profile, ProfileScheme } from '../types/profile'
 
 const initialState: ProfileScheme = {
@@ -12,10 +12,27 @@ const initialState: ProfileScheme = {
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {
-    setProfileData: (state, action: PayloadAction<Profile>) => {
-      state.data = action.payload
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProfileData.pending, (state) => {
+      state.error = undefined
+      state.isLoading = true
+    })
+    builder.addCase(
+      fetchProfileData.fulfilled,
+      (
+        state,
+        action: PayloadAction<Profile>
+      ) => {
+        state.isLoading = false
+        state.data = action.payload
+
+      }
+    )
+    builder.addCase(fetchProfileData.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.payload
+    })
   }
 })
 
