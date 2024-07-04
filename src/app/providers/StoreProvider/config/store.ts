@@ -4,12 +4,19 @@ import { counterReducer } from "../../../../entities/Counter";
 import { userReducer } from "../../../../entities/User";
 import { createReducerManager } from './reducerManager';
 import { StateScheme } from './StateScheme';
+import { profileReducer } from '../../../../entities/Profile';
+import { $api } from '../../../../shared/api/api';
+import { NavigateFunction } from 'react-router-dom';
 
-export const createReduxStore = (initialState?: StateScheme) => {
-  const rootReducers: ReducersMapObject<StateScheme> = {
+export const createReduxStore = (
+  navigator: NavigateFunction,
+  initialState?: StateScheme
+) => {
+  const rootReducers = {
     counter: counterReducer,
     user: userReducer,
-    loginForm: loginReducer
+    loginForm: loginReducer,
+    profile: profileReducer
   };
   const reducerManager = createReducerManager(rootReducers);
   const store = configureStore<StateScheme>({
@@ -17,7 +24,15 @@ export const createReduxStore = (initialState?: StateScheme) => {
     reducer: reducerManager.reduce,
     devTools: process.env.NODE_ENV !== 'production',
     preloadedState: initialState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    // @ts-ignore
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      thunk: {
+        extraArgument: {
+          api: $api,
+          navigator: navigator
+        }
+      }
+    })
   });
   // @ts-ignore
   store.reducerManager = reducerManager;

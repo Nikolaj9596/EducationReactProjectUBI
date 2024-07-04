@@ -3,6 +3,8 @@ import { CounterStateSchema } from "../../../../entities/Counter";
 import { LoginSchema } from "../../../../features/AuthByUserName";
 import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from "@reduxjs/toolkit";
 import { ProfileScheme } from "../../../../entities/Profile";
+import { AxiosInstance } from "axios";
+import { NavigateFunction } from "react-router-dom";
 
 type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -33,4 +35,14 @@ export interface ReducerManager {
 
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
   reducerManager: ReducerManager
+}
+
+export interface ThunkExtraArg {
+  api: AxiosInstance;
+  navigator: NavigateFunction;
+}
+
+export interface ThunkConfig<T> {
+  rejectValue: T,
+  extra: ThunkExtraArg
 }
