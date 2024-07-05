@@ -23,7 +23,7 @@ export const Modal: FC<ModalProps> = (props) => {
 
   const [isClosing, setIsClosing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const timeRef = useRef<ReturnType<typeof setTimeout>>()
+  const timeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const closeHendler = useCallback(() => {
     setIsClosing(true)
     if (onClose) {

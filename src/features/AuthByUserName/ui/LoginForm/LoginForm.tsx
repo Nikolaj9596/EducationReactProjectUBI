@@ -1,6 +1,6 @@
-import React, { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Button,
   DynamicModuleLoader,
