@@ -1,42 +1,43 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { loginReducer } from '../../../../features/AuthByUserName/modal/slice/loginSlice';
+import { configureStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { counterReducer } from "../../../../entities/Counter";
 import { userReducer } from "../../../../entities/User";
 import { createReducerManager } from './reducerManager';
-import { StateScheme } from './StateScheme';
-import { profileReducer } from '../../../../entities/Profile';
+import { CombinedState, StateScheme, ThunkExtraArg } from './StateScheme';
 import { $api } from '../../../../shared/api/api';
 import { NavigateFunction } from 'react-router-dom';
 
-export const createReduxStore = (
-  navigator: NavigateFunction,
-  initialState?: StateScheme
-) => {
-  const rootReducers = {
+export function createReduxStore(
+  initialState?: StateScheme,
+  asyncReducers?: ReducersMapObject<StateScheme>,
+  navigator?: NavigateFunction,
+) {
+  const rootReducers: ReducersMapObject<StateScheme> = {
+    ...asyncReducers,
     counter: counterReducer,
     user: userReducer,
-    loginForm: loginReducer,
-    profile: profileReducer
   };
+
   const reducerManager = createReducerManager(rootReducers);
-  const store = configureStore<StateScheme>({
-    // @ts-ignore
-    reducer: reducerManager.reduce,
-    devTools: process.env.NODE_ENV !== 'production',
+
+  const extraArg: ThunkExtraArg = {
+    api: $api,
+    navigator,
+  };
+
+  const store = configureStore({
+    reducer: reducerManager.reduce as Reducer<CombinedState<StateScheme>>,
     preloadedState: initialState,
-    // @ts-ignore
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       thunk: {
-        extraArgument: {
-          api: $api,
-          navigator: navigator
-        }
-      }
-    })
+        extraArgument: extraArg,
+      },
+    }),
   });
+
   // @ts-ignore
   store.reducerManager = reducerManager;
+
   return store;
-};
+}
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

@@ -6,7 +6,7 @@ import { ProfileScheme } from "../../../../entities/Profile";
 import { AxiosInstance } from "axios";
 import { NavigateFunction } from "react-router-dom";
 
-type CombinedState<T> = {
+export type CombinedState<T> = {
   [K in keyof T]: T[K];
 };
 
@@ -18,8 +18,8 @@ export interface StateScheme {
   counter: CounterStateSchema
   user: UserSchema
   // Async Reducers
-  loginForm: LoginSchema
-  profile: ProfileScheme
+  loginForm?: LoginSchema
+  profile?: ProfileScheme
 }
 
 export type StateSchemeKey = keyof StateScheme;
@@ -39,7 +39,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
 
 export interface ThunkExtraArg {
   api: AxiosInstance;
-  navigator: NavigateFunction;
+  navigator?: NavigateFunction;
 }
 
 export interface ThunkConfig<T> {

@@ -1,5 +1,5 @@
-import React, { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { classNames } from "../../lib";
+import React, { FC, MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { Mods, classNames } from "../../lib/classNames/classNames";
 import { Portal } from "../Portal/Portal";
 import cls from "./Modal.module.scss";
 
@@ -23,7 +23,7 @@ export const Modal: FC<ModalProps> = (props) => {
 
   const [isClosing, setIsClosing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const timeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const timeRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const closeHendler = useCallback(() => {
     setIsClosing(true)
     if (onClose) {
@@ -60,7 +60,7 @@ export const Modal: FC<ModalProps> = (props) => {
     }
   }, [isOpen, onKeyDown])
 
-  const mods: Record<string, boolean> = {
+  const mods: Mods = {
     [cls.opened]: isOpen,
     [cls.isClosing]: isClosing,
   }
