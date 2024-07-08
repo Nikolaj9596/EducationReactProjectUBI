@@ -46,9 +46,7 @@ const LoginForm: FC<LoginFormProps> = memo((props) => {
   }, [dispatch])
 
   const onLoginClick = useCallback(async () => {
-    // @ts-ignore
     const result = await dispatch(loginByUsername({ userName, password }))
-    // @ts-ignore
     if (result.meta.requestStatus === 'fulfilled') {
       props.onSuccess()
     }

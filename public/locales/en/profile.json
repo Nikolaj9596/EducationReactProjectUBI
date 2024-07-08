@@ -1,4 +1,10 @@
 {
   "Профиль": "Profile",
-  "Редактировать": "Edit"
+  "Редактировать": "Edit",
+  "Фамилия": "Last name",
+  "Имя": "Name",
+  "Отчество": "Middle name",
+  "Произошла ошибка при загрузки профиля": "An error occurred while loading the profile",
+  "Попробуйте обновить страницу": "Try refreshing the page",
+  "Отменить": "Cancele"
 }

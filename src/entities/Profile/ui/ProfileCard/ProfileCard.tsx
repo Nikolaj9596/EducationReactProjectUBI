@@ -1,50 +1,78 @@
-import { getProfileData } from "../../model/selectors/getProfileData/getProfileData";
-import { getProfileError } from "../../model/selectors/getProfileError/getProfileError";
-import { getProfileIsLoading } from "../../model/selectors/getProfileIsLoading/getProfileIsLoading";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { classNames, Text, Button, ThemeButton, Input } from "../../../../shared";
+import {
+  classNames,
+  Text,
+  Input,
+  Loader,
+  TextTheme,
+  TextAlign
+} from "../../../../shared";
 import cls from "./ProfileCard.module.scss";
+import { Profile } from "../../model/types/profile";
+import { ProfileEditkCallbacks } from "../../../../pages/ProfilePage/ui/ProfilePage";
 
 interface ProfileCardProps {
   className?: string;
+  data?: Profile
+  isLoading?: boolean
+  error?: string
+  callbacks: ProfileEditkCallbacks
 }
 
 export const ProfileCard: FC<ProfileCardProps> = (props) => {
+  const { className, data, isLoading, error, callbacks } = props
   const { t } = useTranslation("profile")
-  const data = useSelector(getProfileData)
-  const isLoading = useSelector(getProfileIsLoading)
-  const error = useSelector(getProfileError)
+
+  if (isLoading) {
+    return (
+      <div
+        className={classNames(cls.ProfileCard, { [cls.loading]: true }, [className])}
+      >
+        <Loader />
+      </div>
+    )
+  }
+
+  if (error) {
+    console.log(error)
+    return (
+      <div
+        className={classNames(cls.ProfileCard, {}, [className, cls.error])}
+      >
+        <Text
+          theme={TextTheme.ERROR}
+          title={t("Произошла ошибка при загрузки профиля")}
+          text={t("Попробуйте обновить страницу")}
+          align={TextAlign.CENTER}
+        />
+      </div>
+    )
+
+  }
   return (
     <div
-      className={classNames(cls.ProfileCard, {}, [props.className])}
+      className={classNames(cls.ProfileCard, {}, [className])}
     >
-      <div className={cls.header}>
-        <Text title={t('Профиль')} />
-        <Button
-          theme={ThemeButton.OUTLINE}
-          className={cls.editBtn}
-        >
-          {t('Редактировать')}
-        </Button>
-      </div>
       <div className={cls.data}>
 
         <Input
           value={data?.lastName}
           placeholder={t("Фамилия")}
           className={cls.input}
+          onChange={callbacks.lastName}
         />
         <Input
           value={data?.firstName}
           placeholder={t("Имя")}
           className={cls.input}
+          onChange={callbacks.firstName}
         />
         <Input
           value={data?.middleName}
           placeholder={t("Отчество")}
           className={cls.input}
+          onChange={callbacks.middleName}
         />
       </div>
     </div>

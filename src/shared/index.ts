@@ -14,6 +14,7 @@ export {
   ButtonSize,
   Input,
   TextTheme,
-  Text
+  Text,
+  TextAlign
 } from "./ui"
 
