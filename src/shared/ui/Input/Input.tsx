@@ -26,9 +26,12 @@ export const Input = memo((props: InputProps) => {
     readonly,
     ...otherProps
   } = props;
+
   const ref = useRef<HTMLInputElement>(null)
   const [isFocused, setIsFocus] = useState(false)
   const [caretPosiotion, setCaretPosition] = useState(0)
+  const isCaretVisible = isFocused && !readonly
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
     setCaretPosition(e.target.value.length)
@@ -71,7 +74,15 @@ export const Input = memo((props: InputProps) => {
           readOnly={readonly}
           {...otherProps}
         />
-        {isFocused && (<span className={cls.caret} style={{ left: `${caretPosiotion * 8}px` }} />)}
+        {
+          isCaretVisible
+          && (
+            <span
+              className={cls.caret}
+              style={{ left: `${caretPosiotion * 8}px` }}
+            />
+          )
+        }
       </div>
     </div>
   );

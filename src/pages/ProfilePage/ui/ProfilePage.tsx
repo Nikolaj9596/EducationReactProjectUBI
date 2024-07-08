@@ -1,11 +1,17 @@
-import { fetchProfileData, profileActions, ProfileCard, profileReducer } from "../../../entities/Profile";
 import { FC, useCallback, useEffect } from "react";
 import { classNames, DynamicModuleLoader, ReducersList } from "../../../shared";
 import { useAppDispatch } from "../../../shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { getProfileData } from "../../../entities/Profile/model/selectors/getProfileData/getProfileData";
-import { getProfileIsLoading } from "../../../entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading";
-import { getProfileError } from "../../../entities/Profile/model/selectors/getProfileError/getProfileError";
+import {
+  getProfileIsLoading,
+  getProfileError,
+  getProfileReadOnly,
+  fetchProfileData,
+  getFormProfileData,
+  profileActions, 
+  ProfileCard,
+  profileReducer
+} from "../../../entities/Profile"
 import { ProfilePageHeader } from "./ProfilePageHeader/ProfilePageHeader";
 
 interface ProfilePageProps {
@@ -24,9 +30,11 @@ const redusers: ReducersList = {
 
 const ProfilePage: FC<ProfilePageProps> = (props) => {
   const dispatch = useAppDispatch()
-  const data = useSelector(getProfileData)
+  const formData = useSelector(getFormProfileData)
   const isLoading = useSelector(getProfileIsLoading)
   const error = useSelector(getProfileError)
+  const readonly = useSelector(getProfileReadOnly)
+
   useEffect(() => {
     dispatch(fetchProfileData());
   }, [dispatch])
@@ -48,14 +56,15 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
       <div className={classNames('', {}, [props.className])}>
         <ProfilePageHeader />
         <ProfileCard
-          data={data}
+          data={formData}
           isLoading={isLoading}
           error={error}
+          readonly={readonly}
           callbacks={
-            { 
-              firstName: onChangeFirstName, 
-              lastName: onChangeLastName, 
-              middleName: onChangeMiddleName 
+            {
+              firstName: onChangeFirstName,
+              lastName: onChangeLastName,
+              middleName: onChangeMiddleName
             }
           }
         />

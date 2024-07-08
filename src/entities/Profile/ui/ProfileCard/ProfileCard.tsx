@@ -17,11 +17,12 @@ interface ProfileCardProps {
   data?: Profile
   isLoading?: boolean
   error?: string
+  readonly?: boolean
   callbacks: ProfileEditkCallbacks
 }
 
 export const ProfileCard: FC<ProfileCardProps> = (props) => {
-  const { className, data, isLoading, error, callbacks } = props
+  const { className, data, isLoading, error, callbacks, readonly } = props
   const { t } = useTranslation("profile")
 
   if (isLoading) {
@@ -61,18 +62,21 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
           placeholder={t("Фамилия")}
           className={cls.input}
           onChange={callbacks.lastName}
+          readonly={readonly}
         />
         <Input
           value={data?.firstName}
           placeholder={t("Имя")}
           className={cls.input}
           onChange={callbacks.firstName}
+          readonly={readonly}
         />
         <Input
           value={data?.middleName}
           placeholder={t("Отчество")}
           className={cls.input}
           onChange={callbacks.middleName}
+          readonly={readonly}
         />
       </div>
     </div>

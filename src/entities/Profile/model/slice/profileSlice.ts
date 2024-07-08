@@ -17,8 +17,13 @@ export const profileSlice = createSlice({
       state.readonly = action.payload
     },
 
+    cancelEditProfile: (state) => {
+      state.readonly = true
+      state.form = state.data
+    },
+
     updateProfile: (state, action: PayloadAction<Profile>) => {
-      state.data = {
+      state.form = {
         ...state.data,
         ...action.payload
       }
@@ -38,6 +43,7 @@ export const profileSlice = createSlice({
       ) => {
         state.isLoading = false
         state.data = action.payload
+        state.form = action.payload
 
       }
     )
