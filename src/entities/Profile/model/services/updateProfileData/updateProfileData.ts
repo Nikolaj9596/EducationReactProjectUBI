@@ -3,14 +3,16 @@ import { AxiosResponse } from "axios";
 import i18n from "../../../../../shared/config/i18n/i18n";
 import { ThunkConfig } from "../../../../../app/providers/StoreProvider";
 import { Profile } from "../../types/profile";
+import { getFormProfileData } from "../../selectors/getProfileFormData/getProfileFormData";
 
-export const fetchProfileData = createAsyncThunk<Profile, void, ThunkConfig<string>>(
-  'profile/fetchProfileData',
+export const updateProfileData = createAsyncThunk<Profile, void, ThunkConfig<string>>(
+  'profile/updateProfileData',
 
   async (_, thunkApi) => {
-    const { extra, rejectWithValue } = thunkApi;
+    const { extra, rejectWithValue, getState} = thunkApi;
+    const formData = getFormProfileData(getState())
     try {
-      const response: AxiosResponse = await extra.api.get<Profile>('/profile')
+      const response: AxiosResponse = await extra.api.put<Profile>('/profile', formData)
       if (!response.data) {
         throw new Error();
       }
@@ -19,14 +21,7 @@ export const fetchProfileData = createAsyncThunk<Profile, void, ThunkConfig<stri
       console.log(e)
       // return rejectWithValue(i18n.t('Профиль не найден'))
       // TODO: Delete when create server
-      return {
-        "phone": "79999999999",
-        "firstName": "Иван",
-        "lastName": "Иванов",
-        "middleName": "Иванович",
-        "dateBirthday": "10-03-1990",
-        "avatar": "https://i.pinimg.com/originals/88/9e/5d/889e5dd8334a7dfca281208cd74bd40e.png"
-      }
+      return formData
     }
   }
 )

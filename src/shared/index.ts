@@ -15,6 +15,7 @@ export {
   Input,
   TextTheme,
   Text,
-  TextAlign
+  TextAlign,
+  Avatar
 } from "./ui"
 

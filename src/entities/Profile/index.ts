@@ -1,3 +1,4 @@
+
 // selectors
 export { getProfileData } from "./model/selectors/getProfileData/getProfileData";
 export { getProfileError } from "./model/selectors/getProfileError/getProfileError";
@@ -6,6 +7,7 @@ export { getProfileReadOnly } from "./model/selectors/getProfileReadOnly/getProf
 export { getFormProfileData } from "./model/selectors/getProfileFormData/getProfileFormData";
 //thunks
 export { fetchProfileData } from "./model/services/fetchProfileData/fetchProfileData";
+export { updateProfileData } from "./model/services/updateProfileData/updateProfileData";
 // types
 export type { Profile, ProfileScheme } from "../Profile/model/types/profile";
 //ui

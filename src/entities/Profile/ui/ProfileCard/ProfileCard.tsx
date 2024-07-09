@@ -6,7 +6,9 @@ import {
   Input,
   Loader,
   TextTheme,
-  TextAlign
+  TextAlign,
+  Avatar,
+  Mods
 } from "../../../../shared";
 import cls from "./ProfileCard.module.scss";
 import { Profile } from "../../model/types/profile";
@@ -51,12 +53,22 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
     )
 
   }
+
+  const mods: Mods = {
+    [cls.editing]: !readonly,
+  }
+
   return (
     <div
-      className={classNames(cls.ProfileCard, {}, [className])}
+      className={classNames(cls.ProfileCard, mods, [className])}
     >
       <div className={cls.data}>
-
+        {
+          data?.avatar && (
+            <div className={cls.avatarWrapper}>
+              <Avatar size={150} src={data?.avatar} />
+            </div>
+          )}
         <Input
           value={data?.lastName}
           placeholder={t("Фамилия")}
