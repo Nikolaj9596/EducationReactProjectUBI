@@ -78,6 +78,27 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
           onChange={callbacks.middleName}
           readonly={readonly}
         />
+        <Input
+          value={data?.phone}
+          placeholder={t("Номер телофона")}
+          className={cls.input}
+          onChange={callbacks.phone}
+          readonly={readonly}
+        />
+        <Input
+          value={data?.dateBirthday}
+          placeholder={t("Дата рождения")}
+          className={cls.input}
+          onChange={callbacks.dateBirthday}
+          readonly={readonly}
+        />
+        <Input
+          value={data?.avatar}
+          placeholder={t("Аватарка")}
+          className={cls.input}
+          onChange={callbacks.avatar}
+          readonly={readonly}
+        />
       </div>
     </div>
   );

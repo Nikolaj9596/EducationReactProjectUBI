@@ -22,6 +22,9 @@ export interface ProfileEditkCallbacks {
   firstName: (value: string) => void
   lastName: (value: string) => void
   middleName: (value: string) => void
+  phone: (value: string) => void
+  dateBirthday: (value: string) => void
+  avatar: (value: string) => void
 }
 
 const redusers: ReducersList = {
@@ -51,6 +54,18 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
     dispatch(profileActions.updateProfile({ middleName: value || '' }))
   }, [dispatch])
 
+  const onChangePhone = useCallback((value?: string) => {
+    dispatch(profileActions.updateProfile({ phone: value || '' }))
+  }, [dispatch])
+
+  const onChangeDateBirthday = useCallback((value?: string) => {
+    dispatch(profileActions.updateProfile({ dateBirthday: value || '' }))
+  }, [dispatch])
+
+  const onChangeAvatar = useCallback((value?: string) => {
+    dispatch(profileActions.updateProfile({ avatar: value || '' }))
+  }, [dispatch])
+
   return (
     <DynamicModuleLoader reducers={redusers} removeAfterUnmount>
       <div className={classNames('', {}, [props.className])}>
@@ -64,7 +79,10 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
             {
               firstName: onChangeFirstName,
               lastName: onChangeLastName,
-              middleName: onChangeMiddleName
+              middleName: onChangeMiddleName,
+              phone: onChangePhone,
+              dateBirthday: onChangeDateBirthday,
+              avatar: onChangeAvatar
             }
           }
         />

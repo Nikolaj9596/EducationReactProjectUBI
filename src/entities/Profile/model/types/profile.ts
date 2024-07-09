@@ -3,7 +3,7 @@ export interface Profile {
   firstName?: string,
   lastName?: string,
   middleName?: string,
-  dateBirthday?: Date,
+  dateBirthday?: string,
   avatar?: string
 }
 

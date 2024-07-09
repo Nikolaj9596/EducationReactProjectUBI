@@ -17,7 +17,15 @@ export const fetchProfileData = createAsyncThunk<Profile, void, ThunkConfig<stri
       return response.data
     } catch (e) {
       console.log(e)
-      return rejectWithValue(i18n.t('Профиль не найден'))
+      // return rejectWithValue(i18n.t('Профиль не найден'))
+      return {
+        "phone": "79999999999",
+        "firstName": "Иван",
+        "lastName": "Иванов",
+        "middleName": "Иванович",
+        "dateBirthday": "10-03-1990",
+        "avatar": "https://i.pinimg.com/originals/88/9e/5d/889e5dd8334a7dfca281208cd74bd40e.png"
+      }
     }
   }
 )
