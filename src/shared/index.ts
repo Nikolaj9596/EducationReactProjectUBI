@@ -16,6 +16,7 @@ export {
   TextTheme,
   Text,
   TextAlign,
-  Avatar
+  Avatar,
+  Select
 } from "./ui"
 

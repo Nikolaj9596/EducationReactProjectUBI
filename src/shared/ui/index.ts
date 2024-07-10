@@ -1,3 +1,4 @@
+export { Select } from "./Select/Select"
 export { Avatar } from "./Avatar/Avatar"
 export { AppLink, AppLinkTheme } from "./AppLink/AppLink"
 export { Button, ThemeButton, ButtonSize } from "./Button/Button"

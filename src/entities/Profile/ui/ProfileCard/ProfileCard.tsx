@@ -8,11 +8,12 @@ import {
   TextTheme,
   TextAlign,
   Avatar,
-  Mods
+  Mods,
 } from "../../../../shared";
 import cls from "./ProfileCard.module.scss";
 import { Profile } from "../../model/types/profile";
 import { ProfileEditkCallbacks } from "../../../../pages/ProfilePage/ui/ProfilePage";
+import { CurrencySelect } from "../../../Currency";
 
 interface ProfileCardProps {
   className?: string;
@@ -110,6 +111,10 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
           className={cls.input}
           onChange={callbacks.avatar}
           readonly={readonly}
+        />
+        <CurrencySelect 
+          readonly={readonly}
+          className={cls.input}
         />
       </div>
     </div>

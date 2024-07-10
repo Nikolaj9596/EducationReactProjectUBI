@@ -8,7 +8,7 @@ import {
   getProfileReadOnly,
   fetchProfileData,
   getFormProfileData,
-  profileActions, 
+  profileActions,
   ProfileCard,
   profileReducer
 } from "../../../entities/Profile"
