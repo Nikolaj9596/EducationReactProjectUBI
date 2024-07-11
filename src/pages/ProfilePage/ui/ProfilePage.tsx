@@ -6,6 +6,7 @@ import {
   getProfileIsLoading,
   getProfileError,
   getProfileReadOnly,
+  getProfileValidateErrors,
   fetchProfileData,
   getFormProfileData,
   profileActions,
@@ -37,6 +38,7 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
   const isLoading = useSelector(getProfileIsLoading)
   const error = useSelector(getProfileError)
   const readonly = useSelector(getProfileReadOnly)
+  const validateErrors = useSelector(getProfileValidateErrors)
 
   useEffect(() => {
     dispatch(fetchProfileData());

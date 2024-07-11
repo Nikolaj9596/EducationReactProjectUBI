@@ -5,6 +5,7 @@ export { getProfileError } from "./model/selectors/getProfileError/getProfileErr
 export { getProfileIsLoading } from "./model/selectors/getProfileIsLoading/getProfileIsLoading";
 export { getProfileReadOnly } from "./model/selectors/getProfileReadOnly/getProfileReadOnly";
 export { getFormProfileData } from "./model/selectors/getProfileFormData/getProfileFormData";
+export { getProfileValidateErrors } from "./model/selectors/getProfileValidateErrors/getProfileValidateErrors";
 //thunks
 export { fetchProfileData } from "./model/services/fetchProfileData/fetchProfileData";
 export { updateProfileData } from "./model/services/updateProfileData/updateProfileData";

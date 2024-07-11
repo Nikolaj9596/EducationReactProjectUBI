@@ -1,3 +1,10 @@
+export enum ValidateProfileError {
+  INCORRECT_USER_DATA = 'INCORRECT_USER_DATA',
+  INCORRECT_DATE_BIRTHDAY = 'INCORRECT_DATE_BIRTHDAY',
+  NO_DATA = 'NO_DATA',
+  SERVER_ERROR = 'SERVER_ERROR'
+}
+
 export interface Profile {
   phone?: string,
   firstName?: string,
@@ -13,4 +20,5 @@ export interface ProfileScheme {
   isLoading: boolean
   error?: string
   readonly: boolean
+  validateErrors?: ValidateProfileError[]
 }
