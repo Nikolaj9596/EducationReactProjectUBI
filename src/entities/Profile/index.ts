@@ -1,3 +1,4 @@
+export { ValidateProfileError } from "../Profile/model/types/profile";
 
 // selectors
 export { getProfileData } from "./model/selectors/getProfileData/getProfileData";
@@ -15,5 +16,3 @@ export type { Profile, ProfileScheme } from "../Profile/model/types/profile";
 export { ProfileCard } from "./ui/ProfileCard/ProfileCard";
 //slices
 export { profileActions, profileReducer } from "./model/slice/profileSlice";
-
-

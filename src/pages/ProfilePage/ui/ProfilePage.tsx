@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect } from "react";
-import { classNames, DynamicModuleLoader, ReducersList } from "../../../shared";
+import { classNames, DynamicModuleLoader, ReducersList, TextTheme, Text } from "../../../shared";
 import { useAppDispatch } from "../../../shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import {
@@ -11,9 +11,11 @@ import {
   getFormProfileData,
   profileActions,
   ProfileCard,
-  profileReducer
+  profileReducer,
+  ValidateProfileError
 } from "../../../entities/Profile"
 import { ProfilePageHeader } from "./ProfilePageHeader/ProfilePageHeader";
+import { useTranslation } from "react-i18next";
 
 interface ProfilePageProps {
   className?: string;
@@ -39,6 +41,13 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
   const error = useSelector(getProfileError)
   const readonly = useSelector(getProfileReadOnly)
   const validateErrors = useSelector(getProfileValidateErrors)
+  const { t } = useTranslation('profile')
+  const validateErrorTranslates = {
+    [ValidateProfileError.NO_DATA]: t('Нет данных для обработки'),
+    [ValidateProfileError.SERVER_ERROR]: t('Неизвестная ошибка на сервере'),
+    [ValidateProfileError.INCORRECT_USER_DATA]: t('Некорректные данные пользователя'),
+    [ValidateProfileError.INCORRECT_DATE_BIRTHDAY]: t('Некорректные дата рождения'),
+  }
 
   useEffect(() => {
     dispatch(fetchProfileData());
@@ -72,6 +81,13 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
     <DynamicModuleLoader reducers={redusers} removeAfterUnmount>
       <div className={classNames('', {}, [props.className])}>
         <ProfilePageHeader />
+        {validateErrors?.length && validateErrors.map((err) => (
+          <Text
+            key={err}
+            theme={TextTheme.ERROR}
+            text={validateErrorTranslates[err]}
+          />
+        ))}
         <ProfileCard
           data={formData}
           isLoading={isLoading}

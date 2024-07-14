@@ -10,5 +10,9 @@
   "Сохранить": "Save",
   "Номер телофона": "Phone",
   "Дата рождения": "Date Birthday",
-  "Аватарка": "Avatar"
+  "Аватарка": "Avatar",
+  "Нет данных для обработки": "No data to process",
+  "Неизвестная ошибка на сервере": "Unknown error on the server",
+  "Некорректные данные пользователя": "Incorrect user data",
+  "Некорректные дата рождения": "Incorrect date of birth"
 }
