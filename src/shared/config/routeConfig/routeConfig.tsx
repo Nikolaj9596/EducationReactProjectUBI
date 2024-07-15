@@ -6,7 +6,7 @@ import {
 } from "../../../pages"
 import { RouteProps } from "react-router-dom"
 
-type AppRouterProps = RouteProps & {
+export type AppRouterProps = RouteProps & {
   authOnly?: boolean
 }
 
