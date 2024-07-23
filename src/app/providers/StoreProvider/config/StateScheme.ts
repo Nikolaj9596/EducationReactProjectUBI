@@ -5,6 +5,7 @@ import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from "@redux
 import { ProfileScheme } from "../../../../entities/Profile";
 import { AxiosInstance } from "axios";
 import { NavigateFunction } from "react-router-dom";
+import { ArticleDetailsSchema } from "../../../../entities/Article";
 
 export type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -20,6 +21,7 @@ export interface StateScheme {
   // Async Reducers
   loginForm?: LoginSchema
   profile?: ProfileScheme
+  articleDetails?: ArticleDetailsSchema
 }
 
 export type StateSchemeKey = keyof StateScheme;

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { classNames } from "../../lib/classNames/classNames";
+import { classNames, Mods } from "../../lib/classNames/classNames";
 import cls from "./Text.module.scss";
 
 export enum TextTheme {
@@ -29,8 +29,12 @@ export const Text = memo((props: TextProps) => {
     text,
     align = TextAlign.LEFT
   } = props
+  const mods: Mods = {
+    [cls[theme]]: true,
+    [align]: true
+  }
   return (
-    <div className={classNames(cls.Text, { [cls[theme]]: true }, [className, align])}>
+    <div className={classNames(cls.Text, mods, [className])}>
       {title && <p className={cls.title}>{title}</p>}
       {text && <p className={cls.text}>{text}</p>}
     </div>
