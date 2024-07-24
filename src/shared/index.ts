@@ -16,6 +16,7 @@ export {
   TextTheme,
   Text,
   TextAlign,
+  TextSize,
   Avatar,
   Select,
   Skeleton

@@ -1,12 +1,14 @@
 import { FC, memo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../../../../shared/lib/hooks/useAppDispatch";
-import { classNames, DynamicModuleLoader, ReducersList, Skeleton, Text, TextAlign, TextTheme } from "../../../../../shared";
+import { Avatar, classNames, DynamicModuleLoader, ReducersList, Skeleton, Text, TextAlign, TextSize, TextTheme } from "../../../../../shared";
 import { fetchArticleById } from "../../services/fetchArticleById/fetchArticleById";
 import { articleDetailsReducer } from "../../slice/articleDetailsSlice";
 import cls from "./ArticleDetails.module.scss";
 import { useSelector } from "react-redux";
 import { articleDetailsData, articleDetailsError, articleDetailsIsLoading } from "../../selectors/articleDetailsData";
+import { ReactComponent as CalendarIcon } from "../../../../../shared/assets/icons/calendar-20-20.svg"
+import { ReactComponent as EyeIcon } from "../../../../../shared/assets/icons/eye-20-20.svg"
 
 interface ArticleDetailsProps {
   className?: string;
@@ -51,15 +53,33 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo((props) => {
     )
   } else {
     content = (
-      <div className={classNames(cls.ArticleDetails, {}, [className])}>
-        Article Details
-      </div>
+      <>
+        <div className={cls.avatarWrapper}>
+          <Avatar size={200} src={article?.img} className={cls.avatar} />
+        </div>
+        <Text
+          className={cls.title}
+          title={article?.title}
+          text={article?.subtitle}
+          size={TextSize.L}
+        />
+        <div className={cls.articleInfo}>
+          <EyeIcon className={cls.icon} />
+          <Text text={String(article?.views)} />
+        </div>
+        <div className={cls.articleInfo}>
+          <CalendarIcon className={cls.icon} />
+          <Text text={String(article?.createdAt)} />
+        </div>
+      </>
     )
   }
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      {content}
+      <div className={classNames(cls.ArticleDetails, {}, [className])}>
+        {content}
+      </div>
     </DynamicModuleLoader>
   );
 })
