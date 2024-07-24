@@ -1,7 +1,7 @@
 import { FC, memo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../../../../shared/lib/hooks/useAppDispatch";
-import { classNames, DynamicModuleLoader, ReducersList, Text, TextAlign, TextTheme} from "../../../../../shared";
+import { classNames, DynamicModuleLoader, ReducersList, Skeleton, Text, TextAlign, TextTheme } from "../../../../../shared";
 import { fetchArticleById } from "../../services/fetchArticleById/fetchArticleById";
 import { articleDetailsReducer } from "../../slice/articleDetailsSlice";
 import cls from "./ArticleDetails.module.scss";
@@ -33,14 +33,20 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo((props) => {
 
   if (isLoading) {
     content = (
-      <div>.....Loadign</div>
+      <>
+        <Skeleton className={cls.avatar} width={200} height={200} border="50%" />
+        <Skeleton className={cls.title} width={300} height={32} />
+        <Skeleton className={cls.skeleton} width={600} height={24} />
+        <Skeleton className={cls.skeleton} width="100%" height={200} />
+        <Skeleton className={cls.skeleton} width="100%" height={200} />
+      </>
     )
   } else if (error) {
     content = (
-      <Text 
-       title={t("Произашла ошибка при загрузки статьи!!!!")}
-       align={TextAlign.CENTER}
-       theme={TextTheme.ERROR}
+      <Text
+        title={t("Произашла ошибка при загрузки статьи!!!!")}
+        align={TextAlign.CENTER}
+        theme={TextTheme.ERROR}
       />
     )
   } else {
