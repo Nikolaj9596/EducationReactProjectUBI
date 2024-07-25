@@ -38,11 +38,13 @@ export const Text = memo((props: TextProps) => {
     align = TextAlign.LEFT,
     size = TextSize.M
   } = props
+
   const mods: Mods = {
     [cls[theme]]: true,
-    [align]: true,
-    [size]: true,
+    [cls[align]]: true,
+    [cls[size]]: true,
   }
+
   return (
     <div className={classNames(cls.Text, mods, [className])}>
       {title && <p className={cls.title}>{title}</p>}

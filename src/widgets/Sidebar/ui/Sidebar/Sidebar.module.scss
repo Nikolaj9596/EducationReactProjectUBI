@@ -3,7 +3,7 @@
   width: var(--sidebar-width);
   background: var(--inverted-bg-color);
   position: relative;
-  transition: width 0.4s;
+  transition: width 0.3s;
 }
 
 .switchers {
@@ -14,8 +14,8 @@
   width: 100%;
 }
 
-.langToggle {
-  margin-left: 10px;
+.lang {
+  margin-left: 20px;
 }
 
 .collapseBtn {
@@ -33,11 +33,13 @@
 
 .collapsed {
   width: var(--sidebar-width-collapsed);
+
   .switchers {
     flex-direction: column;
     align-items: center;
   }
-  .langToggle {
+
+  .lang {
     margin-left: 0;
   }
 }

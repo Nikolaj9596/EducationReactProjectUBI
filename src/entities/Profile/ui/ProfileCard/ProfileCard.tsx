@@ -17,33 +17,33 @@ import { CurrencySelect } from "../../../Currency";
 
 interface ProfileCardProps {
   className?: string;
-  data?: Profile
-  isLoading?: boolean
-  error?: string
-  readonly?: boolean
-  callbacks: ProfileEditkCallbacks
+  data?: Profile;
+  isLoading?: boolean;
+  error?: string;
+  readonly?: boolean;
+  callbacks: ProfileEditkCallbacks;
 }
 
 export const ProfileCard: FC<ProfileCardProps> = (props) => {
-  const { className, data, isLoading, error, callbacks, readonly } = props
-  const { t } = useTranslation("profile")
+  const { className, data, isLoading, error, callbacks, readonly } = props;
+  const { t } = useTranslation("profile");
 
   if (isLoading) {
     return (
       <div
-        className={classNames(cls.ProfileCard, { [cls.loading]: true }, [className])}
+        className={classNames(cls.ProfileCard, { [cls.loading]: true }, [
+          className,
+        ])}
       >
         <Loader />
       </div>
-    )
+    );
   }
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return (
-      <div
-        className={classNames(cls.ProfileCard, {}, [className, cls.error])}
-      >
+      <div className={classNames(cls.ProfileCard, {}, [className, cls.error])}>
         <Text
           theme={TextTheme.ERROR}
           title={t("Произошла ошибка при загрузки профиля")}
@@ -51,25 +51,21 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
           align={TextAlign.CENTER}
         />
       </div>
-    )
-
+    );
   }
 
   const mods: Mods = {
     [cls.editing]: !readonly,
-  }
+  };
 
   return (
-    <div
-      className={classNames(cls.ProfileCard, mods, [className])}
-    >
+    <div className={classNames(cls.ProfileCard, mods, [className])}>
       <div className={cls.data}>
-        {
-          data?.avatar && (
-            <div className={cls.avatarWrapper}>
-              <Avatar size={150} src={data?.avatar} />
-            </div>
-          )}
+        {data?.avatar && (
+          <div className={cls.avatarWrapper}>
+            <Avatar size={150} src={data?.avatar} />
+          </div>
+        )}
         <Input
           value={data?.lastName}
           placeholder={t("Фамилия")}
@@ -112,10 +108,7 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
           onChange={callbacks.avatar}
           readonly={readonly}
         />
-        <CurrencySelect 
-          readonly={readonly}
-          className={cls.input}
-        />
+        <CurrencySelect readonly={readonly} className={cls.input} />
       </div>
     </div>
   );

@@ -19,6 +19,8 @@ export {
   TextSize,
   Avatar,
   Select,
-  Skeleton
+  Skeleton,
+  Icon,
+  Code
 } from "./ui"
 

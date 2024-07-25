@@ -1,4 +1,3 @@
-
 export { Select } from "./Select/Select"
 export { Avatar } from "./Avatar/Avatar"
 export { AppLink, AppLinkTheme } from "./AppLink/AppLink"
@@ -9,3 +8,5 @@ export { Portal } from "./Portal/Portal"
 export { Input } from "./Input/Input"
 export {Text, TextTheme, TextAlign, TextSize} from "./Text/Text"
 export { Skeleton } from "./Skeleton/Skeleton"
+export { Icon } from "./Icon/Icon"
+export { Code } from "./Code/Code"
