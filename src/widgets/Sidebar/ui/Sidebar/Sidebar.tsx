@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from "react";
+import { FC, memo, useState } from "react";
 import { ThemeSwitcher } from "../../../ThemeSwitcher";
 import {
   Button,
@@ -18,13 +18,13 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = memo((props) => {
   const [collapsed, setCollapsed] = useState(false);
   const onToggle = () => {
-    setCollapsed(prev => !prev)
-  }
+    setCollapsed((prev) => !prev);
+  };
   return (
     <div
-      className={
-        classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [props.className ? props.className : ''])
-      }
+      className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [
+        props.className ? props.className : "",
+      ])}
     >
       <Button
         square={true}
@@ -33,21 +33,19 @@ export const Sidebar: FC<SidebarProps> = memo((props) => {
         onClick={onToggle}
         className={cls.collapseBtn}
       >
-        {collapsed ? '>' : '<'}
+        {collapsed ? ">" : "<"}
       </Button>
       <div className={cls.items}>
         {SidebarItemsList.map((item) => {
-          return <SidebarItem
-            item={item}
-            collapsed={collapsed}
-            key={item.path}
-          />
+          return (
+            <SidebarItem item={item} collapsed={collapsed} key={item.path} />
+          );
         })}
       </div>
       <div className={cls.switchers}>
         <ThemeSwitcher />
         <LangSwitcher className={cls.langToggle} short={collapsed} />
       </div>
-    </div >
+    </div>
   );
 });
