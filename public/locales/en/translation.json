@@ -13,5 +13,6 @@
   "Введите пароль": "Enter password",
   "Введите логин": "Enter login",
   "Форма авторизации": "Authourization Form",
-  "Вы ввели неверный логин или пороль": "You entered an incorrect login or password"
+  "Вы ввели неверный логин или пороль": "You entered an incorrect login or password",
+  "Коментарии отсутствуют": "Not comments"
 }
