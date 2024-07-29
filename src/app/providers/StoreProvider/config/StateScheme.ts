@@ -1,11 +1,17 @@
 import { UserSchema } from "../../../../entities/User";
 import { CounterStateSchema } from "../../../../entities/Counter";
 import { LoginSchema } from "../../../../features/AuthByUserName";
-import { EnhancedStore, Reducer, ReducersMapObject, UnknownAction } from "@reduxjs/toolkit";
+import {
+  EnhancedStore,
+  Reducer,
+  ReducersMapObject,
+  UnknownAction,
+} from "@reduxjs/toolkit";
 import { ProfileScheme } from "../../../../entities/Profile";
 import { AxiosInstance } from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { ArticleDetailsSchema } from "../../../../entities/Article";
+import { ArticleDetailsCommentsSchema } from "../../../../pages/ArticleDetailsPage";
 
 export type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -16,27 +22,29 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
 }
 
 export interface StateScheme {
-  counter: CounterStateSchema
-  user: UserSchema
+  counter: CounterStateSchema;
+  user: UserSchema;
   // Async Reducers
-  loginForm?: LoginSchema
-  profile?: ProfileScheme
-  articleDetails?: ArticleDetailsSchema
+  loginForm?: LoginSchema;
+  profile?: ProfileScheme;
+  articleDetails?: ArticleDetailsSchema;
+  articleDetailsComments?: ArticleDetailsCommentsSchema;
 }
 
 export type StateSchemeKey = keyof StateScheme;
 
-
 export interface ReducerManager {
   getReducerMap: () => ReducersMapObject<StateScheme>;
-  reduce: (state: StateScheme, action: UnknownAction) => CombinedState<StateScheme>;
+  reduce: (
+    state: StateScheme,
+    action: UnknownAction,
+  ) => CombinedState<StateScheme>;
   add: (key: StateSchemeKey, reducer: Reducer) => void;
   remove: (key: StateSchemeKey) => void;
 }
 
-
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
-  reducerManager: ReducerManager
+  reducerManager: ReducerManager;
 }
 
 export interface ThunkExtraArg {
@@ -45,7 +53,7 @@ export interface ThunkExtraArg {
 }
 
 export interface ThunkConfig<T> {
-  rejectValue: T,
-  extra: ThunkExtraArg
-  state: StateScheme
+  rejectValue: T;
+  extra: ThunkExtraArg;
+  state: StateScheme;
 }

@@ -25,7 +25,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
     <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
       <ArticleDetails id={id} />
       <Text className={cls.commentTitle} title={t("Комментарии")} />
-      <CommentList />
+      <CommentList isLoading={false} comments={[]} />
     </div>
   );
 };
