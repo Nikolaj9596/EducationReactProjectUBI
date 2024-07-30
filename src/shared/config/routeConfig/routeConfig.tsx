@@ -4,65 +4,64 @@ import {
   NotFoundPage,
   ProfilePage,
   ArticlesPage,
-  ArticleDetailsPage
-} from "../../../pages"
-import { RouteProps } from "react-router-dom"
+  ArticleDetailsPage,
+} from "../../../pages";
+import { RouteProps } from "react-router-dom";
 
 export type AppRouterProps = RouteProps & {
-  authOnly?: boolean
-}
+  authOnly?: boolean;
+};
 
 export enum AppRouters {
-  MAIN = 'main',
-  ABOUT = 'about',
-  PROFILE = 'profile',
-  ARTICLES = 'articles',
-  ARTICLE_DETAILS = 'article_details',
+  MAIN = "main",
+  ABOUT = "about",
+  PROFILE = "profile",
+  ARTICLES = "articles",
+  ARTICLE_DETAILS = "article_details",
   //last
-  NOT_FOUND = 'not_found'
+  NOT_FOUND = "not_found",
 }
 
 export const RoutePath: Record<AppRouters, string> = {
-  [AppRouters.MAIN]: '/',
-  [AppRouters.ABOUT]: '/about',
-  [AppRouters.PROFILE]: '/profile',
-  [AppRouters.ARTICLES]: '/articles',
-  [AppRouters.ARTICLE_DETAILS]: '/articles/',
-  [AppRouters.NOT_FOUND]: '*'
-
-}
+  [AppRouters.MAIN]: "/",
+  [AppRouters.ABOUT]: "/about",
+  [AppRouters.PROFILE]: "/profile/",
+  [AppRouters.ARTICLES]: "/articles",
+  [AppRouters.ARTICLE_DETAILS]: "/articles/",
+  [AppRouters.NOT_FOUND]: "*",
+};
 
 export const routeConfig: Record<AppRouters, AppRouterProps> = {
   [AppRouters.MAIN]: {
     path: RoutePath.main,
-    element: <MainPage />
+    element: <MainPage />,
   },
 
   [AppRouters.ABOUT]: {
     path: RoutePath.about,
-    element: <AboutPage />
+    element: <AboutPage />,
   },
 
   [AppRouters.PROFILE]: {
-    path: RoutePath.profile,
+    path: `${RoutePath.profile}:id`,
     element: <ProfilePage />,
-    authOnly: true
+    authOnly: true,
   },
 
   [AppRouters.ARTICLES]: {
     path: RoutePath.articles,
     element: <ArticlesPage />,
-    authOnly: true
+    authOnly: true,
   },
 
   [AppRouters.ARTICLE_DETAILS]: {
     path: `${RoutePath.article_details}:id`,
     element: <ArticleDetailsPage />,
-    authOnly: true
+    authOnly: true,
   },
 
   [AppRouters.NOT_FOUND]: {
     path: RoutePath.not_found,
-    element: <NotFoundPage />
-  }
-}
+    element: <NotFoundPage />,
+  },
+};
