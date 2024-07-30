@@ -1,7 +1,14 @@
 import { memo } from "react";
-import { Avatar, classNames, Skeleton, Text } from "../../../../shared";
+import {
+  AppLink,
+  Avatar,
+  classNames,
+  Skeleton,
+  Text,
+} from "../../../../shared";
 import cls from "./CommentCard.module.scss";
 import { Comment } from "../../module/types/comment";
+import { RoutePath } from "../../../../shared/config";
 
 interface CommentCardProps {
   className?: string;
@@ -11,7 +18,7 @@ interface CommentCardProps {
 
 export const CommentCard = memo((props: CommentCardProps) => {
   const { className, comment, isLoading } = props;
-  console.log(comment)
+  console.log(comment);
   if (isLoading) {
     return (
       <div className={classNames(cls.CommentCard, {}, [className])}>
@@ -25,14 +32,17 @@ export const CommentCard = memo((props: CommentCardProps) => {
   }
   return (
     <div className={classNames(cls.CommentCard, {}, [className])}>
-      <div className={cls.header}>
+      <AppLink
+        to={`${RoutePath.profile}${comment.user.id}`}
+        className={cls.header}
+      >
         {comment.user.avatar ? (
           <Avatar size={30} src={comment.user.avatar} />
         ) : (
           <Avatar size={30} />
         )}
         <Text className={cls.userName} title={comment.user.userName} />
-      </div>
+      </AppLink>
       <Text className={cls.text} text={comment.text} />
     </div>
   );

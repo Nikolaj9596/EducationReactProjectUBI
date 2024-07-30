@@ -12,6 +12,7 @@ import { AxiosInstance } from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { ArticleDetailsSchema } from "../../../../entities/Article";
 import { ArticleDetailsCommentsSchema } from "../../../../pages/ArticleDetailsPage";
+import { AddCommentFormSchema } from "../../../../features/AddCommentForm";
 
 export type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -29,6 +30,7 @@ export interface StateScheme {
   profile?: ProfileScheme;
   articleDetails?: ArticleDetailsSchema;
   articleDetailsComments?: ArticleDetailsCommentsSchema;
+  addCommentForm?: AddCommentFormSchema;
 }
 
 export type StateSchemeKey = keyof StateScheme;

@@ -15,5 +15,8 @@
   "Форма авторизации": "Authourization Form",
   "Вы ввели неверный логин или пороль": "You entered an incorrect login or password",
   "Коментарии отсутствуют": "Not comments",
-  "Комментарии к статье не найденa": "Not comments by article"
+  "Комментарии к статье не найденa": "Not comments by article",
+  "Введите тексе комментария": "Enter comment text",
+  "Отправить": "Send",
+  "Не удалось создать комментарий": "Error create comment"
 }

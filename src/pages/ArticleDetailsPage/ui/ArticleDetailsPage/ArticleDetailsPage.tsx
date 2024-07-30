@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { getArticleCommentsIsLoading } from "../../model/selectors/commentSelectors";
 import { fetchCommentsByArticleId } from "../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
+import { AddCommentForm } from "../../../../features/AddCommentForm";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -52,6 +53,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
       <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
         <ArticleDetails id={id} />
         <Text className={cls.commentTitle} title={t("Комментарии")} />
+        <AddCommentForm />
         <CommentList isLoading={isLoading} comments={comments} />
       </div>
     </DynamicModuleLoader>
