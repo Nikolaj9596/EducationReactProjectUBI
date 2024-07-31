@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { classNames, Loader } from "../../../shared";
-import cls from "./PageLoader.module.scss"
+import cls from "./PageLoader.module.scss";
 
 interface PageLoaderProps {
   className?: string;
@@ -8,8 +8,8 @@ interface PageLoaderProps {
 
 export const PageLoader: FC<PageLoaderProps> = (props) => {
   return (
-    <div className={classNames(cls.PageLoader, {}, [props.className ? props.className : ''])}>
-      <Loader/>
+    <div className={classNames(cls.PageLoader, {}, [props.className])}>
+      <Loader />
     </div>
   );
 };

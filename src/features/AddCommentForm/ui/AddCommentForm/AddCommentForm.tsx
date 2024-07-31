@@ -19,10 +19,10 @@ import {
   ReducersList,
 } from "../../../../shared";
 import cls from "./AddCommentForm.module.scss";
-import { sentComment } from "../../model/services/sentComment/sentComment";
 
-interface AddCommentFormProps {
+export interface AddCommentFormProps {
   className?: string;
+  onSentComment: (text: string) => void;
 }
 
 const reducers: ReducersList = {
@@ -30,7 +30,7 @@ const reducers: ReducersList = {
 };
 
 const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
-  const { className } = props;
+  const { className, onSentComment } = props;
   const { t } = useTranslation();
   const text = useSelector(getAddCommentFormText);
   const error = useSelector(getAddCommentFormError);
@@ -43,9 +43,10 @@ const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
     [dispatch],
   );
 
-  const onSentComment = useCallback(() => {
-    dispatch(sentComment());
-  }, [dispatch]);
+  const onSentHendler = useCallback(() => {
+    onSentComment(text || "");
+    onCommentTextChange("");
+  }, [onSentComment, text, onCommentTextChange]);
 
   return (
     <DynamicModuleLoader reducers={reducers}>
@@ -56,7 +57,7 @@ const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
           value={text}
           onChange={onCommentTextChange}
         />
-        <Button theme={ThemeButton.OUTLINE} onClick={onSentComment}>
+        <Button theme={ThemeButton.OUTLINE} onClick={onSentHendler}>
           {t("Отправить")}
         </Button>
       </div>
