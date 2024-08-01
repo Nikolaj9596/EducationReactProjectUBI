@@ -1,6 +1,6 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../../../../shared/lib/hooks/useAppDispatch";
+import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
 import {
   Avatar,
   classNames,
@@ -12,19 +12,19 @@ import {
   TextSize,
   TextTheme,
   Icon,
-} from "../../../../../shared";
-import { fetchArticleById } from "../../services/fetchArticleById/fetchArticleById";
-import { articleDetailsReducer } from "../../slice/articleDetailsSlice";
+} from "../../../../shared";
+import { fetchArticleById } from "../../model/services/fetchArticleById/fetchArticleById";
+import { articleDetailsReducer } from "../../model/slice/articleDetailsSlice";
 import cls from "./ArticleDetails.module.scss";
 import { useSelector } from "react-redux";
 import {
   articleDetailsData,
   articleDetailsError,
   articleDetailsIsLoading,
-} from "../../selectors/articleDetailsData";
-import { ReactComponent as CalendarIcon } from "../../../../../shared/assets/icons/calendar-20-20.svg";
-import { ReactComponent as EyeIcon } from "../../../../../shared/assets/icons/eye-20-20.svg";
-import { ArticleBlock, ArticleBlockType } from "../../types/article";
+} from "../../model/selectors/articleDetailsData";
+import { ReactComponent as CalendarIcon } from "../../../../shared/assets/icons/calendar-20-20.svg";
+import { ReactComponent as EyeIcon } from "../../../../shared/assets/icons/eye-20-20.svg";
+import { ArticleBlock, ArticleBlockType } from "../../model/types/article";
 import { ArticleCodeBlockComponent } from "../ArticleCodeBlockComponent/ArticleCodeBlockComponent";
 import { ArticleTextBlockComponent } from "../ArticleTextBlockComponent/ArticleTextBlockComponent";
 import { ArticleImageBlockComponent } from "../ArticleImageBlockComponent/ArticleImageBlockComponent";

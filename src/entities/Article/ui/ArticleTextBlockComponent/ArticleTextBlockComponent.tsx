@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
-import { classNames, Text } from "../../../../../shared";
-import { ArticleTextBlock } from "../../types/article";
+import { classNames, Text } from "../../../../shared";
+import { ArticleTextBlock } from "../../model/types/article";
 import cls from "./ArticleTextBlockComponent.module.scss";
 
 interface ArticleTextBlockComponentProps {

@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
-import { classNames, Code } from "../../../../../shared";
-import { ArticleCodeBlock } from "../../types/article";
+import { classNames, Code } from "../../../../shared";
+import { ArticleCodeBlock } from "../../model/types/article";
 import cls from "./ArticleCodeBlockComponent.module.scss";
 
 interface ArticleCodeBlockComponentProps {
