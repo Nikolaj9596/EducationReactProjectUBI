@@ -1,0 +1,17 @@
+.TABLE {
+  display: flex;
+  flex-wrap: wrap;
+
+  .card {
+    margin-bottom: 30px;
+    margin-right: 30px;
+  }
+}
+
+.LIST {
+
+  .card {
+    margin-right: 30px;
+    margin-bottom: 30px;
+  }
+}

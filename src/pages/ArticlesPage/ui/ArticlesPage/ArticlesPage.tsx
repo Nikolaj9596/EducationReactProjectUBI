@@ -1,4 +1,4 @@
-import { Article, ArticleList } from "../../../../entities/Article";
+import { Article, ArticleList, ArticleView } from "../../../../entities/Article";
 import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
 import { classNames } from "../../../../shared";
@@ -10,6 +10,12 @@ interface ArticlesPageProps {
 
 const article = {
   id: "1",
+  author: {
+    id: "2",
+    userName: "user",
+    avatar:
+      "https://i.pinimg.com/originals/88/9e/5d/889e5dd8334a7dfca281208cd74bd40e.png",
+  },
   title: "Javascript newslfsjl ljflsjdflsjldfjslkdjf",
   subtitle: "Что нового в JS за 2022 год?",
   img: "https://teknotower.com/wp-content/uploads/2020/11/js.png",
@@ -83,7 +89,12 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
   const { t } = useTranslation("article");
   return (
     <div className={classNames(cls.ArticlesPage, {}, [className])}>
-      <ArticleList articles={[article]} />
+      <ArticleList
+        view={ArticleView.LIST}
+        articles={new Array(16)
+          .fill(0)
+          .map((item, index) => ({ ...article, id: String(index) }))}
+      />
     </div>
   );
 };

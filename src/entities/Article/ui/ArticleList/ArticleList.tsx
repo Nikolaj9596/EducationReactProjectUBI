@@ -15,11 +15,20 @@ interface ArticleListProps {
 export const ArticleList: FC<ArticleListProps> = memo((props) => {
   const { className, articles, isLoading, view = ArticleView.TABLE } = props;
   const { t } = useTranslation();
+
   const renderArticles = (item: Article) => {
-    return <ArticleListItem article={item} view={view}/>;
+    return (
+      <ArticleListItem
+        className={cls.card}
+        article={item}
+        view={view}
+        key={item.id}
+      />
+    );
   };
+
   return (
-    <div className={classNames(cls.ArticleList, {}, [className])}>
+    <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
       {articles.length > 0 ? articles.map(renderArticles) : null}
     </div>
   );

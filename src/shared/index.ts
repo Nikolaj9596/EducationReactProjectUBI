@@ -21,6 +21,7 @@ export {
   Select,
   Skeleton,
   Icon,
-  Code
+  Code,
+  Card
 } from "./ui"
 
