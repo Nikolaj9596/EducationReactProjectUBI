@@ -4,7 +4,7 @@ import {
   ArticleTextBlock,
   ArticleView,
 } from "../../model/types/article";
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Avatar,
@@ -18,6 +18,8 @@ import {
 import cls from "./ArticleListItem.module.scss";
 import { ReactComponent as EyeIcon } from "../../../../shared/assets/icons/eye-20-20.svg";
 import { ArticleTextBlockComponent } from "../ArticleTextBlockComponent/ArticleTextBlockComponent";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "../../../../shared/config";
 
 interface ArticleListItemProps {
   className?: string;
@@ -35,6 +37,11 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
       <Icon Svg={EyeIcon} />
     </>
   );
+  const navigate = useNavigate();
+  const onOpneArticleDetails = useCallback(() => {
+    navigate(RoutePath.article_details + article.id);
+  }, [navigate, article.id]);
+
   if (view === ArticleView.LIST) {
     let textBlock = article.blocks.find(
       (block) => block.type === ArticleBlockType.TEXT,
@@ -57,10 +64,15 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
           {types}
           <img src={article.img} className={cls.img} alt={article.title} />
           {textBlock && (
-            <ArticleTextBlockComponent block={textBlock} className={cls.textBlock}/>
+            <ArticleTextBlockComponent
+              block={textBlock}
+              className={cls.textBlock}
+            />
           )}
           <div className={cls.footer}>
-            <Button theme={ThemeButton.OUTLINE}>{t("Читать далее...")}</Button>
+            <Button theme={ThemeButton.OUTLINE} onClick={onOpneArticleDetails}>
+              {t("Читать далее...")}
+            </Button>
             {views}
           </div>
         </Card>
@@ -71,7 +83,7 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
     <div
       className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
     >
-      <Card className={cls.card}>
+      <Card className={cls.card} onClick={onOpneArticleDetails}>
         <div className={cls.imageWrapper}>
           <img className={cls.img} src={article.img} alt={article.title} />
           <Text text={article.createdAt} className={cls.date} />

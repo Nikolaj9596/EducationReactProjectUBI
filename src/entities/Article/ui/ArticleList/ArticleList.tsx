@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { classNames } from "../../../../shared";
 import cls from "./ArticleList.module.scss";
 import { ArticleListItem } from "../ArticleListItem/ArticleListItem";
+import { ArticleListItemSkeleton } from "../ArticleListItem/ArticleListItemSkeleton";
 
 interface ArticleListProps {
   className?: string;
@@ -15,6 +16,18 @@ interface ArticleListProps {
 export const ArticleList: FC<ArticleListProps> = memo((props) => {
   const { className, articles, isLoading, view = ArticleView.TABLE } = props;
   const { t } = useTranslation();
+
+  if (isLoading) {
+    return (
+      <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
+        {new Array(view === ArticleView.TABLE ? 9 : 3)
+          .fill(0)
+          .map((item, index) => (
+            <ArticleListItemSkeleton className={cls.card} key={index} view={view} />
+          ))}
+      </div>
+    );
+  }
 
   const renderArticles = (item: Article) => {
     return (
