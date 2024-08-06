@@ -1,0 +1,62 @@
+import {
+  createEntityAdapter,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
+import { ARTICLE_VIEW_LOCAL_STORAGE_KEY } from "../../../../shared/const/LocalStorage";
+import { StateScheme } from "../../../../app/providers";
+import { ArticleView, Article } from "../../../../entities/Article";
+import { fetchArticlesList } from "../services/fetchArticlesList/fetchArticlesList";
+import { ArticlesPageSchema } from "../types/articlePageSchema";
+
+const articleAdapter = createEntityAdapter<Article, string>({
+  selectId: (article) => article.id,
+});
+
+export const getArticles = articleAdapter.getSelectors<StateScheme>(
+  (state) => state.articlesPage || articleAdapter.getInitialState(),
+);
+
+export const articlePageSlice = createSlice({
+  name: "articlePageSlice",
+  initialState: articleAdapter.getInitialState<ArticlesPageSchema>({
+    isLoading: false,
+    error: undefined,
+    view: ArticleView.TABLE,
+    ids: [],
+    entities: {},
+  }),
+  reducers: {
+    setView: (state, action: PayloadAction<ArticleView>) => {
+      state.view = action.payload;
+      localStorage.setItem(ARTICLE_VIEW_LOCAL_STORAGE_KEY, action.payload);
+    },
+    initState: (state) => {
+      state.view = localStorage.getItem(
+        ARTICLE_VIEW_LOCAL_STORAGE_KEY,
+      ) as ArticleView;
+    },
+  },
+
+  extraReducers: (builder) => {
+    // INFO: fetchArticlesList
+    builder.addCase(fetchArticlesList.pending, (state) => {
+      state.error = undefined;
+      state.isLoading = true;
+    });
+    builder.addCase(
+      fetchArticlesList.fulfilled,
+      (state, action: PayloadAction<Article[]>) => {
+        state.isLoading = false;
+        articleAdapter.setAll(state, action.payload);
+      },
+    );
+    builder.addCase(fetchArticlesList.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+  },
+});
+
+export const { actions: articlesPageActions } = articlePageSlice;
+export const { reducer: articlesPageReducer } = articlePageSlice;

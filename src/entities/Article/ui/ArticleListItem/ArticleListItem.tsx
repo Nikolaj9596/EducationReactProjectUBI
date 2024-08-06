@@ -39,7 +39,9 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
   );
   const navigate = useNavigate();
   const onOpneArticleDetails = useCallback(() => {
-    navigate(RoutePath.article_details + article.id);
+    // TODO: Fix it
+    // navigate(RoutePath.article_details + article.id);
+    navigate('/articles/' + article.id);
   }, [navigate, article.id]);
 
   if (view === ArticleView.LIST) {

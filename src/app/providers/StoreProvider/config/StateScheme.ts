@@ -13,6 +13,7 @@ import { NavigateFunction } from "react-router-dom";
 import { ArticleDetailsSchema } from "../../../../entities/Article";
 import { ArticleDetailsCommentsSchema } from "../../../../pages/ArticleDetailsPage";
 import { AddCommentFormSchema } from "../../../../features/AddCommentForm";
+import { ArticlesPageSchema } from "../../../../pages/ArticlesPage";
 
 export type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -31,6 +32,7 @@ export interface StateScheme {
   articleDetails?: ArticleDetailsSchema;
   articleDetailsComments?: ArticleDetailsCommentsSchema;
   addCommentForm?: AddCommentFormSchema;
+  articlesPage?: ArticlesPageSchema;
 }
 
 export type StateSchemeKey = keyof StateScheme;
