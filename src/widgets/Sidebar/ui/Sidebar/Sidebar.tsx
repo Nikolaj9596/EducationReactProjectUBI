@@ -23,12 +23,16 @@ export const Sidebar: FC<SidebarProps> = memo((props) => {
     setCollapsed((prev) => !prev);
   };
 
-  const itemsList = useMemo(() => sidebarItemsList.map((item) => (
-    <SidebarItem item={item} collapsed={collapsed} key={item.path} />
-  )), [collapsed, sidebarItemsList])
+  const itemsList = useMemo(
+    () =>
+      sidebarItemsList.map((item) => (
+        <SidebarItem item={item} collapsed={collapsed} key={item.path} />
+      )),
+    [collapsed, sidebarItemsList],
+  );
 
   return (
-    <div
+    <menu
       className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [
         props.className ? props.className : "",
       ])}
@@ -42,13 +46,11 @@ export const Sidebar: FC<SidebarProps> = memo((props) => {
       >
         {collapsed ? ">" : "<"}
       </Button>
-      <div className={cls.items}>
-        {itemsList}
-      </div>
+      <div className={cls.items}>{itemsList}</div>
       <div className={cls.switchers}>
         <ThemeSwitcher />
         <LangSwitcher className={cls.langToggle} short={collapsed} />
       </div>
-    </div>
+    </menu>
   );
 });

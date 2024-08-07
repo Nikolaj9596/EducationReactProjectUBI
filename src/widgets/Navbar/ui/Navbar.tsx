@@ -14,24 +14,25 @@ interface NavbarProps {
 
 export const Navbar: FC<NavbarProps> = memo(({ className }) => {
   const { t } = useTranslation();
-  const [isAuthModal, setIsAuthModal] = useState(false)
-  const dispatch = useDispatch()
-  const authData = useSelector(getUserAuthData)
+  const [isAuthModal, setIsAuthModal] = useState(false);
+  const dispatch = useDispatch();
+  const authData = useSelector(getUserAuthData);
   const onCloseModal = useCallback(() => {
-    setIsAuthModal(false)
-  }, [])
+    setIsAuthModal(false);
+  }, []);
 
   const onShowModal = useCallback(() => {
-    setIsAuthModal(true)
-  }, [])
+    setIsAuthModal(true);
+  }, []);
 
   const onLogout = useCallback(() => {
-    dispatch(userActions.logout())
-  }, [dispatch])
+    dispatch(userActions.logout());
+  }, [dispatch]);
   if (authData) {
-
     return (
-      <div className={classNames(cls.navbar, {}, [className ? className : ''])}>
+      <header
+        className={classNames(cls.navbar, {}, [className ? className : ""])}
+      >
         <Button
           theme={ThemeButton.CLEAR_INVERTED}
           className={cls.links}
@@ -39,11 +40,13 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
         >
           {t("Выйти")}
         </Button>
-      </div>
+      </header>
     );
   }
   return (
-    <div className={classNames(cls.navbar, {}, [className ? className : ''])}>
+    <header
+      className={classNames(cls.navbar, {}, [className ? className : ""])}
+    >
       <Button
         theme={ThemeButton.CLEAR_INVERTED}
         className={cls.links}
@@ -51,10 +54,9 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
       >
         {t("Войти")}
       </Button>
-      {
-        isAuthModal && (<LoginModal isOpen={isAuthModal} onClose={onCloseModal} />)
-      }
-    </div>
+      {isAuthModal && (
+        <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
+      )}
+    </header>
   );
 });
-

@@ -8,6 +8,7 @@ import {
   ReducersList,
   Button,
   ThemeButton,
+  Page,
 } from "../../../../shared";
 import cls from "./ArticleDetailsPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
@@ -58,15 +59,15 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
 
   if (!id) {
     return (
-      <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+      <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
         {t("Статья не найдена")}
-      </div>
+      </Page>
     );
   }
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+      <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
         <Button theme={ThemeButton.OUTLINE} onClick={onBackToList}>
           {t("Назад к списку")}
         </Button>
@@ -74,7 +75,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
         <Text className={cls.commentTitle} title={t("Комментарии")} />
         <AddCommentForm onSentComment={onSendComment} />
         <CommentList isLoading={isLoading} comments={comments} />
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 };

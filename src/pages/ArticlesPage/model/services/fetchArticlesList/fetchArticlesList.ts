@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import i18n from "../../../../../shared/config/i18n/i18n";
 import { ThunkConfig } from "../../../../../app/providers/StoreProvider";
-import {Article} from "../../../../../entities/Article";
+import { Article } from "../../../../../entities/Article";
+import { getArticlesPageLimit } from "../../selectors/articlesPageSelectors";
 
 const article = {
   id: "1",
@@ -80,17 +81,32 @@ const article = {
   ],
 } as Article;
 
+interface FetchArticleListProps {
+  page?: number;
+}
+
 export const fetchArticlesList = createAsyncThunk<
   Article[],
-  void,
+  FetchArticleListProps,
   ThunkConfig<string>
 >(
   "articlesPage/fetchArticlesList",
 
-  async (_, thunkApi) => {
-    const { extra, rejectWithValue } = thunkApi;
+  async (props, thunkApi) => {
+    const { extra, rejectWithValue, getState } = thunkApi;
+    const { page } = props;
+    const limit = getArticlesPageLimit(getState());
+
     try {
-      const response: AxiosResponse = await extra.api.get<Article[]>("/articles");
+      const response: AxiosResponse = await extra.api.get<Article[]>(
+        "/articles",
+        {
+          params: {
+            _limit: limit,
+            _page: page,
+          },
+        },
+      );
       if (!response.data) {
         throw new Error();
       }
@@ -99,7 +115,7 @@ export const fetchArticlesList = createAsyncThunk<
       console.log(e);
       // return rejectWithValue(i18n.t('Статья не найденa'))
       // TODO: Delete when create server
-      return new Array(16)
+      return new Array(50)
         .fill(0)
         .map((item, index) => ({ ...article, id: String(index) }));
     }

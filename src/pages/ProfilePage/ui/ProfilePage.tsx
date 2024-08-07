@@ -5,6 +5,7 @@ import {
   ReducersList,
   TextTheme,
   Text,
+  Page
 } from "../../../shared";
 import { useAppDispatch } from "../../../shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
@@ -109,7 +110,7 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
 
   return (
     <DynamicModuleLoader reducers={redusers} removeAfterUnmount>
-      <div className={classNames("", {}, [props.className])}>
+      <Page className={classNames("", {}, [props.className])}>
         <ProfilePageHeader />
         {validateErrors?.length &&
           validateErrors.map((err) => (
@@ -133,7 +134,7 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
             avatar: onChangeAvatar,
           }}
         />
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 };

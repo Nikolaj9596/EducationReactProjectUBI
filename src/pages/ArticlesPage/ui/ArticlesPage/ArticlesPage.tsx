@@ -1,12 +1,9 @@
-import {
-  Article,
-  ArticleList,
-  ArticleView,
-} from "../../../../entities/Article";
+import { ArticleList, ArticleView } from "../../../../entities/Article";
 import { FC, memo, useCallback, useEffect } from "react";
 import {
   classNames,
   DynamicModuleLoader,
+  Page,
   ReducersList,
 } from "../../../../shared";
 import cls from "./ArticlesPage.module.scss";
@@ -49,16 +46,16 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
   );
 
   useEffect(() => {
-    dispatch(fetchArticlesList());
     dispatch(articlesPageActions.initState());
+    dispatch(fetchArticlesList({ page: 1 }));
   }, [dispatch]);
 
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <div className={classNames(cls.ArticlesPage, {}, [className])}>
+      <Page className={classNames(cls.ArticlesPage, {}, [className])}>
         <ArticleViewSelector view={view} onViewClick={onChangeView} />
         <ArticleList view={view} articles={articles} isLoading={isLoading} />
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 };
