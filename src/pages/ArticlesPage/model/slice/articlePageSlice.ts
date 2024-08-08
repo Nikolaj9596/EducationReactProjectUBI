@@ -56,7 +56,8 @@ export const articlePageSlice = createSlice({
       fetchArticlesList.fulfilled,
       (state, action: PayloadAction<Article[]>) => {
         state.isLoading = false;
-        articleAdapter.setAll(state, action.payload);
+        articleAdapter.setMany(state, action.payload);
+        state.hasMore = action.payload.length > 0;
       },
     );
     builder.addCase(fetchArticlesList.rejected, (state, action) => {

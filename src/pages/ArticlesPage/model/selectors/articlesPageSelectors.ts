@@ -9,5 +9,7 @@ export const getArticlesPageView = (state: StateScheme) =>
   state.articlesPage?.view || ArticleView.TABLE;
 export const getArticlesPageLimit = (state: StateScheme) =>
   state.articlesPage?.limit || 30;
+export const getArticlesPageNumber = (state: StateScheme) =>
+  state.articlesPage?.page || 1;
 export const getArticlesPageHasMore = (state: StateScheme) =>
   state.articlesPage?.hasMore || false;
