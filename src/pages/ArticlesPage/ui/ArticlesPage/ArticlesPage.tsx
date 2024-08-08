@@ -18,11 +18,11 @@ import { useSelector } from "react-redux";
 import {
   getArticlesPageError,
   getArticlesPageIsLoading,
-  getArticlesPageNumber,
   getArticlesPageView,
 } from "../../model/selectors/articlesPageSelectors";
 import { ArticleViewSelector } from "../ArticleViewSelector/ArticleViewSelector";
 import { fetchNextArticlesPage } from "../../model/services/fetchNextArticlesPage/fetchNextArticlesPage";
+import { initArticlesPage } from "../../model/services/initArticlePage/initArticlePage";
 
 interface ArticlesPageProps {
   className?: string;
@@ -39,7 +39,6 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
   const isLoading = useSelector(getArticlesPageIsLoading);
   const error = useSelector(getArticlesPageError);
   const view = useSelector(getArticlesPageView);
-  const page = useSelector(getArticlesPageNumber);
 
   const onChangeView = useCallback(
     (view: ArticleView) => {
@@ -53,12 +52,11 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(articlesPageActions.initState());
-    dispatch(fetchArticlesList({ page: page + 1 }));
-  }, [page, dispatch]);
+    dispatch(initArticlesPage());
+  }, [dispatch]);
 
   return (
-    <DynamicModuleLoader reducers={reducers}>
+    <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
       <Page
         onScrollEnd={onLoadNextPart}
         className={classNames(cls.ArticlesPage, {}, [className])}

@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { classNames, Text } from "../../../../shared";
 import { CommentCard } from "../CommentCard/CommentCard";
-import {Comment } from "../../module/types/comment"
+import { Comment } from "../../module/types/comment";
 import cls from "./CommentList.module.scss";
 
 interface CommentListProps {
@@ -13,15 +13,21 @@ interface CommentListProps {
 
 export const CommentList = memo((props: CommentListProps) => {
   const { className, comments, isLoading } = props;
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className={classNames(cls.CommentList, {}, [className])}>
-      {comments?.length
-        ? comments.map(comment => (
-          <CommentCard className={cls.comment} comment={comment} isLoading={isLoading}/>
+      {comments?.length ? (
+        comments.map((comment) => (
+          <CommentCard
+            className={cls.comment}
+            comment={comment}
+            isLoading={isLoading}
+            key={comment.id}
+          />
         ))
-        : <Text text={t("Коментарии отсутствуют")}/>
-      }
+      ) : (
+        <Text text={t("Коментарии отсутствуют")} />
+      )}
     </div>
   );
 });
