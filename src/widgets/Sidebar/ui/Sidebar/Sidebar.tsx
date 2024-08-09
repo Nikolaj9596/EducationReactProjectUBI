@@ -34,7 +34,7 @@ export const Sidebar: FC<SidebarProps> = memo((props) => {
   return (
     <menu
       className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [
-        props.className ? props.className : "",
+        props.className,
       ])}
     >
       <Button

@@ -8,6 +8,7 @@ import { StateScheme } from "../../../../app/providers";
 import { ArticleView, Article } from "../../../../entities/Article";
 import { fetchArticlesList } from "../services/fetchArticlesList/fetchArticlesList";
 import { ArticlesPageSchema } from "../types/articlePageSchema";
+import { ArticleSortField } from "../../../../entities/Article/model/types/article";
 
 const articleAdapter = createEntityAdapter<Article, string>({
   selectId: (article) => article.id,
@@ -29,6 +30,9 @@ export const articlePageSlice = createSlice({
     ids: [],
     entities: {},
     _inited: false,
+    sort: ArticleSortField.CREATED,
+    search: "",
+    order: "asc",
   }),
   reducers: {
     setView: (state, action: PayloadAction<ArticleView>) => {
