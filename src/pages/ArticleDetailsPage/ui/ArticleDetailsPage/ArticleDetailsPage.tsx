@@ -8,7 +8,6 @@ import {
   ReducersList,
   Button,
   ThemeButton,
-  Page,
 } from "../../../../shared";
 import cls from "./ArticleDetailsPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
@@ -24,6 +23,7 @@ import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
 import { AddCommentForm } from "../../../../features/AddCommentForm";
 import { addCommentForArticle } from "../../model/services/addCommentForArticle/addCommentForArticle";
 import { RoutePath } from "../../../../shared/config";
+import { Page } from "../../../../widgets";
 
 interface ArticleDetailsPageProps {
   className?: string;

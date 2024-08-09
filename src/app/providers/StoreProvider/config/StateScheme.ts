@@ -13,6 +13,7 @@ import { ArticleDetailsSchema } from "../../../../entities/Article";
 import { ArticleDetailsCommentsSchema } from "../../../../pages/ArticleDetailsPage";
 import { AddCommentFormSchema } from "../../../../features/AddCommentForm";
 import { ArticlesPageSchema } from "../../../../pages/ArticlesPage";
+import { UISchema } from "../../../../features/UI";
 
 export type CombinedState<T> = {
   [K in keyof T]: T[K];
@@ -31,6 +32,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
 export interface StateScheme {
   counter: CounterStateSchema;
   user: UserSchema;
+  ui: UISchema;
   // Async Reducers
   loginForm?: LoginSchema;
   profile?: ProfileScheme;

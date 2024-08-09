@@ -1,6 +1,7 @@
 import { Counter } from "../../../entities/Counter";
 import { useTranslation } from "react-i18next";
-import { Page } from "../../../shared";
+import { Page } from "../../../widgets";
+
 
 const MainPage = () => {
   const { t } = useTranslation("main");

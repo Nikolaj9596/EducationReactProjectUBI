@@ -3,7 +3,6 @@ import { FC, memo, useCallback, useEffect } from "react";
 import {
   classNames,
   DynamicModuleLoader,
-  Page,
   ReducersList,
 } from "../../../../shared";
 import cls from "./ArticlesPage.module.scss";
@@ -13,7 +12,6 @@ import {
   getArticles,
 } from "../../model/slice/articlePageSlice";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
-import { fetchArticlesList } from "../../model/services/fetchArticlesList/fetchArticlesList";
 import { useSelector } from "react-redux";
 import {
   getArticlesPageError,
@@ -23,6 +21,7 @@ import {
 import { ArticleViewSelector } from "../ArticleViewSelector/ArticleViewSelector";
 import { fetchNextArticlesPage } from "../../model/services/fetchNextArticlesPage/fetchNextArticlesPage";
 import { initArticlesPage } from "../../model/services/initArticlePage/initArticlePage";
+import { Page } from "../../../../widgets";
 
 interface ArticlesPageProps {
   className?: string;

@@ -5,7 +5,6 @@ import {
   ReducersList,
   TextTheme,
   Text,
-  Page
 } from "../../../shared";
 import { useAppDispatch } from "../../../shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
@@ -24,6 +23,7 @@ import {
 import { ProfilePageHeader } from "./ProfilePageHeader/ProfilePageHeader";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { Page } from "../../../widgets";
 
 interface ProfilePageProps {
   className?: string;

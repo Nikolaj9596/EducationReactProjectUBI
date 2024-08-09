@@ -23,5 +23,4 @@ export {
   Icon,
   Code,
   Card,
-  Page,
 } from "./ui";
