@@ -1,4 +1,4 @@
-import { ArticleList, ArticleView } from "../../../../entities/Article";
+import { ArticleList } from "../../../../entities/Article";
 import { FC, memo, useCallback, useEffect } from "react";
 import {
   classNames,
@@ -53,7 +53,12 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
         className={classNames(cls.ArticlesPage, {}, [className])}
       >
         <ArticlesPageFilters />
-        <ArticleList view={view} articles={articles} isLoading={isLoading} />
+        <ArticleList
+          className={cls.list}
+          view={view}
+          articles={articles}
+          isLoading={isLoading}
+        />
       </Page>
     </DynamicModuleLoader>
   );

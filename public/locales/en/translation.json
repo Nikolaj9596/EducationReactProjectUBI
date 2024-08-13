@@ -19,5 +19,12 @@
   "Введите тексе комментария": "Enter comment text",
   "Отправить": "Send",
   "Не удалось создать комментарий": "Error create comment",
-  "Сортировать по": "Order by"
+  "Сортировать по": "Order by",
+  "Поиск": "Search",
+  "по": "by",
+  "возврастанию": "to the rise",
+  "убыванию": "in descending order",
+  "дате создания": "date of creation",
+  "названию": "name",
+  "просмотрам": "views"
 }

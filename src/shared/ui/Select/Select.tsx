@@ -2,7 +2,7 @@ import { ChangeEvent, FC, memo, useMemo } from "react";
 import { classNames, Mods } from "../../../shared";
 import cls from "./Select.module.scss";
 
-interface SelectOption {
+export interface SelectOption {
   value?: string
   content?: string
 }
