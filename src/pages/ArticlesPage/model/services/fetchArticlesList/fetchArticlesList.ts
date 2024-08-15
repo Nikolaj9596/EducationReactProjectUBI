@@ -3,7 +3,14 @@ import { AxiosResponse } from "axios";
 import i18n from "../../../../../shared/config/i18n/i18n";
 import { ThunkConfig } from "../../../../../app/providers/StoreProvider";
 import { Article } from "../../../../../entities/Article";
-import { getArticlesPageLimit } from "../../selectors/articlesPageSelectors";
+import {
+  getArticlesPageLimit,
+  getArticlesPageNumber,
+  getArticlesPageOrder,
+  getArticlesPageSearch,
+  getArticlesPageSort,
+} from "../../selectors/articlesPageSelectors";
+import { addQueryParams } from "../../../../../shared/lib/url/addQueryParams/addQueryParams";
 
 const article = {
   id: "1",
@@ -82,7 +89,7 @@ const article = {
 } as Article;
 
 interface FetchArticleListProps {
-  page?: number;
+  replace?: boolean;
 }
 
 export const fetchArticlesList = createAsyncThunk<
@@ -94,9 +101,17 @@ export const fetchArticlesList = createAsyncThunk<
 
   async (props, thunkApi) => {
     const { extra, rejectWithValue, getState } = thunkApi;
-    const { page } = props;
     const limit = getArticlesPageLimit(getState());
+    const sort = getArticlesPageSort(getState());
+    const order = getArticlesPageOrder(getState());
+    const search = getArticlesPageSearch(getState());
+    const page = getArticlesPageNumber(getState());
 
+    addQueryParams({
+      sort,
+      order,
+      search,
+    });
     try {
       const response: AxiosResponse = await extra.api.get<Article[]>(
         "/articles",
@@ -104,6 +119,9 @@ export const fetchArticlesList = createAsyncThunk<
           params: {
             _limit: limit,
             _page: page,
+            _order: order,
+            _sort: sort,
+            _search: search,
           },
         },
       );

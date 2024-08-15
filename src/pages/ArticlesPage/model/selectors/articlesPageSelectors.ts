@@ -1,4 +1,4 @@
-import { ArticleSortField } from "entities/Article/model/types/article";
+import { ArticleSortField } from "../../../../entities/Article/model/types/article";
 import { StateScheme } from "../../../../app/providers";
 import { ArticleView } from "../../../../entities/Article";
 

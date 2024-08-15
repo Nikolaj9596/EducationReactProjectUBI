@@ -16,6 +16,8 @@ import cls from "./AriclesPageFilters.module.scss";
 import { ArticleSortSelector } from "../../../../entities/Article/ui/ArticleSortSelector/ArticleSortSelector";
 import { ArticleSortField } from "../../../../entities/Article/model/types/article";
 import { SortOrder } from "../../model/types/articlePageSchema";
+import { fetchArticlesList } from "../../model/services/fetchArticlesList/fetchArticlesList";
+import { useDebounce } from "../../../../shared/lib/hooks/useDebounce/useDebounce";
 
 interface ArticlesPageFiltersProps {
   className?: string;
@@ -30,6 +32,9 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = memo(
     const sort = useSelector(getArticlesPageSort);
     const search = useSelector(getArticlesPageSearch);
 
+    const fetchData = useCallback(() => {
+      dispatch(fetchArticlesList({ replace: true }));
+    }, [dispatch]);
     const onChangeView = useCallback(
       (view: ArticleView) => {
         dispatch(articlesPageActions.setView(view));
@@ -37,18 +42,33 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = memo(
       [dispatch],
     );
 
+    const debouncedFetchData = useDebounce(fetchData, 300);
+
     const onChangeSort = useCallback(
       (sort: ArticleSortField) => {
         dispatch(articlesPageActions.setSort(sort));
+        dispatch(articlesPageActions.setPage(1));
+        fetchData();
       },
-      [dispatch],
+      [dispatch, fetchData],
     );
 
     const onChangeOrder = useCallback(
       (order: SortOrder) => {
         dispatch(articlesPageActions.setOrder(order));
+        dispatch(articlesPageActions.setPage(1));
+        fetchData();
       },
-      [dispatch],
+      [dispatch, fetchData],
+    );
+
+    const onChangeSearch = useCallback(
+      (search: string) => {
+        dispatch(articlesPageActions.setSearch(search));
+        dispatch(articlesPageActions.setPage(1));
+        debouncedFetchData();
+      },
+      [dispatch, debouncedFetchData],
     );
 
     return (
@@ -65,7 +85,11 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = memo(
           <ArticleViewSelector view={view} onViewClick={onChangeView} />
         </div>
         <Card className={cls.search}>
-          <Input placeholder={t("Поиск")} />
+          <Input
+            placeholder={t("Поиск")}
+            value={search}
+            onChange={onChangeSearch}
+          />
         </Card>
       </div>
     );

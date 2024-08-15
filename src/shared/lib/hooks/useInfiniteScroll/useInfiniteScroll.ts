@@ -1,3 +1,4 @@
+// Hook реализует бесконечный скролл
 import { MutableRefObject, useEffect } from "react";
 
 export interface UseInfiniteScrollOptions {

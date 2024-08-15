@@ -42,11 +42,12 @@ export const articlePageSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
-
     setOrder: (state, action: PayloadAction<SortOrder>) => {
       state.order = action.payload;
     },
-
+    setLimit: (state, action: PayloadAction<number>) => {
+      state.limit = action.payload;
+    },
     setSort: (state, action: PayloadAction<ArticleSortField>) => {
       state.sort = action.payload;
     },
@@ -65,18 +66,23 @@ export const articlePageSlice = createSlice({
 
   extraReducers: (builder) => {
     // INFO: fetchArticlesList
-    builder.addCase(fetchArticlesList.pending, (state) => {
+    builder.addCase(fetchArticlesList.pending, (state, action) => {
       state.error = undefined;
       state.isLoading = true;
+
+      if (action.meta.arg.replace) {
+        articleAdapter.removeAll(state);
+      }
     });
-    builder.addCase(
-      fetchArticlesList.fulfilled,
-      (state, action: PayloadAction<Article[]>) => {
-        state.isLoading = false;
-        articleAdapter.setMany(state, action.payload);
-        state.hasMore = action.payload.length > 0;
-      },
-    );
+    builder.addCase(fetchArticlesList.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.hasMore = action.payload.length >= state.limit;
+      if (action.meta.arg.replace) {
+        articleAdapter.setAll(state, action.payload);
+      } else {
+        articleAdapter.addMany(state, action.payload);
+      }
+    });
     builder.addCase(fetchArticlesList.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;

@@ -1,3 +1,4 @@
+// Hook позволяет выполнить только одно действие в определеное кол-во времени
 import { useCallback, useRef } from "react";
 
 export const useThrottle = (

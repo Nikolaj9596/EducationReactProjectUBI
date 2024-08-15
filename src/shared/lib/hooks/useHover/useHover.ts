@@ -1,3 +1,4 @@
+// Hook позволяет позволяет определить когда у пользователя наведен курсор на элемент
 import { useCallback, useMemo, useState } from "react";
 
 interface UseHoverBind {

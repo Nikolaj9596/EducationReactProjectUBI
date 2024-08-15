@@ -4,8 +4,8 @@ import {
   Reducer,
   ReducersMapObject,
 } from "@reduxjs/toolkit";
+import { MountedRecord } from "../../../types/global";
 import {
-  MountedRecord,
   ReducerManager,
   StateScheme,
   StateSchemeKey,

@@ -14,17 +14,7 @@ import { ArticleDetailsCommentsSchema } from "../../../../pages/ArticleDetailsPa
 import { AddCommentFormSchema } from "../../../../features/AddCommentForm";
 import { ArticlesPageSchema } from "../../../../pages/ArticlesPage";
 import { UISchema } from "../../../../features/UI";
-
-export type CombinedState<T> = {
-  [K in keyof T]: T[K];
-};
-
-type OptionalRecord<K extends keyof any, T> = {
-  [P in K]?: T;
-};
-
-export type MountedRecord = OptionalRecord<StateSchemeKey, boolean>;
-
+import { CombinedState, MountedRecord } from "../../../../app/types/global";
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
   reducerManager: ReducerManager;
 }
