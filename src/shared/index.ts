@@ -24,4 +24,5 @@ export {
   Icon,
   Code,
   Card,
+  Tabs
 } from "./ui";

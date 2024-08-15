@@ -8,7 +8,10 @@ import { StateScheme } from "../../../../app/providers";
 import { ArticleView, Article } from "../../../../entities/Article";
 import { fetchArticlesList } from "../services/fetchArticlesList/fetchArticlesList";
 import { ArticlesPageSchema, SortOrder } from "../types/articlePageSchema";
-import { ArticleSortField } from "../../../../entities/Article/model/types/article";
+import {
+  ArticleSortField,
+  ArticleType,
+} from "../../../../entities/Article/model/types/article";
 
 const articleAdapter = createEntityAdapter<Article, string>({
   selectId: (article) => article.id,
@@ -33,7 +36,9 @@ export const articlePageSlice = createSlice({
     sort: ArticleSortField.CREATED,
     search: "",
     order: "asc",
+    type: ArticleType.ALL,
   }),
+
   reducers: {
     setView: (state, action: PayloadAction<ArticleView>) => {
       state.view = action.payload;
@@ -41,6 +46,9 @@ export const articlePageSlice = createSlice({
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
+    },
+    setType: (state, action: PayloadAction<ArticleType>) => {
+      state.type = action.payload;
     },
     setOrder: (state, action: PayloadAction<SortOrder>) => {
       state.order = action.payload;

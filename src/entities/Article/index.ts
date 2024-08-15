@@ -1,3 +1,4 @@
+export { ArticleTypeTabs } from "./ui/ArticleTypeTabs/ArticleTypeTabs"
 export { ArticleListItem } from "./ui/ArticleListItem/ArticleListItem"
 export { ArticleList } from "./ui/ArticleList/ArticleList"
 export { ArticleDetails } from "./ui/ArticleDetails/ArticleDetails"

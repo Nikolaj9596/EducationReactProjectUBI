@@ -1,4 +1,4 @@
-import { ArticleSortField } from "../../../../entities/Article/model/types/article";
+import { ArticleSortField, ArticleType } from "../../../../entities/Article/model/types/article";
 import { StateScheme } from "../../../../app/providers";
 import { ArticleView } from "../../../../entities/Article";
 
@@ -22,3 +22,5 @@ export const getArticlesPageSort = (state: StateScheme) =>
   state.articlesPage?.sort ?? ArticleSortField.CREATED;
 export const getArticlesPageSearch = (state: StateScheme) =>
   state.articlesPage?.search ?? '';
+export const getArticlesPageType = (state: StateScheme) =>
+  state.articlesPage?.type ?? ArticleType.ALL;

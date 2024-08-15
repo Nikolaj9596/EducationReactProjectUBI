@@ -3,6 +3,7 @@ import {
   getArticlesPageOrder,
   getArticlesPageSearch,
   getArticlesPageSort,
+  getArticlesPageType,
   getArticlesPageView,
 } from "../../model/selectors/articlesPageSelectors";
 import { articlesPageActions } from "../../model/slice/articlePageSlice";
@@ -14,10 +15,15 @@ import { Card, classNames, Input } from "../../../../shared";
 import { ArticleViewSelector } from "../ArticleViewSelector/ArticleViewSelector";
 import cls from "./AriclesPageFilters.module.scss";
 import { ArticleSortSelector } from "../../../../entities/Article/ui/ArticleSortSelector/ArticleSortSelector";
-import { ArticleSortField } from "../../../../entities/Article/model/types/article";
+import {
+  ArticleSortField,
+  ArticleType,
+} from "../../../../entities/Article/model/types/article";
 import { SortOrder } from "../../model/types/articlePageSchema";
 import { fetchArticlesList } from "../../model/services/fetchArticlesList/fetchArticlesList";
 import { useDebounce } from "../../../../shared/lib/hooks/useDebounce/useDebounce";
+import { TabItem } from "../../../../shared/ui/Tabs/Tabs";
+import { ArticleTypeTabs } from "../../../../entities/Article";
 
 interface ArticlesPageFiltersProps {
   className?: string;
@@ -31,6 +37,7 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = memo(
     const order = useSelector(getArticlesPageOrder);
     const sort = useSelector(getArticlesPageSort);
     const search = useSelector(getArticlesPageSearch);
+    const type = useSelector(getArticlesPageType);
 
     const fetchData = useCallback(() => {
       dispatch(fetchArticlesList({ replace: true }));
@@ -71,6 +78,15 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = memo(
       [dispatch, debouncedFetchData],
     );
 
+    const onChangeType = useCallback(
+      (tab: ArticleType) => {
+        dispatch(articlesPageActions.setType(tab));
+        dispatch(articlesPageActions.setPage(1));
+        fetchData();
+      },
+      [dispatch, fetchData],
+    );
+
     return (
       <div
         className={classNames(cls.ArticlesPageFilters, {}, [props.className])}
@@ -91,6 +107,11 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = memo(
             onChange={onChangeSearch}
           />
         </Card>
+        <ArticleTypeTabs
+          className={cls.tabs}
+          value={type}
+          onChangeType={onChangeType}
+        />
       </div>
     );
   },

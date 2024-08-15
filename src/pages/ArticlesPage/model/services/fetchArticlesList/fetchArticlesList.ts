@@ -9,8 +9,10 @@ import {
   getArticlesPageOrder,
   getArticlesPageSearch,
   getArticlesPageSort,
+  getArticlesPageType,
 } from "../../selectors/articlesPageSelectors";
 import { addQueryParams } from "../../../../../shared/lib/url/addQueryParams/addQueryParams";
+import { ArticleType } from "../../../../../entities/Article/model/types/article";
 
 const article = {
   id: "1",
@@ -106,11 +108,13 @@ export const fetchArticlesList = createAsyncThunk<
     const order = getArticlesPageOrder(getState());
     const search = getArticlesPageSearch(getState());
     const page = getArticlesPageNumber(getState());
+    const type = getArticlesPageType(getState());
 
     addQueryParams({
       sort,
       order,
       search,
+      type,
     });
     try {
       const response: AxiosResponse = await extra.api.get<Article[]>(
@@ -122,6 +126,7 @@ export const fetchArticlesList = createAsyncThunk<
             _order: order,
             _sort: sort,
             _search: search,
+            _type: type === ArticleType.ALL ? undefined : type,
           },
         },
       );
