@@ -10,7 +10,10 @@ import {
 import { ProfileScheme } from "../../../../entities/Profile";
 import { AxiosInstance } from "axios";
 import { ArticleDetailsSchema } from "../../../../entities/Article";
-import { ArticleDetailsCommentsSchema } from "../../../../pages/ArticleDetailsPage";
+import {
+  ArticleDetailsCommentsSchema,
+  ArticleDetailsPageRecommendationsSchema,
+} from "../../../../pages/ArticleDetailsPage";
 import { AddCommentFormSchema } from "../../../../features/AddCommentForm";
 import { ArticlesPageSchema } from "../../../../pages/ArticlesPage";
 import { UISchema } from "../../../../features/UI";
@@ -30,6 +33,7 @@ export interface StateScheme {
   articleDetailsComments?: ArticleDetailsCommentsSchema;
   addCommentForm?: AddCommentFormSchema;
   articlesPage?: ArticlesPageSchema;
+  articleDetailsPageRecommendations?: ArticleDetailsPageRecommendationsSchema;
 }
 
 export type StateSchemeKey = keyof StateScheme;

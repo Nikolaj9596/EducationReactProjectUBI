@@ -1,5 +1,5 @@
 import { Article, ArticleView } from "../../model/types/article";
-import { FC, memo } from "react";
+import { FC, HTMLAttributeAnchorTarget, memo } from "react";
 import { classNames } from "../../../../shared";
 import cls from "./ArticleList.module.scss";
 import { ArticleListItem } from "../ArticleListItem/ArticleListItem";
@@ -10,10 +10,17 @@ interface ArticleListProps {
   articles: Article[];
   isLoading?: boolean;
   view?: ArticleView;
+  target?: HTMLAttributeAnchorTarget;
 }
 
 export const ArticleList: FC<ArticleListProps> = memo((props) => {
-  const { className, articles, isLoading, view = ArticleView.TABLE } = props;
+  const {
+    className,
+    articles,
+    isLoading,
+    view = ArticleView.TABLE,
+    target = "_blank",
+  } = props;
 
   const getSelection = (view: ArticleView) => {
     return (
@@ -38,6 +45,7 @@ export const ArticleList: FC<ArticleListProps> = memo((props) => {
         article={item}
         view={view}
         key={item.id}
+        target={target}
       />
     );
   };
