@@ -19,3 +19,8 @@
 .links a:last-child { /* Removes margin for the last link to align it properly */
   margin-right: 0;
 }
+
+.appName {
+  width: var(--sidebar-width);
+  margin-left: 15px;
+}

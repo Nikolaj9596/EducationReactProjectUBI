@@ -1,5 +1,12 @@
 import React, { FC, memo, useCallback, useState } from "react";
-import { Button, ThemeButton } from "../../../shared/ui";
+import {
+  Button,
+  ThemeButton,
+  Text,
+  AppLink,
+  AppLinkTheme,
+  TextTheme,
+} from "../../../shared/ui";
 import { classNames } from "../../../shared/lib/classNames/classNames";
 import cls from "./Navbar.module.scss";
 import { useTranslation } from "react-i18next";
@@ -7,6 +14,7 @@ import { LoginModal } from "../../../features/AuthByUserName";
 import { useSelector } from "react-redux";
 import { getUserAuthData, userActions } from "../../../entities/User";
 import { useDispatch } from "react-redux";
+import { RoutePath } from "../../../shared/config";
 
 interface NavbarProps {
   className?: string;
@@ -33,6 +41,20 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
       <header
         className={classNames(cls.navbar, {}, [className ? className : ""])}
       >
+        <Text
+          theme={TextTheme.INVERTED}
+          className={cls.appName}
+          title={t("Blog App")}
+        />
+        {/*TODO: Delete this code*/}
+        {/* <AppLink theme={AppLinkTheme.SECONDARY} to={RoutePath.article_create}> */}
+        <AppLink
+          className={cls.createBtn}
+          theme={AppLinkTheme.SECONDARY}
+          to={"/articles/new"}
+        >
+          {t("Создать статью")}
+        </AppLink>
         <Button
           theme={ThemeButton.CLEAR_INVERTED}
           className={cls.links}

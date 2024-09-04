@@ -4,7 +4,7 @@ import {
   ArticleTextBlock,
   ArticleView,
 } from "../../model/types/article";
-import { FC, HTMLAttributeAnchorTarget, memo, useCallback } from "react";
+import { FC, HTMLAttributeAnchorTarget, memo} from "react";
 import { useTranslation } from "react-i18next";
 import {
   AppLink,
@@ -67,7 +67,11 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
             />
           )}
           <div className={cls.footer}>
-            <AppLink target={target} to={RoutePath.article_details + article.id}>
+            <AppLink target={target}
+              //TODO: Remove it
+              // to={RoutePath.article_details + article.id}
+              to={"/articles/" + article.id}
+            >
               <Button theme={ThemeButton.OUTLINE}>
                 {t("Читать далее...")}
               </Button>
@@ -81,7 +85,8 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
   return (
     <AppLink
       target={target}
-      to={RoutePath.article_details + article.id}
+      // to={RoutePath.article_details + article.id}
+      to={"/articles/" + article.id}
       className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
     >
       <Card className={cls.card}>

@@ -26,6 +26,10 @@ export const fetchArticleById = createAsyncThunk<Article, string, ThunkConfig<st
         "img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",
         "views": 1022,
         "createdAt": "26.02.2022",
+        "author": {
+          "id": "1",
+          "userName": "admin"
+        },
         "type": [
           "IT"
         ],
