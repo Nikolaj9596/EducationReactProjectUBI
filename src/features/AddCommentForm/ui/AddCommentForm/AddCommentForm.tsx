@@ -17,6 +17,7 @@ import {
   ThemeButton,
   DynamicModuleLoader,
   ReducersList,
+  HStack,
 } from "../../../../shared";
 import cls from "./AddCommentForm.module.scss";
 
@@ -50,7 +51,7 @@ const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
 
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <div className={classNames(cls.AddCommentForm, {}, [className])}>
+      <HStack max justify={"between"} className={classNames(cls.AddCommentForm, {}, [className])}>
         <Input
           className={cls.input}
           placeholder={t("Введите тексе комментария")}
@@ -60,7 +61,7 @@ const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
         <Button theme={ThemeButton.OUTLINE} onClick={onSentHendler}>
           {t("Отправить")}
         </Button>
-      </div>
+      </HStack>
     </DynamicModuleLoader>
   );
 });

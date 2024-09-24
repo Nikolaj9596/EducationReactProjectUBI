@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { classNames, Text } from "../../../../shared";
+import { classNames, Text, VStack } from "../../../../shared";
 import { CommentCard } from "../CommentCard/CommentCard";
 import { Comment } from "../../module/types/comment";
 import cls from "./CommentList.module.scss";
@@ -15,7 +15,11 @@ export const CommentList = memo((props: CommentListProps) => {
   const { className, comments, isLoading } = props;
   const { t } = useTranslation();
   return (
-    <div className={classNames(cls.CommentList, {}, [className])}>
+    <VStack
+      gap={"16"}
+      max
+      className={classNames(cls.CommentList, {}, [className])}
+    >
       {comments?.length ? (
         comments.map((comment) => (
           <CommentCard
@@ -28,6 +32,6 @@ export const CommentList = memo((props: CommentListProps) => {
       ) : (
         <Text text={t("Коментарии отсутствуют")} />
       )}
-    </div>
+    </VStack>
   );
 });

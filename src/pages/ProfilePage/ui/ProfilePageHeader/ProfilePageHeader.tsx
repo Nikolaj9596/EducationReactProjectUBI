@@ -1,7 +1,12 @@
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, classNames, ThemeButton, Text } from "../../../../shared";
-import cls from "./ProfilePageHeader.module.scss";
+import {
+  Button,
+  classNames,
+  ThemeButton,
+  Text,
+  HStack,
+} from "../../../../shared";
 import { getProfileReadOnly } from "../../../../entities/Profile/model/selectors/getProfileReadOnly/getProfileReadOnly";
 import { useSelector } from "react-redux";
 import {
@@ -37,39 +42,31 @@ export const ProfilePageHeader: FC<ProfilePageHeaderProps> = (props) => {
   }, [dispatch]);
 
   return (
-    <div className={classNames(cls.ProfilePageHeader, {}, [props.className])}>
+    <HStack
+      max
+      justify="between"
+      className={classNames("", {}, [props.className])}
+    >
       <Text title={t("Профиль")} />
       {canEdit && (
-        <div className={cls.btnsWrapper}>
+        <div>
           {readonly ? (
-            <Button
-              theme={ThemeButton.OUTLINE}
-              className={cls.editBtn}
-              onClick={onEdit}
-            >
+            <Button theme={ThemeButton.OUTLINE} onClick={onEdit}>
               {t("Редактировать")}
             </Button>
           ) : (
-            <>
-              <Button
-                theme={ThemeButton.OUTLINE_RED}
-                className={cls.editBtn}
-                onClick={onCancelEdit}
-              >
+            <HStack gap="8">
+              <Button theme={ThemeButton.OUTLINE_RED} onClick={onCancelEdit}>
                 {t("Отменить")}
               </Button>
 
-              <Button
-                theme={ThemeButton.OUTLINE}
-                className={cls.saveBtn}
-                onClick={onSave}
-              >
+              <Button theme={ThemeButton.OUTLINE} onClick={onSave}>
                 {t("Сохранить")}
               </Button>
-            </>
+            </HStack>
           )}
         </div>
       )}
-    </div>
+    </HStack>
   );
 };

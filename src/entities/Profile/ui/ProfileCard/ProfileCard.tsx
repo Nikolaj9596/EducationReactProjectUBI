@@ -9,6 +9,8 @@ import {
   TextAlign,
   Avatar,
   Mods,
+  VStack,
+  HStack,
 } from "../../../../shared";
 import cls from "./ProfileCard.module.scss";
 import { Profile } from "../../model/types/profile";
@@ -30,27 +32,33 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
 
   if (isLoading) {
     return (
-      <div
+      <HStack
+        max
+        justify={"center"}
         className={classNames(cls.ProfileCard, { [cls.loading]: true }, [
           className,
         ])}
       >
         <Loader />
-      </div>
+      </HStack>
     );
   }
 
   if (error) {
     console.log(error);
     return (
-      <div className={classNames(cls.ProfileCard, {}, [className, cls.error])}>
+      <HStack
+        justify={"center"}
+        max
+        className={classNames(cls.ProfileCard, {}, [className, cls.error])}
+      >
         <Text
           theme={TextTheme.ERROR}
           title={t("Произошла ошибка при загрузки профиля")}
           text={t("Попробуйте обновить страницу")}
           align={TextAlign.CENTER}
         />
-      </div>
+      </HStack>
     );
   }
 
@@ -59,12 +67,15 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
   };
 
   return (
-    <div className={classNames(cls.ProfileCard, mods, [className])}>
-      <div className={cls.data}>
+    <VStack
+      gap={"8"}
+      max
+      className={classNames(cls.ProfileCard, mods, [className])}
+    >
         {data?.avatar && (
-          <div className={cls.avatarWrapper}>
+          <HStack justify={"center"} max className={cls.avatarWrapper}>
             <Avatar size={150} src={data?.avatar} />
-          </div>
+          </HStack>
         )}
         <Input
           value={data?.lastName}
@@ -109,7 +120,6 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
           readonly={readonly}
         />
         <CurrencySelect readonly={readonly} className={cls.input} />
-      </div>
-    </div>
+    </VStack>
   );
 };

@@ -5,6 +5,7 @@ import {
   ReducersList,
   TextTheme,
   Text,
+  VStack,
 } from "../../../shared";
 import { useAppDispatch } from "../../../shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
@@ -111,29 +112,31 @@ const ProfilePage: FC<ProfilePageProps> = (props) => {
   return (
     <DynamicModuleLoader reducers={redusers} removeAfterUnmount>
       <Page className={classNames("", {}, [props.className])}>
-        <ProfilePageHeader />
-        {validateErrors?.length &&
-          validateErrors.map((err) => (
-            <Text
-              key={err}
-              theme={TextTheme.ERROR}
-              text={validateErrorTranslates[err]}
-            />
-          ))}
-        <ProfileCard
-          data={formData}
-          isLoading={isLoading}
-          error={error}
-          readonly={readonly}
-          callbacks={{
-            firstName: onChangeFirstName,
-            lastName: onChangeLastName,
-            middleName: onChangeMiddleName,
-            phone: onChangePhone,
-            dateBirthday: onChangeDateBirthday,
-            avatar: onChangeAvatar,
-          }}
-        />
+        <VStack gap={"16"} max>
+          <ProfilePageHeader />
+          {validateErrors?.length &&
+            validateErrors.map((err) => (
+              <Text
+                key={err}
+                theme={TextTheme.ERROR}
+                text={validateErrorTranslates[err]}
+              />
+            ))}
+          <ProfileCard
+            data={formData}
+            isLoading={isLoading}
+            error={error}
+            readonly={readonly}
+            callbacks={{
+              firstName: onChangeFirstName,
+              lastName: onChangeLastName,
+              middleName: onChangeMiddleName,
+              phone: onChangePhone,
+              dateBirthday: onChangeDateBirthday,
+              avatar: onChangeAvatar,
+            }}
+          />
+        </VStack>
       </Page>
     </DynamicModuleLoader>
   );

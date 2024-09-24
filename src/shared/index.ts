@@ -24,5 +24,7 @@ export {
   Icon,
   Code,
   Card,
-  Tabs
+  Tabs,
+  VStack,
+  HStack,
 } from "./ui";

@@ -13,3 +13,5 @@ export { Icon } from "./Icon/Icon";
 export { Code } from "./Code/Code";
 export { Card } from "./Card/Card";
 export { Tabs } from "./Tabs/Tabs";
+export { VStack } from "./Stack/VStack/VStack";
+export { HStack } from "./Stack/HStack/HStack";

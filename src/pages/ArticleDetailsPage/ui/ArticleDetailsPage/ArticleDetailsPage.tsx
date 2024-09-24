@@ -2,10 +2,12 @@ import { ArticleDetails, ArticleList } from "../../../../entities/Article";
 import { FC, memo, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  classNames, DynamicModuleLoader,
+  classNames,
+  DynamicModuleLoader,
   Text,
   ReducersList,
   TextSize,
+  VStack,
 } from "../../../../shared";
 import cls from "./ArticleDetailsPage.module.scss";
 import { useParams } from "react-router-dom";
@@ -73,25 +75,27 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-        <ArticleDetailsPageHeader/>
-        <ArticleDetails id={id} />
-        <Text
-          size={TextSize.L}
-          className={cls.commentTitle}
-          title={t("Рекомендуем")}
-        />
-        <ArticleList
-          articles={recommendations}
-          isLoading={recommendationsIsLoading}
-          className={cls.recommendations}
-        />
-        <Text
-          size={TextSize.L}
-          className={cls.commentTitle}
-          title={t("Комментарии")}
-        />
-        <AddCommentForm onSentComment={onSendComment} />
-        <CommentList isLoading={isLoading} comments={comments} />
+        <VStack gap={"16"} max>
+          <ArticleDetailsPageHeader />
+          <ArticleDetails id={id} />
+          <Text
+            size={TextSize.L}
+            className={cls.commentTitle}
+            title={t("Рекомендуем")}
+          />
+          <ArticleList
+            articles={recommendations}
+            isLoading={recommendationsIsLoading}
+            className={cls.recommendations}
+          />
+          <Text
+            size={TextSize.L}
+            className={cls.commentTitle}
+            title={t("Комментарии")}
+          />
+          <AddCommentForm onSentComment={onSendComment} />
+          <CommentList isLoading={isLoading} comments={comments} />
+        </VStack>
       </Page>
     </DynamicModuleLoader>
   );

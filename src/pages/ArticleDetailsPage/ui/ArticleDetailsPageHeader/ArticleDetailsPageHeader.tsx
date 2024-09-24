@@ -2,7 +2,7 @@ import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { RoutePath } from "../../../../shared/config";
-import { Button, classNames, ThemeButton } from "../../../../shared";
+import { Button, classNames, HStack, ThemeButton } from "../../../../shared";
 import cls from "./ArticleDetailsPageHeader.module.scss";
 import { useSelector } from "react-redux";
 import { articleDetailsData } from "../../../../entities/Article";
@@ -28,7 +28,9 @@ export const ArticleDetailsPageHeader: FC<ArticleDetailsPageHeaderProps> = memo(
     }, [navigate, article]);
 
     return (
-      <div
+      <HStack
+        max
+        justify={"between"}
         className={classNames(cls.ArticleDetailsPageHeader, {}, [
           props.className,
         ])}
@@ -45,7 +47,7 @@ export const ArticleDetailsPageHeader: FC<ArticleDetailsPageHeaderProps> = memo(
             {t("Редактировать")}
           </Button>
         )}
-      </div>
+      </HStack>
     );
   },
 );
