@@ -12,18 +12,28 @@ const MainPage = () => {
         <Counter />
       </h2>
       <VStack>
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
-      <Listbox />
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
-      <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <Listbox
+          defaultValue="Select value"
+          value={undefined}
+          onChange={(value: string) => {}}
+          items={[
+            { value: '1', content: "one" },
+            { value: '2', content: "twp" },
+            { value: '3', content: "three" },
+            { value: '4', content: "some" },
+          ]}
+        />
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
+        <div>some</div>
       </VStack>
     </Page>
   );
