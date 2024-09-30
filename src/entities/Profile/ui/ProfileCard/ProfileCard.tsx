@@ -72,54 +72,54 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
       max
       className={classNames(cls.ProfileCard, mods, [className])}
     >
-        {data?.avatar && (
-          <HStack justify={"center"} max className={cls.avatarWrapper}>
-            <Avatar size={150} src={data?.avatar} />
-          </HStack>
-        )}
-        <Input
-          value={data?.lastName}
-          placeholder={t("Фамилия")}
-          className={cls.input}
-          onChange={callbacks.lastName}
-          readonly={readonly}
-        />
-        <Input
-          value={data?.firstName}
-          placeholder={t("Имя")}
-          className={cls.input}
-          onChange={callbacks.firstName}
-          readonly={readonly}
-        />
-        <Input
-          value={data?.middleName}
-          placeholder={t("Отчество")}
-          className={cls.input}
-          onChange={callbacks.middleName}
-          readonly={readonly}
-        />
-        <Input
-          value={data?.phone}
-          placeholder={t("Номер телофона")}
-          className={cls.input}
-          onChange={callbacks.phone}
-          readonly={readonly}
-        />
-        <Input
-          value={data?.dateBirthday}
-          placeholder={t("Дата рождения")}
-          className={cls.input}
-          onChange={callbacks.dateBirthday}
-          readonly={readonly}
-        />
-        <Input
-          value={data?.avatar}
-          placeholder={t("Аватарка")}
-          className={cls.input}
-          onChange={callbacks.avatar}
-          readonly={readonly}
-        />
-        <CurrencySelect readonly={readonly} className={cls.input} />
+      {data?.avatar && (
+        <HStack justify={"center"} max className={cls.avatarWrapper}>
+          <Avatar size={150} src={data?.avatar} />
+        </HStack>
+      )}
+      <Input
+        value={data?.lastName}
+        placeholder={t("Фамилия")}
+        className={cls.input}
+        onChange={callbacks.lastName}
+        readonly={readonly}
+      />
+      <Input
+        value={data?.firstName}
+        placeholder={t("Имя")}
+        className={cls.input}
+        onChange={callbacks.firstName}
+        readonly={readonly}
+      />
+      <Input
+        value={data?.middleName}
+        placeholder={t("Отчество")}
+        className={cls.input}
+        onChange={callbacks.middleName}
+        readonly={readonly}
+      />
+      <Input
+        value={data?.phone}
+        placeholder={t("Номер телофона")}
+        className={cls.input}
+        onChange={callbacks.phone}
+        readonly={readonly}
+      />
+      <Input
+        value={data?.dateBirthday}
+        placeholder={t("Дата рождения")}
+        className={cls.input}
+        onChange={callbacks.dateBirthday}
+        readonly={readonly}
+      />
+      <Input
+        value={data?.avatar}
+        placeholder={t("Аватарка")}
+        className={cls.input}
+        onChange={callbacks.avatar}
+        readonly={readonly}
+      />
+      <CurrencySelect readonly={readonly} className={cls.input} direction={"bottom"}/>
     </VStack>
   );
 };

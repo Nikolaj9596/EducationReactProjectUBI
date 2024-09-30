@@ -1,5 +1,6 @@
 export { Select } from "./Select/Select";
 export type { SelectOption } from "./Select/Select";
+export type {DropdownDirection} from "./Listbox/Listbox";
 export { Avatar } from "./Avatar/Avatar";
 export { AppLink, AppLinkTheme } from "./AppLink/AppLink";
 export { Button, ThemeButton, ButtonSize } from "./Button/Button";

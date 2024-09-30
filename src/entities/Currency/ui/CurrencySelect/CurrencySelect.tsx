@@ -2,12 +2,14 @@ import { Currency } from "../../modal/types/currency";
 import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { classNames, Listbox } from "../../../../shared";
+import { DropdownDirection } from "../../../../shared/ui";
 
 interface CurrencySelectProps {
   value?: Currency;
   onChange?: (value: Currency) => void;
   readonly?: boolean;
   className?: string;
+  direction?: DropdownDirection;
 }
 
 const options = [
@@ -18,7 +20,7 @@ const options = [
 
 export const CurrencySelect: FC<CurrencySelectProps> = memo((props) => {
   const { t } = useTranslation();
-  const { value, onChange, readonly, className } = props;
+  const { value, onChange, readonly, className, direction } = props;
 
   const onChangeHandler = useCallback(
     (value: string) => {
@@ -29,12 +31,13 @@ export const CurrencySelect: FC<CurrencySelectProps> = memo((props) => {
 
   return (
     <Listbox
-      defaultValue={t("Укажите валюту")}
-      readonly={readonly}
       items={options}
-      value={value}
-      onChange={onChangeHandler}
       className={className}
+      value={value}
+      defaultValue={t("Укажите валюту")}
+      onChange={onChangeHandler}
+      readonly={readonly}
+      direction={direction}
     />
   );
   // return (
