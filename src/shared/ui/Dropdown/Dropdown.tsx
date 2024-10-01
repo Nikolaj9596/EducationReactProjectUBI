@@ -35,13 +35,14 @@ export const Dropdown: FC<DropdownProps> = memo((props) => {
       >
         {items.map((item) => {
           const content = ({ active }: { active: boolean }) => (
-            <button
+            <Button
+              theme={ThemeButton.CLEAR}
               disabled={item.disabled}
               className={classNames(cls.item, { [cls.active]: active }, [])}
               onClick={item.onClick}
             >
               {item.content}
-            </button>
+            </Button>
           );
           if (item.href) {
             return (
