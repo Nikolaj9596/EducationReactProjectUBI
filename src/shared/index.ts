@@ -1,7 +1,7 @@
 //lib
 export type { Mods } from "./lib/classNames/classNames";
 export type { ReducersList } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
-export type { SelectOption } from "./ui";
+export type { SelectOption, DropdownItem } from "./ui";
 export { DynamicModuleLoader } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
 export { classNames } from "./lib/classNames/classNames";
 
@@ -27,5 +27,6 @@ export {
   Tabs,
   VStack,
   HStack,
-  Listbox
+  Listbox,
+  Dropdown,
 } from "./ui";

@@ -6,6 +6,8 @@ import {
   AppLink,
   AppLinkTheme,
   TextTheme,
+  Dropdown,
+  Avatar,
 } from "../../../shared/ui";
 import { classNames } from "../../../shared/lib/classNames/classNames";
 import cls from "./Navbar.module.scss";
@@ -55,13 +57,21 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
         >
           {t("Создать статью")}
         </AppLink>
-        <Button
-          theme={ThemeButton.CLEAR_INVERTED}
-          className={cls.links}
-          onClick={onLogout}
-        >
-          {t("Выйти")}
-        </Button>
+        <Dropdown
+          direction={"bottom left"}
+          className={cls.dropdown}
+          items={[
+            {
+              content: t("Профиль"),
+              href: "/profile/" + authData.id,
+            },
+            {
+              content: t("Выйти"),
+              onClick: onLogout,
+            },
+          ]}
+          trigger={<Avatar size={30} src={authData.avatar} />}
+        />
       </header>
     );
   }

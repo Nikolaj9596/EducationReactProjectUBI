@@ -29,7 +29,8 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
       const userData = {
         "id": "1",
         "userName": "admin",
-        "password": "123"
+        "password": "123",
+        "avatar": "https://i.pinimg.com/originals/88/9e/5d/889e5dd8334a7dfca281208cd74bd40e.png"
       }
       dispatch(userActions.setAuthData(userData))
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(userData))

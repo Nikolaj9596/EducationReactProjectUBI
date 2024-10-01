@@ -119,7 +119,7 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
         onChange={callbacks.avatar}
         readonly={readonly}
       />
-      <CurrencySelect readonly={readonly} className={cls.input} direction={"bottom"}/>
+      <CurrencySelect readonly={readonly} className={cls.input} direction={"bottom left"}/>
     </VStack>
   );
 };
