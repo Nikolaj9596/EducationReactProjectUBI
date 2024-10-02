@@ -6,6 +6,7 @@ import { StateScheme, ThunkExtraArg } from "./StateScheme";
 import { $api } from "../../../../shared/api/api";
 import { uiReducer } from "../../../../features/UI";
 import { CombinedState } from "../../../types/global";
+import { rtkApi } from "../../../../shared/api/rtkApi";
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -16,6 +17,7 @@ export function createReduxStore(
     counter: counterReducer,
     user: userReducer,
     ui: uiReducer,
+    [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
   const reducerManager = createReducerManager(rootReducers);
@@ -32,7 +34,7 @@ export function createReduxStore(
         thunk: {
           extraArgument: extraArg,
         },
-      }),
+      }).concat(rtkApi.middleware),
   });
 
   // @ts-ignore

@@ -18,6 +18,7 @@ import { AddCommentFormSchema } from "../../../../features/AddCommentForm";
 import { ArticlesPageSchema } from "../../../../pages/ArticlesPage";
 import { UISchema } from "../../../../features/UI";
 import { CombinedState, MountedRecord } from "../../../../app/types/global";
+import { rtkApi } from "../../../../shared/api/rtkApi";
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
   reducerManager: ReducerManager;
 }
@@ -26,6 +27,7 @@ export interface StateScheme {
   counter: CounterStateSchema;
   user: UserSchema;
   ui: UISchema;
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
   // Async Reducers
   loginForm?: LoginSchema;
   profile?: ProfileScheme;
