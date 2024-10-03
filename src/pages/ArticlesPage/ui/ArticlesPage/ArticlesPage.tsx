@@ -1,27 +1,16 @@
-import { ArticleList } from "../../../../entities/Article";
-import { FC, memo, useCallback, useEffect } from "react";
+import { FC, memo, useCallback } from "react";
 import {
   classNames,
   DynamicModuleLoader,
   ReducersList,
 } from "../../../../shared";
 import cls from "./ArticlesPage.module.scss";
-import {
-  articlesPageReducer,
-  getArticles,
-} from "../../model/slice/articlePageSlice";
+import { articlesPageReducer } from "../../model/slice/articlePageSlice";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
-import { useSelector } from "react-redux";
-import {
-  getArticlesPageError,
-  getArticlesPageIsLoading,
-  getArticlesPageView,
-} from "../../model/selectors/articlesPageSelectors";
 import { fetchNextArticlesPage } from "../../model/services/fetchNextArticlesPage/fetchNextArticlesPage";
-import { initArticlesPage } from "../../model/services/initArticlePage/initArticlePage";
 import { Page } from "../../../../widgets";
 import { ArticlesPageFilters } from "../ArticlesPageFilers/AriclesPageFilters";
-import { useSearchParams } from "react-router-dom";
+import { ArticleInfiniteList } from "../ArticleInfiniteList/ArticleInfiniteList";
 
 interface ArticlesPageProps {
   className?: string;
@@ -34,19 +23,10 @@ const reducers: ReducersList = {
 const ArticlesPage: FC<ArticlesPageProps> = (props) => {
   const { className } = props;
   const dispatch = useAppDispatch();
-  const articles = useSelector(getArticles.selectAll);
-  const isLoading = useSelector(getArticlesPageIsLoading);
-  const error = useSelector(getArticlesPageError);
-  const view = useSelector(getArticlesPageView);
-  let [searchParams] = useSearchParams();
 
   const onLoadNextPart = useCallback(() => {
     dispatch(fetchNextArticlesPage());
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(initArticlesPage(searchParams));
-  }, [dispatch, searchParams]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
@@ -55,12 +35,7 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
         className={classNames(cls.ArticlesPage, {}, [className])}
       >
         <ArticlesPageFilters />
-        <ArticleList
-          className={cls.list}
-          view={view}
-          articles={articles}
-          isLoading={isLoading}
-        />
+        <ArticleInfiniteList className={cls.list} />
       </Page>
     </DynamicModuleLoader>
   );

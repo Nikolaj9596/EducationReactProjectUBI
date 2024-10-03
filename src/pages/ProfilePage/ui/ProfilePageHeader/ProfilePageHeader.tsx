@@ -7,15 +7,15 @@ import {
   Text,
   HStack,
 } from "../../../../shared";
-import { getProfileReadOnly } from "../../../../entities/Profile/model/selectors/getProfileReadOnly/getProfileReadOnly";
 import { useSelector } from "react-redux";
-import {
-  getProfileData,
-  profileActions,
-  updateProfileData,
-} from "../../../../entities/Profile";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
 import { getUserAuthData } from "../../../../entities/User";
+import {
+  getProfileData,
+  getProfileReadOnly,
+  profileActions,
+  updateProfileData,
+} from "../../../../features/editableProfileCard";
 
 interface ProfilePageHeaderProps {
   className?: string;
