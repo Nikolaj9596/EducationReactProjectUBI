@@ -1,32 +1,20 @@
 import { ArticleDetails } from "../../../../entities/Article";
-import { FC, memo, useCallback, useEffect } from "react";
+import { FC, memo } from "react";
 import { useTranslation } from "react-i18next";
 import {
   classNames,
   DynamicModuleLoader,
-  Text,
   ReducersList,
-  TextSize,
   VStack,
 } from "../../../../shared";
 import cls from "./ArticleDetailsPage.module.scss";
 import { useParams } from "react-router-dom";
-import { CommentList } from "../../../../entities/Comment";
-import {
-  articleDetailsCommentsReducer,
-  getArticleComments,
-} from "../../../../pages/ArticleDetailsPage";
-import { useSelector } from "react-redux";
-import { getArticleCommentsIsLoading } from "../../model/selectors/commentSelectors";
-import { fetchCommentsByArticleId } from "../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId";
-import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
-import { AddCommentForm } from "../../../../features/AddCommentForm";
-import { addCommentForArticle } from "../../model/services/addCommentForArticle/addCommentForArticle";
+import { articleDetailsCommentsReducer } from "../../../../pages/ArticleDetailsPage";
 import { Page } from "../../../../widgets";
 import { articleDetailsPageRecommendationsReducer } from "../../model/slices/articleDetailsPageRecommendationsSlice";
-import { fetchArticleRecommendations } from "../../model/services/fetchArticleRecommendations/fetchArticleRecommendations";
 import { ArticleDetailsPageHeader } from "../ArticleDetailsPageHeader/ArticleDetailsPageHeader";
 import { ArticleRecommendationsList } from "../../../../features/articleRecommendationsList";
+import { ArticleDetailsComments } from "../ArticleDetailsComments/ArticleDetailsComments";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -41,20 +29,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
   const { className } = props;
   const { t } = useTranslation("article");
   const { id } = useParams<{ id: string }>();
-  const comments = useSelector(getArticleComments.selectAll);
-  const isLoading = useSelector(getArticleCommentsIsLoading);
-  const dispatch = useAppDispatch();
 
-  const onSendComment = useCallback(
-    (text: string) => {
-      dispatch(addCommentForArticle(text));
-    },
-    [dispatch],
-  );
-
-  useEffect(() => {
-    dispatch(fetchCommentsByArticleId(id));
-  }, [dispatch, id]);
 
   if (!id) {
     return (
@@ -71,13 +46,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
           <ArticleDetailsPageHeader />
           <ArticleDetails id={id} />
           <ArticleRecommendationsList />
-          <Text
-            size={TextSize.L}
-            className={cls.commentTitle}
-            title={t("Комментарии")}
-          />
-          <AddCommentForm onSentComment={onSendComment} />
-          <CommentList isLoading={isLoading} comments={comments} />
+          <ArticleDetailsComments id={id}/>
         </VStack>
       </Page>
     </DynamicModuleLoader>
