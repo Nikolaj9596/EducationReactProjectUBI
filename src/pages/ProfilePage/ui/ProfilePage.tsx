@@ -1,16 +1,8 @@
 import { FC } from "react";
-import {
-  classNames,
-  DynamicModuleLoader,
-  ReducersList,
-  VStack,
-} from "../../../shared";
-import { ProfilePageHeader } from "./ProfilePageHeader/ProfilePageHeader";
+import { classNames, VStack } from "../../../shared";
 import { Page } from "../../../widgets";
-import {
-  EditableProfileCard,
-  profileReducer,
-} from "../../../features/editableProfileCard";
+import { EditableProfileCard } from "../../../features/editableProfileCard";
+import { useParams } from "react-router-dom";
 
 interface ProfilePageProps {
   className?: string;
@@ -25,20 +17,14 @@ export interface ProfileEditkCallbacks {
   avatar: (value: string) => void;
 }
 
-const redusers: ReducersList = {
-  profile: profileReducer,
-};
-
 const ProfilePage: FC<ProfilePageProps> = (props) => {
+  const { id } = useParams<{ id: string }>();
   return (
-    <DynamicModuleLoader reducers={redusers} removeAfterUnmount>
-      <Page className={classNames("", {}, [props.className])}>
-        <VStack gap={"16"} max>
-          <ProfilePageHeader />
-          <EditableProfileCard />
-        </VStack>
-      </Page>
-    </DynamicModuleLoader>
+    <Page className={classNames("", {}, [props.className])}>
+      <VStack gap={"16"} max>
+        <EditableProfileCard id={id} />
+      </VStack>
+    </Page>
   );
 };
 

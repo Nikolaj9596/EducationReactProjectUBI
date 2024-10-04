@@ -7,7 +7,6 @@ import {
   ReducersMapObject,
   UnknownAction,
 } from "@reduxjs/toolkit";
-import { ProfileScheme } from "../../../../entities/Profile";
 import { AxiosInstance } from "axios";
 import { ArticleDetailsSchema } from "../../../../entities/Article";
 import {
@@ -19,6 +18,7 @@ import { ArticlesPageSchema } from "../../../../pages/ArticlesPage";
 import { UISchema } from "../../../../features/UI";
 import { CombinedState, MountedRecord } from "../../../../app/types/global";
 import { rtkApi } from "../../../../shared/api/rtkApi";
+import { ProfileScheme } from "../../../../features/editableProfileCard";
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
   reducerManager: ReducerManager;
 }
