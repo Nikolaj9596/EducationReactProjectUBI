@@ -1,7 +1,8 @@
 export { Select } from "./Select/Select";
 export type { SelectOption } from "./Select/Select";
 export type { DropdownDirection } from "../types/ui";
-export type { DropdownItem } from "./Dropdown/Dropdown";
+export type { DropdownItem } from "./Popups";
+export { CardTheme } from "./Card/Card";
 export { Avatar } from "./Avatar/Avatar";
 export { AppLink, AppLinkTheme } from "./AppLink/AppLink";
 export { Button, ThemeButton, ButtonSize } from "./Button/Button";
@@ -17,5 +18,4 @@ export { Card } from "./Card/Card";
 export { Tabs } from "./Tabs/Tabs";
 export { VStack } from "./Stack/VStack/VStack";
 export { HStack } from "./Stack/HStack/HStack";
-export { Listbox } from "./Listbox/Listbox";
-export { Dropdown } from "./Dropdown/Dropdown";
+export { Listbox, Dropdown, Popover } from "./Popups";

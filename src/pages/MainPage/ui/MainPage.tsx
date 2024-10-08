@@ -14,11 +14,6 @@ const MainPage = () => {
       <VStack>
         <div>some</div>
         <div>some</div>
-        <div>some</div>
-        <div>some</div>
-        <div>some</div>
-        <div>some</div>
-        <div>some</div>
         <Listbox
           defaultValue="Select value"
           value={undefined}
@@ -31,12 +26,8 @@ const MainPage = () => {
           ]}
         />
         <div>some</div>
-        <div>some</div>
-        <div>some</div>
-        <div>some</div>
       </VStack>
     </Page>
   );
 };
-
 export default MainPage;

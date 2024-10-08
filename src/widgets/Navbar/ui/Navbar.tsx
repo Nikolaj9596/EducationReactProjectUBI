@@ -8,6 +8,9 @@ import {
   TextTheme,
   Dropdown,
   Avatar,
+  HStack,
+  Icon,
+  Popover,
 } from "../../../shared/ui";
 import { classNames } from "../../../shared/lib/classNames/classNames";
 import cls from "./Navbar.module.scss";
@@ -21,7 +24,9 @@ import {
   userActions,
 } from "../../../entities/User";
 import { useDispatch } from "react-redux";
+import { ReactComponent as NotificationIcon } from "../../../shared/assets/icons/notification-20-20.svg";
 import { RoutePath } from "../../../shared/config";
+import { NotificationList } from "../../../entities/Notification";
 
 interface NavbarProps {
   className?: string;
@@ -65,29 +70,40 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
         >
           {t("Создать статью")}
         </AppLink>
-        <Dropdown
-          direction={"bottom left"}
-          className={cls.dropdown}
-          items={[
-            ...(isAdminPanelAvailable
-              ? [
-                {
-                  content: t("Админка"),
-                  href: "/admin",
-                },
-              ]
-              : []),
-            {
-              content: t("Профиль"),
-              href: "/profile/" + authData.id,
-            },
-            {
-              content: t("Выйти"),
-              onClick: onLogout,
-            },
-          ]}
-          trigger={<Avatar size={30} src={authData.avatar} />}
-        />
+        <HStack gap={"16"} className={cls.actions}>
+          <Popover
+            trigger={
+              <Button theme={ThemeButton.CLEAR}>
+                <Icon Svg={NotificationIcon} inverted />
+              </Button>
+            }
+            direction={"bottom left"}
+          >
+            <NotificationList />
+          </Popover>
+          <Dropdown
+            direction={"bottom left"}
+            items={[
+              ...(isAdminPanelAvailable
+                ? [
+                    {
+                      content: t("Админка"),
+                      href: "/admin",
+                    },
+                  ]
+                : []),
+              {
+                content: t("Профиль"),
+                href: "/profile/" + authData.id,
+              },
+              {
+                content: t("Выйти"),
+                onClick: onLogout,
+              },
+            ]}
+            trigger={<Avatar size={30} src={authData.avatar} />}
+          />
+        </HStack>
       </header>
     );
   }
