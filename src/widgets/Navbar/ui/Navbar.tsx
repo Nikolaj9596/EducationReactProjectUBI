@@ -6,11 +6,7 @@ import {
   AppLink,
   AppLinkTheme,
   TextTheme,
-  Dropdown,
-  Avatar,
   HStack,
-  Icon,
-  Popover,
 } from "../../../shared/ui";
 import { classNames } from "../../../shared/lib/classNames/classNames";
 import cls from "./Navbar.module.scss";
@@ -24,9 +20,9 @@ import {
   userActions,
 } from "../../../entities/User";
 import { useDispatch } from "react-redux";
-import { ReactComponent as NotificationIcon } from "../../../shared/assets/icons/notification-20-20.svg";
 import { RoutePath } from "../../../shared/config";
-import { NotificationList } from "../../../entities/Notification";
+import { NotificationButton } from "../../../features/notificationButton";
+import { AvatarDropdown } from "../../../features/avatarDropdown";
 
 interface NavbarProps {
   className?: string;
@@ -35,10 +31,7 @@ interface NavbarProps {
 export const Navbar: FC<NavbarProps> = memo(({ className }) => {
   const { t } = useTranslation();
   const [isAuthModal, setIsAuthModal] = useState(false);
-  const dispatch = useDispatch();
   const authData = useSelector(getUserAuthData);
-  const isAdmin = useSelector(isUserAdmin);
-  const isManager = useSelector(isUserManager);
   const onCloseModal = useCallback(() => {
     setIsAuthModal(false);
   }, []);
@@ -47,10 +40,6 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
     setIsAuthModal(true);
   }, []);
 
-  const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
-  }, [dispatch]);
-  const isAdminPanelAvailable = isAdmin || isManager;
   if (authData) {
     return (
       <header
@@ -71,38 +60,8 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
           {t("Создать статью")}
         </AppLink>
         <HStack gap={"16"} className={cls.actions}>
-          <Popover
-            trigger={
-              <Button theme={ThemeButton.CLEAR}>
-                <Icon Svg={NotificationIcon} inverted />
-              </Button>
-            }
-            direction={"bottom left"}
-          >
-            <NotificationList />
-          </Popover>
-          <Dropdown
-            direction={"bottom left"}
-            items={[
-              ...(isAdminPanelAvailable
-                ? [
-                    {
-                      content: t("Админка"),
-                      href: "/admin",
-                    },
-                  ]
-                : []),
-              {
-                content: t("Профиль"),
-                href: "/profile/" + authData.id,
-              },
-              {
-                content: t("Выйти"),
-                onClick: onLogout,
-              },
-            ]}
-            trigger={<Avatar size={30} src={authData.avatar} />}
-          />
+          <NotificationButton />
+          <AvatarDropdown />
         </HStack>
       </header>
     );

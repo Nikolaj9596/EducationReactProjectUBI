@@ -29,5 +29,6 @@ export {
   HStack,
   Listbox,
   Dropdown,
-  CardTheme
+  CardTheme,
+  Popover
 } from "./ui";
