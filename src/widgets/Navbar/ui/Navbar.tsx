@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState } from "react";
+import { FC, memo, useCallback, useState } from "react";
 import {
   Button,
   ThemeButton,
@@ -15,11 +15,7 @@ import { LoginModal } from "../../../features/AuthByUserName";
 import { useSelector } from "react-redux";
 import {
   getUserAuthData,
-  isUserAdmin,
-  isUserManager,
-  userActions,
 } from "../../../entities/User";
-import { useDispatch } from "react-redux";
 import { RoutePath } from "../../../shared/config";
 import { NotificationButton } from "../../../features/notificationButton";
 import { AvatarDropdown } from "../../../features/avatarDropdown";

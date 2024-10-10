@@ -30,5 +30,6 @@ export {
   Listbox,
   Dropdown,
   CardTheme,
-  Popover
+  Popover,
+  Drawer
 } from "./ui";
