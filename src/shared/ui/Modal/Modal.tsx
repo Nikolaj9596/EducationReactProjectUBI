@@ -1,12 +1,8 @@
-import React, {
+import {
   FC,
-  MutableRefObject,
   ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
 } from "react";
+import { useModal } from "../../lib/hooks/useModal/useModal";
 import { Mods, classNames } from "../../lib/classNames/classNames";
 import { Overlay } from "../Overlay/Overlay";
 import { Portal } from "../Portal/Portal";
@@ -19,7 +15,6 @@ interface ModalProps {
   onClose?: () => void;
   lazy?: boolean;
 }
-const ANIMATION_DELAY = 300;
 
 export const Modal: FC<ModalProps> = (props) => {
   const {
@@ -30,43 +25,11 @@ export const Modal: FC<ModalProps> = (props) => {
     lazy,
   } = props;
 
-  const [isClosing, setIsClosing] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const timeRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
-  const closeHendler = useCallback(() => {
-    setIsClosing(true);
-    if (onClose) {
-      timeRef.current = setTimeout(() => {
-        onClose();
-        setIsClosing(false);
-      }, ANIMATION_DELAY);
-    }
-  }, [onClose]);
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsMounted(true);
-    }
-  }, [isOpen]);
-
-  const onKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        closeHendler();
-      }
-    },
-    [closeHendler],
-  );
-
-  useEffect(() => {
-    if (isOpen) {
-      window.addEventListener("keydown", onKeyDown);
-    }
-    return () => {
-      clearTimeout(timeRef.current);
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isOpen, onKeyDown]);
+  const { isClosing, isMounted, close } = useModal({
+    onClose,
+    isOpen,
+    animationDelay: 300,
+  });
 
   const mods: Mods = {
     [cls.opened]: isOpen,
@@ -79,7 +42,7 @@ export const Modal: FC<ModalProps> = (props) => {
   return (
     <Portal>
       <div className={classNames(cls.Modal, mods, [className])}>
-        <Overlay onClick={closeHendler} />
+        <Overlay onClick={close} />
         <div className={cls.content}>{children}</div>
       </div>
     </Portal>
