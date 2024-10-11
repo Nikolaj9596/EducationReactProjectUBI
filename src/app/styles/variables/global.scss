@@ -30,7 +30,8 @@
   --sidebar-width: 300px;
   --sidebar-width-collapsed: 80px;
   // z - Index
-  --modal-z-index: 100000;
+  --modal-z-index: 1000;
+  --overlay-z-index: 100;
 
   // Color
   --overlay-color: rgba(0 0 0 / 60%);

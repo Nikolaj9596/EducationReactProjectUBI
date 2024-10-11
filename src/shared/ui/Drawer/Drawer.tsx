@@ -4,7 +4,10 @@ import { classNames } from "../../../shared";
 import cls from "./Drawer.module.scss";
 import { Portal } from "../Portal/Portal";
 import { Overlay } from "../Overlay/Overlay";
-import { useAnimationLibs } from "../../../shared/lib/components/AnimationProvider";
+import {
+  AnimationProvider,
+  useAnimationLibs,
+} from "../../../shared/lib/components/AnimationProvider";
 
 interface DrawerProps {
   className?: string;
@@ -16,7 +19,7 @@ interface DrawerProps {
 
 const height = window.innerHeight - 300;
 
-export const DrawerContent: FC<DrawerProps> = memo((props) => {
+const DrawerContent: FC<DrawerProps> = memo((props) => {
   const { className, children, onClose, isOpen, lazy } = props;
   const { theme } = useTheme();
   const { Spring, Gesture } = useAnimationLibs();
@@ -97,11 +100,19 @@ export const DrawerContent: FC<DrawerProps> = memo((props) => {
   );
 });
 
-export const Drawer = memo((props: DrawerProps) => {
+const DrawerAsync = (props: DrawerProps) => {
   const { isLoading } = useAnimationLibs();
   if (!isLoading) {
     return null;
   }
 
   return <DrawerContent {...props} />;
-});
+};
+
+export const Drawer = (props: DrawerProps) => {
+  return (
+    <AnimationProvider>
+      <DrawerAsync {...props} />
+    </AnimationProvider>
+  );
+};
