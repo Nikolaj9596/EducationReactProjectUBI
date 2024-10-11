@@ -36,7 +36,7 @@ export const Dropdown: FC<DropdownProps> = memo((props) => {
       <MenuItems
         className={classNames(cls.menu, {}, [mapDirectionClass[direction]])}
       >
-        {items.map((item) => {
+        {items.map((item, index) => {
           const content = ({ active }: { active: boolean }) => (
             <Button
               theme={ThemeButton.CLEAR}
@@ -53,13 +53,22 @@ export const Dropdown: FC<DropdownProps> = memo((props) => {
           );
           if (item.href) {
             return (
-              <MenuItem as={AppLink} to={item.href} disabled={item.disabled}>
+              <MenuItem
+                as={AppLink}
+                to={item.href}
+                disabled={item.disabled}
+                key={"dropdown-key-" + index}
+              >
                 {content}
               </MenuItem>
             );
           }
           return (
-            <MenuItem as={Fragment} disabled={item.disabled}>
+            <MenuItem
+              as={Fragment}
+              disabled={item.disabled}
+              key={"dropdown-key-" + index}
+            >
               {content}
             </MenuItem>
           );

@@ -1,3 +1,4 @@
+export { StarRating } from "./StarRating/StarRating";
 export { Drawer } from "./Drawer/Drawer";
 export { Select } from "./Select/Select";
 export type { SelectOption } from "./Select/Select";
