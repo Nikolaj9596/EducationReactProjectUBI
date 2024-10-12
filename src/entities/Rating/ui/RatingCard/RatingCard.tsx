@@ -23,15 +23,24 @@ interface RatingCardProps {
   hasFeedback?: boolean;
   onCancel?: (starsCount: number) => void;
   onAccept?: (starsCount: number, feedback?: string) => void;
+  rate?: number;
 }
 
 export const RatingCard: FC<RatingCardProps> = memo((props) => {
   const { t } = useTranslation();
+  const {
+    className,
+    title,
+    feedbackTitle,
+    hasFeedback,
+    onCancel,
+    onAccept,
+    rate = 0,
+  } = props;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [starsCount, setStarsCount] = useState(0);
+  const [starsCount, setStarsCount] = useState(rate);
   const [feedback, setFeedback] = useState("");
-  const { className, title, feedbackTitle, hasFeedback, onCancel, onAccept } =
-    props;
   const onSelectStars = useCallback(
     (selectedStarsCount: number) => {
       setStarsCount(selectedStarsCount);
