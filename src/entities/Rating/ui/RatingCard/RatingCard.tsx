@@ -67,7 +67,7 @@ export const RatingCard: FC<RatingCardProps> = memo((props) => {
   const modalContent = (
     <VStack max gap={"32"}>
       <Text title={feedbackTitle} />
-      <Input placeholder={t("Ваш отзыв")} />
+      <Input placeholder={t("Ваш отзыв")} onChange={setFeedback} />
       <HStack gap={"16"} max justify={"end"}>
         <Button theme={ThemeButton.OUTLINE_RED} onClick={cancelHandle}>
           {t("Закрыть")}
@@ -79,10 +79,14 @@ export const RatingCard: FC<RatingCardProps> = memo((props) => {
     </VStack>
   );
   return (
-    <Card className={classNames(cls.RatingCard, {}, [className])}>
+    <Card className={classNames(cls.RatingCard, {}, [className])} max>
       <VStack align={"center"} gap={"8"}>
         <Text title={title} />
-        <StarRating size={40} onSelect={onSelectStars} />
+        <StarRating
+          selectedStars={starsCount}
+          size={40}
+          onSelect={onSelectStars}
+        />
       </VStack>
       <BrowserView>
         <Modal isOpen={isModalOpen} lazy>

@@ -15,6 +15,7 @@ import { articleDetailsPageRecommendationsReducer } from "../../model/slices/art
 import { ArticleDetailsPageHeader } from "../ArticleDetailsPageHeader/ArticleDetailsPageHeader";
 import { ArticleRecommendationsList } from "../../../../features/articleRecommendationsList";
 import { ArticleDetailsComments } from "../ArticleDetailsComments/ArticleDetailsComments";
+import { ArticleRating } from "../../../../features/articleRating";
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -30,7 +31,6 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
   const { t } = useTranslation("article");
   const { id } = useParams<{ id: string }>();
 
-
   if (!id) {
     return (
       <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
@@ -45,8 +45,9 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
         <VStack gap={"16"} max>
           <ArticleDetailsPageHeader />
           <ArticleDetails id={id} />
+          <ArticleRating articleId={id} />
           <ArticleRecommendationsList />
-          <ArticleDetailsComments id={id}/>
+          <ArticleDetailsComments id={id} />
         </VStack>
       </Page>
     </DynamicModuleLoader>
