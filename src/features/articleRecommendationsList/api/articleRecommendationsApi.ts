@@ -1,6 +1,6 @@
-import { RoutePath } from "../../../shared/config";
 import { rtkApi } from "../../../shared/api/rtkApi";
 import { Article } from "../../../entities/Article";
+import { RoutePath } from "../../../shared/const/router";
 
 const recommendationsApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

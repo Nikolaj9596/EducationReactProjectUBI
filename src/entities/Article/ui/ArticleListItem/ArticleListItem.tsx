@@ -19,7 +19,6 @@ import {
 import cls from "./ArticleListItem.module.scss";
 import { ReactComponent as EyeIcon } from "../../../../shared/assets/icons/eye-20-20.svg";
 import { ArticleTextBlockComponent } from "../ArticleTextBlockComponent/ArticleTextBlockComponent";
-import { RoutePath } from "../../../../shared/config";
 
 interface ArticleListItemProps {
   className?: string;

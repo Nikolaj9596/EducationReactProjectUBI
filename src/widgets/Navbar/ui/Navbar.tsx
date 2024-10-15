@@ -16,7 +16,6 @@ import { useSelector } from "react-redux";
 import {
   getUserAuthData,
 } from "../../../entities/User";
-import { RoutePath } from "../../../shared/config";
 import { NotificationButton } from "../../../features/notificationButton";
 import { AvatarDropdown } from "../../../features/avatarDropdown";
 

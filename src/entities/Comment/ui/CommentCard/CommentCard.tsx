@@ -9,7 +9,7 @@ import {
 } from "../../../../shared";
 import cls from "./CommentCard.module.scss";
 import { Comment } from "../../module/types/comment";
-import { RoutePath } from "../../../../shared/config";
+import { RoutePath } from "../../../../shared/const/router";
 
 interface CommentCardProps {
   className?: string;

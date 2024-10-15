@@ -1,12 +1,12 @@
 import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { RoutePath } from "../../../../shared/config";
 import { Button, classNames, HStack, ThemeButton } from "../../../../shared";
 import cls from "./ArticleDetailsPageHeader.module.scss";
 import { useSelector } from "react-redux";
 import { articleDetailsData } from "../../../../entities/Article";
 import { getCanEditArticle } from "../../model/selectors/article";
+import { RoutePath } from "../../../../shared/const/router";
 
 interface ArticleDetailsPageHeaderProps {
   className?: string;
