@@ -1,11 +1,14 @@
 import { classNames, Skeleton } from "../../../../shared";
 import { useTranslation } from "react-i18next";
 import cls from "./ArticleRating.module.scss";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { RatingCard } from "../../../../entities/Rating";
 import { useSelector } from "react-redux";
 import { getUserAuthData } from "../../../../entities/User";
-import { useGetArticleRatingQuery } from "../../api/articleRatingApi";
+import {
+  useAddRatingArticleMutation,
+  useGetArticleRatingQuery,
+} from "../../api/articleRatingApi";
 
 interface ArticleRatingProps {
   className?: string;
@@ -21,15 +24,47 @@ export const ArticleRating = memo((props: ArticleRatingProps) => {
     articleId,
     userId: userData?.id ?? "",
   });
+  const [rateArticleMutation] = useAddRatingArticleMutation();
+  const handleRateArticle = useCallback(
+    (starsCount: number, feedback?: string) => {
+      try {
+        rateArticleMutation({
+          userId: userData?.id ?? "",
+          articleId,
+          rate: starsCount,
+          feedback,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [articleId, rateArticleMutation, userData],
+  );
+
+  const onAccept = useCallback(
+    (starsCount: number, feedback?: string) => {
+      handleRateArticle(starsCount, feedback);
+    },
+    [handleRateArticle],
+  );
+
+  const onCancel = useCallback(
+    (starsCount: number) => {
+      handleRateArticle(starsCount);
+    },
+    [handleRateArticle],
+  );
 
   if (isLoading) {
     return <Skeleton width={"100%"} height={120} />;
   }
   //TODO: remove in prod ??
-  const rating = data?.[0] ?? {rate: 4};
+  const rating = data?.[0];
 
   return (
     <RatingCard
+      onAccept={onAccept}
+      onCancel={onCancel}
       rate={rating?.rate}
       className={classNames(cls.ArticleRating, {}, [className])}
       title={t("Оцените статью")}
