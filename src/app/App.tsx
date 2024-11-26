@@ -30,6 +30,7 @@ const App = () => {
           header={<Navbar />}
           sidebar={<Sidebar />}
           content={<AppRouter />}
+          toolbar={<div>skjfsdidi</div>}
         />
       </Suspense>
     </div>

@@ -40,20 +40,6 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
       <header
         className={classNames(cls.navbar, {}, [className ? className : ""])}
       >
-        <Text
-          theme={TextTheme.INVERTED}
-          className={cls.appName}
-          title={t("Blog App")}
-        />
-        {/*TODO: Delete this code*/}
-        {/* <AppLink theme={AppLinkTheme.SECONDARY} to={RoutePath.article_create}> */}
-        <AppLink
-          className={cls.createBtn}
-          theme={AppLinkTheme.SECONDARY}
-          to={"/articles/new"}
-        >
-          {t("Создать статью")}
-        </AppLink>
         <HStack gap={"16"} className={cls.actions}>
           <NotificationButton />
           <AvatarDropdown />

@@ -1,3 +1,4 @@
+export { AppLogo } from "./AppLogo/AppLogo";
 export { StarRating } from "./StarRating/StarRating";
 export { Drawer } from "./Drawer/Drawer";
 export { Select } from "./Select/Select";

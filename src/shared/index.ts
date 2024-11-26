@@ -34,4 +34,5 @@ export {
   Drawer,
   StarRating,
   Modal,
+  AppLogo,
 } from "./ui";

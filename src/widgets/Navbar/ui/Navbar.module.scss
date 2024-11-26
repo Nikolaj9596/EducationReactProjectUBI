@@ -1,22 +1,22 @@
 .navbar {
-  width: 100%;
-  height: var(--navbar-height);
-  background: var(--inverted-bg-color);
-  display: flex;
-  align-items: center;
-  padding: 20px;
+  padding: 16px;
 }
 
-.links, .actions{
+.links,
+.actions {
   margin-left: auto;
 }
 
-.links a { /* Target the link elements inside the .links container */
-  margin-right: 20px; /* Add margin to the right of each link */
-  text-decoration: none; /* Optional: removes the underline */
+.links a {
+  /* Target the link elements inside the .links container */
+  margin-right: 20px;
+  /* Add margin to the right of each link */
+  text-decoration: none;
+  /* Optional: removes the underline */
 }
 
-.links a:last-child { /* Removes margin for the last link to align it properly */
+.links a:last-child {
+  /* Removes margin for the last link to align it properly */
   margin-right: 0;
 }
 
