@@ -1,11 +1,11 @@
 import { FC, memo } from "react";
 import { Link, LinkProps } from "react-router-dom";
-import { classNames } from "../../../lib/classNames/classNames";
+import { classNames } from "../../../shared";
 import cls from "./AppLink.module.scss";
 
 export enum AppLinkTheme {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
 }
 
 interface AppLinkProps extends LinkProps {
@@ -32,4 +32,3 @@ export const AppLink: FC<AppLinkProps> = memo((props) => {
     </Link>
   );
 });
-

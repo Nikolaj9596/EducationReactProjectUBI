@@ -11,7 +11,7 @@ import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
-import { Card, classNames, Input } from "../../../../shared";
+import { Card, classNames, Input, TabItem } from "../../../../shared";
 import { ArticleViewSelector } from "../ArticleViewSelector/ArticleViewSelector";
 import cls from "./AriclesPageFilters.module.scss";
 import { ArticleSortSelector } from "../../../../entities/Article/ui/ArticleSortSelector/ArticleSortSelector";
@@ -22,7 +22,6 @@ import {
 import { SortOrder } from "../../model/types/articlePageSchema";
 import { fetchArticlesList } from "../../model/services/fetchArticlesList/fetchArticlesList";
 import { useDebounce } from "../../../../shared/lib/hooks/useDebounce/useDebounce";
-import { TabItem } from "../../../../shared/ui/Tabs/Tabs";
 import { ArticleTypeTabs } from "../../../../entities/Article";
 
 interface ArticlesPageFiltersProps {

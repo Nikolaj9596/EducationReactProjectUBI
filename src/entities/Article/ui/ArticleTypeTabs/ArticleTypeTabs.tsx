@@ -1,8 +1,7 @@
 import { ArticleType } from "../../model/types/article";
 import { FC, memo, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { classNames } from "../../../../shared";
-import { TabItem, Tabs } from "../../../../shared/ui/Tabs/Tabs";
+import { classNames, TabItem, Tabs } from "../../../../shared";
 import cls from "./ArticleTypeTabs.module.scss";
 
 interface ArticleTypeTabsProps {

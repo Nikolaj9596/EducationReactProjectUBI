@@ -1,8 +1,7 @@
 import { memo } from "react";
 import cls from "./AppLogo.module.scss";
-import { HStack } from "../Stack/HStack/HStack";
 import { ReactComponent as AppIcon } from "../../assets/icons/app-image.svg";
-import { classNames } from "../../../lib/classNames/classNames";
+import { classNames, HStack } from "../../../shared";
 
 interface AppLogoProps {
   className?: string;

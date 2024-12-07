@@ -1,5 +1,5 @@
 import { FC, memo, ReactNode } from "react";
-import { classNames } from "../../../../../../shared";
+import { classNames } from "../../../../../shared";
 import cls from "./Popover.module.scss";
 import popupCls from "../../styles/popup.module.scss";
 import {

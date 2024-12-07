@@ -1,12 +1,19 @@
 //lib
 export type { Mods } from "./lib/classNames/classNames";
 export type { ReducersList } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
-export type { SelectOption, DropdownItem } from "./ui";
+export type {
+  SelectOption,
+  DropdownItem,
+  TabItem,
+  DropdownDirection,
+} from "./ui";
 export { DynamicModuleLoader } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
 export { classNames } from "./lib/classNames/classNames";
 
 //ui
 export {
+  Overlay,
+  Portal,
   AppLink,
   AppLinkTheme,
   Button,

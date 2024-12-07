@@ -5,12 +5,15 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { FC, Fragment, ReactNode } from "react";
-import { classNames } from "../../../../../lib/classNames/classNames";
-import { Button, ThemeButton } from "../../../Button/Button";
-import { HStack } from "../../../Stack/HStack/HStack";
+import {
+  classNames,
+  Button,
+  ThemeButton,
+  HStack,
+  DropdownDirection,
+} from "../../../../../shared";
 import cls from "./Listbox.module.scss";
 import { mapDirectionClass } from "../../styles/const";
-import { DropdownDirection } from "shared/types/ui";
 import popupCls from "../../styles/popup.module.scss";
 
 export interface ListBoxItem {

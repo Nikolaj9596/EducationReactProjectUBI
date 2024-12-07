@@ -1,5 +1,5 @@
 import { CSSProperties, FC, memo } from "react";
-import { classNames } from "../../../lib/classNames/classNames";
+import { classNames } from "../../../shared";
 import cls from "./Skeleton.module.scss";
 
 interface SkeletonProps {

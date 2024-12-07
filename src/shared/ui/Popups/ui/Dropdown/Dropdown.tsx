@@ -5,7 +5,7 @@ import {
   Button,
   ThemeButton,
   AppLink,
-} from "../../../../../../shared";
+} from "../../../../../shared";
 import cls from "./Dropdown.module.scss";
 import popupCls from "../../styles/popup.module.scss";
 import { mapDirectionClass } from "../../styles/const";
