@@ -1,9 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { getUserAuthData } from "../../../../entities/User";
-import { ReactComponent as AboutIcon } from "../../../../shared/assets/icons/about-20-20.svg";
-import { ReactComponent as MainIcon } from "../../../../shared/assets/icons/main-20-20.svg";
-import { ReactComponent as ProfileIcon } from "../../../../shared/assets/icons/profile-20-20.svg";
-import { ReactComponent as ArticleIcon } from "../../../../shared/assets/icons/article-20-20.svg";
+import { ReactComponent as MainIcon } from "../../../../shared/assets/icons/home.svg";
+import { ReactComponent as ArticleIcon } from "../../../../shared/assets/icons/article.svg";
+import { ReactComponent as AboutIcon } from "../../../../shared/assets/icons/Info.svg";
+import { ReactComponent as ProfileIcon } from "../../../../shared/assets/icons/avatar.svg";
+
 import { SidebarItemType } from "../types/sidebar";
 
 export const getSidebarItems = createSelector(getUserAuthData, (userData) => {

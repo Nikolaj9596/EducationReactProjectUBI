@@ -3,7 +3,6 @@ import { FC, Fragment, memo, ReactNode } from "react";
 import {
   classNames,
   Button,
-  ThemeButton,
   AppLink,
 } from "../../../../../shared";
 import cls from "./Dropdown.module.scss";
@@ -40,7 +39,7 @@ export const Dropdown: FC<DropdownProps> = memo((props) => {
         {items.map((item, index) => {
           const content = ({ active }: { active: boolean }) => (
             <Button
-              theme={ThemeButton.CLEAR}
+              variant={"clear"}
               disabled={item.disabled}
               className={classNames(
                 cls.item,

@@ -1,3 +1,5 @@
+import { JsonSettings } from "./jsonSettings";
+
 export enum UserRole {
   ADMIN = "ADMIN",
   USER = "USER",
@@ -5,11 +7,12 @@ export enum UserRole {
 }
 
 export interface User {
-  id?: string;
+  id: string;
   userName: string;
   password?: string;
   avatar?: string;
   roles?: UserRole[];
+  jsonSettings?: JsonSettings;
 }
 
 export interface UserSchema {

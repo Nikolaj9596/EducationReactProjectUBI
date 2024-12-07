@@ -1,21 +1,18 @@
 import { FC, memo, useCallback, useState } from "react";
 import {
   Button,
-  ThemeButton,
   Text,
   AppLink,
-  AppLinkTheme,
+  AppLinkVariant,
   TextTheme,
   HStack,
-} from "../../../shared/ui";
-import { classNames } from "../../../shared/lib/classNames/classNames";
+  classNames,
+} from "../../../shared";
 import cls from "./Navbar.module.scss";
 import { useTranslation } from "react-i18next";
 import { LoginModal } from "../../../features/AuthByUserName";
 import { useSelector } from "react-redux";
-import {
-  getUserAuthData,
-} from "../../../entities/User";
+import { getUserAuthData } from "../../../entities/User";
 import { NotificationButton } from "../../../features/notificationButton";
 import { AvatarDropdown } from "../../../features/avatarDropdown";
 
@@ -52,7 +49,7 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
       className={classNames(cls.navbar, {}, [className ? className : ""])}
     >
       <Button
-        theme={ThemeButton.CLEAR_INVERTED}
+        variant={"clear"}
         className={cls.links}
         onClick={onShowModal}
       >

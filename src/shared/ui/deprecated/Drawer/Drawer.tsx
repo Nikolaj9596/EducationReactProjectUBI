@@ -1,6 +1,5 @@
-import { useTheme } from "../../../../app/providers";
 import { FC, memo, ReactNode, useCallback, useEffect } from "react";
-import { classNames, Portal, Overlay } from "../../../../shared";
+import { classNames, Portal, Overlay, useTheme } from "../../../../shared";
 import cls from "./Drawer.module.scss";
 import {
   AnimationProvider,

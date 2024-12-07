@@ -1,9 +1,7 @@
-import { Theme, useTheme } from "../../../app/providers";
-import React, { memo } from "react";
-import cls from "./ThemeSwitcher.module.scss";
-import { Button, ThemeButton, classNames } from "../../../shared";
-import { ReactComponent as LightIcon } from "../../../shared/assets/icons/theme-light.svg";
-import { ReactComponent as DarkIcon } from "../../../shared/assets/icons/theme-dark.svg";
+import { memo, useCallback } from "react";
+import { Icon, useTheme, useAppDispatch } from "../../../shared";
+import { saveJsonSettings } from "../../../entities/User";
+import { ReactComponent as ThemeIcon } from "../../../shared/assets/icons/theme.svg";
 
 interface ThemeSwitcherProps {
   className?: string;
@@ -11,15 +9,12 @@ interface ThemeSwitcherProps {
 
 export const ThemeSwitcher = memo(({ className }: ThemeSwitcherProps) => {
   const { theme, toggleTheme } = useTheme();
-  return (
-    <Button
-      theme={ThemeButton.CLEAR}
-      onClick={toggleTheme}
-      className={classNames(cls.ThemeSwitcher, {}, [
-        className ? className : "",
-      ])}
-    >
-      {theme === Theme.DARK ? <DarkIcon /> : <LightIcon />}
-    </Button>
-  );
+  const dispatch = useAppDispatch();
+
+  const onToggleHandler = useCallback(() => {
+    toggleTheme((newTheme) => {
+      dispatch(saveJsonSettings({ theme: newTheme }));
+    });
+  }, [dispatch, toggleTheme]);
+  return <Icon Svg={ThemeIcon} clickable onClick={onToggleHandler} />;
 });

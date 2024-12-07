@@ -1,7 +1,7 @@
 import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Button, classNames, HStack, ThemeButton } from "../../../../shared";
+import { Button, classNames, HStack } from "../../../../shared";
 import cls from "./ArticleDetailsPageHeader.module.scss";
 import { useSelector } from "react-redux";
 import { articleDetailsData } from "../../../../entities/Article";
@@ -35,13 +35,13 @@ export const ArticleDetailsPageHeader: FC<ArticleDetailsPageHeaderProps> = memo(
           props.className,
         ])}
       >
-        <Button theme={ThemeButton.OUTLINE} onClick={onBackToList}>
+        <Button variant={"outline"} onClick={onBackToList}>
           {t("Назад к списку")}
         </Button>
         {canEdit && (
           <Button
             className={cls.editBtn}
-            theme={ThemeButton.OUTLINE}
+            variant={"outline"}
             onClick={onEditArticle}
           >
             {t("Редактировать")}

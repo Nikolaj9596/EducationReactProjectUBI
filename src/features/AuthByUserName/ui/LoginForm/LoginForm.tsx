@@ -6,7 +6,6 @@ import {
   DynamicModuleLoader,
   classNames,
   Input,
-  ThemeButton,
   TextTheme,
   Text
 } from "../../../../shared";
@@ -79,7 +78,7 @@ const LoginForm: FC<LoginFormProps> = memo((props) => {
           value={password}
         />
         <Button
-          theme={ThemeButton.OUTLINE}
+          variant={"outline"}
           className={cls.loginBtn}
           onClick={onLoginClick}
           disabled={isLoading}

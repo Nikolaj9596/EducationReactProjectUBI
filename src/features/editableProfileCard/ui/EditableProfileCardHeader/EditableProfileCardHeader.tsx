@@ -7,13 +7,7 @@ import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
-import {
-  Button,
-  classNames,
-  HStack,
-  Text,
-  ThemeButton,
-} from "../../../../shared";
+import { Button, classNames, HStack, Text } from "../../../../shared";
 
 interface EditableProfileCardHeaderProps {
   className?: string;
@@ -50,16 +44,16 @@ export const EditableProfileCardHeader: FC<EditableProfileCardHeaderProps> =
         {canEdit && (
           <div>
             {readonly ? (
-              <Button theme={ThemeButton.OUTLINE} onClick={onEdit}>
+              <Button variant={"outline"} onClick={onEdit}>
                 {t("Редактировать")}
               </Button>
             ) : (
               <HStack gap="8">
-                <Button theme={ThemeButton.OUTLINE_RED} onClick={onCancelEdit}>
+                <Button variant={"outline"} onClick={onCancelEdit}>
                   {t("Отменить")}
                 </Button>
 
-                <Button theme={ThemeButton.OUTLINE} onClick={onSave}>
+                <Button variant={"outline"} onClick={onSave}>
                   {t("Сохранить")}
                 </Button>
               </HStack>

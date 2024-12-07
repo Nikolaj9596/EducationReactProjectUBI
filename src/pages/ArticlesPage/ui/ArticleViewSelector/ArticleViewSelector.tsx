@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Button, classNames, Icon, ThemeButton } from "../../../../shared";
+import { Button, classNames, Icon } from "../../../../shared";
 import cls from "./ArticleViewSelector.module.scss";
 import { ReactComponent as ListIcon } from "../../../../shared/assets/icons/list-24-24.svg";
 import { ReactComponent as TableIcon } from "../../../../shared/assets/icons/tiled-24-24.svg";
@@ -35,7 +35,7 @@ export const ArticleViewSelector: FC<ArticleViewSelectorProps> = memo(
         {viewTypes.map((viewType) => (
           <Button
             key={viewType.view}
-            theme={ThemeButton.CLEAR}
+            variant={"clear"}
             onClick={onClick(viewType.view)}
           >
             <Icon

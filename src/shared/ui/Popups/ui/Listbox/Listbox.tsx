@@ -8,7 +8,6 @@ import { FC, Fragment, ReactNode } from "react";
 import {
   classNames,
   Button,
-  ThemeButton,
   HStack,
   DropdownDirection,
 } from "../../../../../shared";
@@ -57,7 +56,7 @@ export const Listbox: FC<ListBoxProps> = (props) => {
         disabled={readonly}
       >
         <ListboxButton className={cls.trigger} disabled={readonly}>
-          <Button theme={ThemeButton.OUTLINE} disabled={readonly}>
+          <Button variant={"outline"} disabled={readonly}>
             {value ?? defaultValue}
           </Button>
         </ListboxButton>

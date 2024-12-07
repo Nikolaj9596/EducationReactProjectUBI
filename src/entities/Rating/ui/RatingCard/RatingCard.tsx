@@ -11,7 +11,6 @@ import {
   HStack,
   Button,
   Input,
-  ThemeButton,
   Drawer,
 } from "../../../../shared";
 import cls from "./RatingCard.module.scss";
@@ -69,10 +68,10 @@ export const RatingCard: FC<RatingCardProps> = memo((props) => {
       <Text title={feedbackTitle} />
       <Input placeholder={t("Ваш отзыв")} onChange={setFeedback} />
       <HStack gap={"16"} max justify={"end"}>
-        <Button theme={ThemeButton.OUTLINE_RED} onClick={cancelHandle}>
+        <Button variant={"outline"} color={"error"} onClick={cancelHandle}>
           {t("Закрыть")}
         </Button>
-        <Button theme={ThemeButton.OUTLINE} onClick={acceptHandle}>
+        <Button variant={"outline"} color={"success"} onClick={acceptHandle}>
           {t("Отправить")}
         </Button>
       </HStack>

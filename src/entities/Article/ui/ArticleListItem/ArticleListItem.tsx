@@ -14,7 +14,6 @@ import {
   classNames,
   Icon,
   Text,
-  ThemeButton,
 } from "../../../../shared";
 import cls from "./ArticleListItem.module.scss";
 import { ReactComponent as EyeIcon } from "../../../../shared/assets/icons/eye-20-20.svg";
@@ -71,7 +70,7 @@ export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
               // to={RoutePath.article_details + article.id}
               to={"/articles/" + article.id}
             >
-              <Button theme={ThemeButton.OUTLINE}>
+              <Button variant={"outline"}>
                 {t("Читать далее...")}
               </Button>
             </AppLink>

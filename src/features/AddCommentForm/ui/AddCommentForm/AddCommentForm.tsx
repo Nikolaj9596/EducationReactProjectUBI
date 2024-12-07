@@ -14,7 +14,6 @@ import {
   classNames,
   Input,
   Button,
-  ThemeButton,
   DynamicModuleLoader,
   ReducersList,
   HStack,
@@ -58,7 +57,7 @@ const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
           value={text}
           onChange={onCommentTextChange}
         />
-        <Button theme={ThemeButton.OUTLINE} onClick={onSentHendler}>
+        <Button variant={"outline"} onClick={onSentHendler}>
           {t("Отправить")}
         </Button>
       </HStack>

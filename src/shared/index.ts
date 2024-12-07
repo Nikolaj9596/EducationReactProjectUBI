@@ -1,3 +1,6 @@
+//layouts
+export { MainLayout } from "./layouts";
+
 //lib
 export type { Mods } from "./lib/classNames/classNames";
 export type { ReducersList } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
@@ -6,20 +9,27 @@ export type {
   DropdownItem,
   TabItem,
   DropdownDirection,
+  AppLinkVariant,
+  ButtonSize,
+  ButtonColor,
 } from "./ui";
 export { DynamicModuleLoader } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
-export { classNames } from "./lib/classNames/classNames";
-
+export {
+  classNames,
+  buildSelector,
+  addQueryParams,
+  useTheme,
+  useAppDispatch,
+} from "./lib";
+//api
+export { rtkApi } from "./api/rtkApi";
 //ui
 export {
   Overlay,
   Portal,
   AppLink,
-  AppLinkTheme,
   Button,
-  ThemeButton,
   Loader,
-  ButtonSize,
   Input,
   TextTheme,
   Text,
