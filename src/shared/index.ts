@@ -4,7 +4,26 @@ export { MainLayout } from "./layouts";
 //lib
 export type { Mods } from "./lib/classNames/classNames";
 export type { ReducersList } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
+export { DynamicModuleLoader } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
+export {
+  classNames,
+  buildSelector,
+  addQueryParams,
+  useTheme,
+  useAppDispatch,
+  getFeatureFlag,
+  updateFeatureFlag,
+  useForceUpdate
+} from "./lib";
+
+//api
+export { rtkApi } from "./api/rtkApi";
+
+//ui
 export type {
+  TextAlign,
+  TextSize,
+  TextVariant,
   SelectOption,
   DropdownItem,
   TabItem,
@@ -13,17 +32,6 @@ export type {
   ButtonSize,
   ButtonColor,
 } from "./ui";
-export { DynamicModuleLoader } from "./lib/components/DynamicModuleLoader/DynamicModuleLoader";
-export {
-  classNames,
-  buildSelector,
-  addQueryParams,
-  useTheme,
-  useAppDispatch,
-} from "./lib";
-//api
-export { rtkApi } from "./api/rtkApi";
-//ui
 export {
   Overlay,
   Portal,
@@ -31,10 +39,7 @@ export {
   Button,
   Loader,
   Input,
-  TextTheme,
   Text,
-  TextAlign,
-  TextSize,
   Avatar,
   Select,
   Skeleton,

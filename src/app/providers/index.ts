@@ -1,4 +1,3 @@
-
 //router
 export { AppRouter } from "./router";
 
@@ -9,7 +8,8 @@ export { StoreProvider } from "./StoreProvider";
 export type {
   StateSchemeKey,
   StateScheme,
-  ReduxStoreWithManager
-} from "./StoreProvider"
+  ReduxStoreWithManager,
+  ThunkConfig,
+} from "./StoreProvider";
 
-export type { DeepPartial } from "./StoreProvider/ui/StoreProvider" 
+export type { DeepPartial } from "./StoreProvider/ui/StoreProvider";

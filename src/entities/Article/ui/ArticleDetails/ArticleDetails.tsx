@@ -8,9 +8,6 @@ import {
   ReducersList,
   Skeleton,
   Text,
-  TextAlign,
-  TextSize,
-  TextTheme,
   Icon,
   HStack,
   VStack,
@@ -92,8 +89,8 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo((props) => {
     content = (
       <Text
         title={t("Произашла ошибка при загрузки статьи!!!!")}
-        align={TextAlign.CENTER}
-        theme={TextTheme.ERROR}
+        align={"center"}
+        variant={"error"}
       />
     );
   } else {
@@ -107,7 +104,7 @@ export const ArticleDetails: FC<ArticleDetailsProps> = memo((props) => {
             className={cls.title}
             title={article?.title}
             text={article?.subtitle}
-            size={TextSize.L}
+            size={"l"}
           />
           <HStack gap={"8"} className={cls.articleInfo}>
             <Icon Svg={EyeIcon} className={cls.icon} />

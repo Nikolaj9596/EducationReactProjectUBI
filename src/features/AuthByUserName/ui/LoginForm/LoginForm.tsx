@@ -6,8 +6,7 @@ import {
   DynamicModuleLoader,
   classNames,
   Input,
-  TextTheme,
-  Text
+  Text,
 } from "../../../../shared";
 import cls from "./LoginForm.module.scss";
 import { loginByUsername } from "../../../../features/AuthByUserName";
@@ -26,31 +25,36 @@ export interface LoginFormProps {
 
 const intialReducers: ReducersList = {
   loginForm: loginReducer,
-}
+};
 
 const LoginForm: FC<LoginFormProps> = memo((props) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch()
-  const userName = useSelector(getLoginUsername)
-  const password = useSelector(getLoginPassword)
-  const error = useSelector(getLoginError)
-  const isLoading = useSelector(getLoginIsLoading)
+  const dispatch = useAppDispatch();
+  const userName = useSelector(getLoginUsername);
+  const password = useSelector(getLoginPassword);
+  const error = useSelector(getLoginError);
+  const isLoading = useSelector(getLoginIsLoading);
 
-  const onChangeUserName = useCallback((value: string) => {
-    dispatch(loginActions.setUserName(value))
-  }, [dispatch])
+  const onChangeUserName = useCallback(
+    (value: string) => {
+      dispatch(loginActions.setUserName(value));
+    },
+    [dispatch],
+  );
 
-  const onChangePassword = useCallback((value: string) => {
-    dispatch(loginActions.setPassword(value))
-  }, [dispatch])
+  const onChangePassword = useCallback(
+    (value: string) => {
+      dispatch(loginActions.setPassword(value));
+    },
+    [dispatch],
+  );
 
   const onLoginClick = useCallback(async () => {
-    const result = await dispatch(loginByUsername({ userName, password }))
-    if (result.meta.requestStatus === 'fulfilled') {
-      props.onSuccess()
+    const result = await dispatch(loginByUsername({ userName, password }));
+    if (result.meta.requestStatus === "fulfilled") {
+      props.onSuccess();
     }
-
-  }, [props.onSuccess, dispatch, userName, password])
+  }, [props.onSuccess, dispatch, userName, password]);
 
   return (
     <DynamicModuleLoader reducers={intialReducers}>
@@ -59,8 +63,8 @@ const LoginForm: FC<LoginFormProps> = memo((props) => {
           props.className ? props.className : "",
         ])}
       >
-        <Text title={t('Форма авторизации')} />
-        {error && <Text text={error} theme={TextTheme.ERROR} />}
+        <Text title={t("Форма авторизации")} />
+        {error && <Text text={error} variant={"error"} />}
 
         <Input
           placeholder={t("Введите логин")}
@@ -88,6 +92,6 @@ const LoginForm: FC<LoginFormProps> = memo((props) => {
       </div>
     </DynamicModuleLoader>
   );
-})
+});
 
 export default LoginForm;

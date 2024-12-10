@@ -5,8 +5,6 @@ import {
   Text,
   Input,
   Loader,
-  TextTheme,
-  TextAlign,
   Avatar,
   Mods,
   VStack,
@@ -53,10 +51,10 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
         className={classNames(cls.ProfileCard, {}, [className, cls.error])}
       >
         <Text
-          theme={TextTheme.ERROR}
+          variant={"error"}
           title={t("Произошла ошибка при загрузки профиля")}
           text={t("Попробуйте обновить страницу")}
-          align={TextAlign.CENTER}
+          align={"center"}
         />
       </HStack>
     );
@@ -119,7 +117,11 @@ export const ProfileCard: FC<ProfileCardProps> = (props) => {
         onChange={callbacks.avatar}
         readonly={readonly}
       />
-      <CurrencySelect readonly={readonly} className={cls.input} direction={"bottom left"}/>
+      <CurrencySelect
+        readonly={readonly}
+        className={cls.input}
+        direction={"bottom left"}
+      />
     </VStack>
   );
 };

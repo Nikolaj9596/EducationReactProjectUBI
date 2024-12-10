@@ -5,7 +5,7 @@ import { getArticleComments } from "../../model/slices/articleDetailsCommentsSli
 import { FC, memo, Suspense, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { classNames, Text, TextSize, VStack } from "../../../../shared";
+import { classNames, Text, VStack } from "../../../../shared";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
 import { AddCommentForm } from "../../../../features/AddCommentForm";
 import { CommentList } from "../../../../entities/Comment";
@@ -38,7 +38,7 @@ export const ArticleDetailsComments: FC<ArticleDetailsCommentsProps> = memo(
 
     return (
       <VStack gap={"16"} max className={classNames("", {}, [className])}>
-        <Text size={TextSize.L} title={t("Комментарии")} />
+        <Text size={"l"} title={t("Комментарии")} />
         <Suspense fallback={<PageLoader />}>
           <AddCommentForm onSentComment={onSendComment} />
         </Suspense>

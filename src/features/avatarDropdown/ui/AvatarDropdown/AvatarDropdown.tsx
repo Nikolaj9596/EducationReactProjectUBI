@@ -10,6 +10,7 @@ import {
   isUserManager,
   userActions,
 } from "../../../../entities/User";
+import { getRouteAdmin, getRouteProfile, getRouteSettings } from "shared/const/router";
 
 interface AvatarDropdownProps {
   className?: string;
@@ -27,29 +28,38 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
     dispatch(userActions.logout());
   }, [dispatch]);
   const isAdminPanelAvailable = isAdmin || isManager;
+
+  if (!authData) {
+    return null;
+  }
+  const items = [
+    ...(isAdminPanelAvailable
+      ? [
+          {
+            content: t("Админка"),
+            href: getRouteAdmin(),
+          },
+        ]
+      : []),
+    {
+      content: t("Настройки"),
+      href: getRouteSettings(),
+    },
+    {
+      content: t("Профиль"),
+      href: getRouteProfile(authData.id),
+    },
+    {
+      content: t("Выйти"),
+      onClick: onLogout,
+    },
+  ];
   return (
     <Dropdown
-      className={classNames(cls.AvatarDropdown, {}, [className])}
-      direction={"bottom left"}
-      items={[
-        ...(isAdminPanelAvailable
-          ? [
-              {
-                content: t("Админка"),
-                href: "/admin",
-              },
-            ]
-          : []),
-        {
-          content: t("Профиль"),
-          href: "/profile/" + authData?.id,
-        },
-        {
-          content: t("Выйти"),
-          onClick: onLogout,
-        },
-      ]}
-      trigger={<Avatar size={30} src={authData?.avatar} />}
+      direction="bottom left"
+      className={classNames("", {}, [className])}
+      items={items}
+      trigger={<Avatar size={40} src={authData.avatar} />}
     />
   );
 });

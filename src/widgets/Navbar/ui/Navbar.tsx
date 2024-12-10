@@ -4,7 +4,7 @@ import {
   Text,
   AppLink,
   AppLinkVariant,
-  TextTheme,
+  TextVariant,
   HStack,
   classNames,
 } from "../../../shared";

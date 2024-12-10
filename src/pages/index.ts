@@ -1,3 +1,4 @@
+export { SettingsPage } from "./SettingsPage";
 export { ArticleEditPage } from "./ArticleEditPage";
 export { AboutPage } from "./AboutPage";
 export { MainPage } from "./MainPage";

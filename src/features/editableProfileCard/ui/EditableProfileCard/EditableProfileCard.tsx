@@ -2,12 +2,7 @@ import { useTranslation } from "react-i18next";
 import { memo, useCallback, useEffect } from "react";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import {
-  TextTheme,
-  Text,
-  ReducersList,
-  DynamicModuleLoader,
-} from "../../../../shared";
+import { Text, ReducersList, DynamicModuleLoader } from "../../../../shared";
 import { getFormProfileData } from "../../model/selectors/getProfileFormData/getProfileFormData";
 import { getProfileError } from "../..//model/selectors/getProfileError/getProfileError";
 import { getProfileIsLoading } from "../../model/selectors/getProfileIsLoading/getProfileIsLoading";
@@ -96,12 +91,12 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
   return (
     <DynamicModuleLoader reducers={redusers} removeAfterUnmount>
-      <EditableProfileCardHeader/>
+      <EditableProfileCardHeader />
       {validateErrors?.length &&
         validateErrors.map((err) => (
           <Text
             key={err}
-            theme={TextTheme.ERROR}
+            variant={"error"}
             text={validateErrorTranslates[err]}
           />
         ))}
