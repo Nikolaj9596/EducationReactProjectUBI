@@ -1,4 +1,3 @@
-export { updateFeatureFlag, getFeatureFlag } from "./features";
 export { useAppDispatch } from "./hooks/useAppDispatch";
 export { useTheme } from "./hooks/useTheme/useTheme";
 export { addQueryParams } from "./url/addQueryParams/addQueryParams";

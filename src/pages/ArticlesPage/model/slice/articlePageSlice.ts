@@ -3,7 +3,7 @@ import {
   createSlice,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { ARTICLE_VIEW_LOCAL_STORAGE_KEY } from "../../../../shared/const/LocalStorage";
+import { ARTICLE_VIEW_LOCAL_STORAGE_KEY } from "../../../../shared/const/localstorage";
 import { StateScheme } from "../../../../app/providers";
 import { ArticleView, Article } from "../../../../entities/Article";
 import { fetchArticlesList } from "../services/fetchArticlesList/fetchArticlesList";

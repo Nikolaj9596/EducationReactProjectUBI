@@ -11,8 +11,6 @@ export {
   addQueryParams,
   useTheme,
   useAppDispatch,
-  getFeatureFlag,
-  updateFeatureFlag,
   useForceUpdate
 } from "./lib";
 

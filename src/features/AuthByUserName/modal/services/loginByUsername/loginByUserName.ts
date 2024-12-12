@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
-import { USER_LOCAL_STORAGE_KEY } from "../../../../../shared/const/LocalStorage";
+import { USER_LOCAL_STORAGE_KEY } from "../../../../../shared/const/localstorage";
 import { User, userActions, UserRole } from "../../../../../entities/User";
 import i18n from "../../../../../shared/config/i18n/i18n";
 import { ThunkConfig } from "../../../../../app/providers/StoreProvider";

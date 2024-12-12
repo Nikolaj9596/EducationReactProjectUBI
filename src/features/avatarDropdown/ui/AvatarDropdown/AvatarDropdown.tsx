@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import cls from "./AvatarDropdown.module.scss";
 import { memo, useCallback } from "react";
 import { Dropdown, classNames, Avatar } from "../../../../shared";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
@@ -10,7 +9,11 @@ import {
   isUserManager,
   userActions,
 } from "../../../../entities/User";
-import { getRouteAdmin, getRouteProfile, getRouteSettings } from "shared/const/router";
+import {
+  getRouteAdmin,
+  getRouteProfile,
+  getRouteSettings,
+} from "../../../../shared/const/router";
 
 interface AvatarDropdownProps {
   className?: string;

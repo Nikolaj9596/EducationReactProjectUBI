@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_LOCAL_STORAGE_KEY } from "../const/LocalStorage";
+import { USER_LOCAL_STORAGE_KEY } from "../const/localstorage";
 
 
 export const $api = axios.create({
