@@ -2,7 +2,7 @@ import cls from "./NotificationButton.module.scss";
 import { memo, useCallback, useState } from "react";
 import { Popover, classNames, Button, Icon, Drawer } from "../../../../shared";
 import { NotificationList } from "../../../../entities/Notification";
-import { ReactComponent as NotificationIcon } from "../../../../shared/assets/icons/notification-20-20.svg";
+import { ReactComponent as NotificationIcon } from "../../../../shared/assets/icons/notification.svg";
 import { BrowserView, MobileView } from "react-device-detect";
 
 interface NotificationButtonProps {
@@ -21,15 +21,13 @@ export const NotificationButton = memo((props: NotificationButtonProps) => {
   }, []);
 
   const trigger = (
-    <Button onClick={onOpenDrawer} variant={"clear"}>
-      <Icon Svg={NotificationIcon} />
-    </Button>
+    <Icon Svg={NotificationIcon} clickable onClick={onOpenDrawer} />
   );
 
   return (
     <div>
       <BrowserView>
-        <Popover trigger={trigger} direction={"bottom left"}>
+        <Popover direction="bottom left" trigger={trigger}>
           <NotificationList
             className={classNames(cls.NotificationButton, {}, [className])}
           />

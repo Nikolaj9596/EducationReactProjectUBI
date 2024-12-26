@@ -11,7 +11,7 @@ export {
   addQueryParams,
   useTheme,
   useAppDispatch,
-  useForceUpdate
+  useForceUpdate,
 } from "./lib";
 
 //api

@@ -20,6 +20,7 @@ interface PopoverProps {
 /**@deprecate**/
 export const Popover: FC<PopoverProps> = memo((props) => {
   const { className, direction = "bottom right", trigger, children } = props;
+  const menuClasses = [mapDirectionClass[direction], popupCls.menu];
   return (
     <HPopover
       className={classNames(cls.Popover, {}, [className, popupCls.popup])}
@@ -27,9 +28,7 @@ export const Popover: FC<PopoverProps> = memo((props) => {
       <PopoverButton as={"div"} className={popupCls.trigger}>
         {trigger}
       </PopoverButton>
-      <PopoverPanel
-        className={classNames(cls.panel, {}, [mapDirectionClass[direction]])}
-      >
+      <PopoverPanel className={classNames(cls.panel, {}, menuClasses)}>
         {children}
       </PopoverPanel>
     </HPopover>

@@ -2,8 +2,14 @@
   position: relative;
 }
 
+.menu {
+  border-radius: 18px;
+  border: 1px solid var(--accent);
+  overflow: hidden;
+}
+
 .active {
-  background: var(--inverted-primary-color);
+  background: var(--light-bg);
 }
 
 .disabled {

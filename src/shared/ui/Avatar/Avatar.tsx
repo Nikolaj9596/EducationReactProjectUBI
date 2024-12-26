@@ -1,28 +1,23 @@
 import { CSSProperties, FC, useMemo } from "react";
-import { classNames } from "../../../lib/classNames/classNames";
+import { classNames } from "../../../shared";
 import cls from "./Avatar.module.scss";
 
 interface AvatarProps {
   className?: string;
-  src?: string
-  size?: number
-  alt?: string
+  src?: string;
+  size?: number;
+  alt?: string;
 }
 
 /**@deprecate**/
 export const Avatar: FC<AvatarProps> = (props) => {
-  const {
-    className,
-    src,
-    size,
-    alt
-  } = props
+  const { className, src, size, alt } = props;
   const styles = useMemo<CSSProperties>(() => {
     return {
       width: size,
-      height: size
-    }
-  }, [size])
+      height: size,
+    };
+  }, [size]);
   return (
     <img
       src={src}

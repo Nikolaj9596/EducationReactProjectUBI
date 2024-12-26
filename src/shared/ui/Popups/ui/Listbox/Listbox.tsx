@@ -4,36 +4,37 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { FC, Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, useMemo } from "react";
 import {
   classNames,
   Button,
   HStack,
   DropdownDirection,
+  Icon,
 } from "../../../../../shared";
 import cls from "./Listbox.module.scss";
 import { mapDirectionClass } from "../../styles/const";
 import popupCls from "../../styles/popup.module.scss";
+import { ReactComponent as ArrowIcon } from "../../../../../shared/assets/icons/arrow-bottom.svg";
 
-export interface ListBoxItem {
+export interface ListBoxItem<T extends string> {
   value: string;
   content: ReactNode;
   disabled?: boolean;
 }
 
-interface ListBoxProps {
-  items?: ListBoxItem[];
+interface ListBoxProps<T extends string> {
+  items?: ListBoxItem<T>[];
   className?: string;
-  value?: string;
+  value?: T;
   defaultValue?: string;
-  onChange?: <T extends string>(value: T) => void;
+  onChange: (value: T) => void;
   readonly?: boolean;
   direction?: DropdownDirection;
   label?: string;
 }
 
-/**@deprecate**/
-export const Listbox: FC<ListBoxProps> = (props) => {
+export function ListBox<T extends string>(props: ListBoxProps<T>) {
   const {
     items,
     className,
@@ -45,9 +46,14 @@ export const Listbox: FC<ListBoxProps> = (props) => {
     label,
   } = props;
 
+  const optionsClasses = [mapDirectionClass[direction], popupCls.menu];
+
+  const selectedItem = useMemo(() => {
+    return items?.find((item) => item.value === value);
+  }, [items, value]);
   return (
     <HStack gap={"4"}>
-      {label && <span>{label + ">"}</span>}
+      {label && <span>{`${label}>`}</span>}
       <HListbox
         as={"div"}
         className={classNames(cls.Listbox, {}, [className, popupCls.popup])}
@@ -56,15 +62,17 @@ export const Listbox: FC<ListBoxProps> = (props) => {
         disabled={readonly}
       >
         <ListboxButton className={cls.trigger} disabled={readonly}>
-          <Button variant={"outline"} disabled={readonly}>
-            {value ?? defaultValue}
+          <Button
+            variant={"filled"}
+            disabled={readonly}
+            addonRight={<Icon Svg={ArrowIcon} />}
+          >
+              {selectedItem?.content ?? defaultValue}
           </Button>
         </ListboxButton>
         <ListboxOptions
           transition
-          className={classNames(cls.options, {}, [
-            mapDirectionClass[direction],
-          ])}
+          className={classNames(cls.options, {}, optionsClasses)}
         >
           {items?.map((item) => (
             <ListboxOption
@@ -78,9 +86,10 @@ export const Listbox: FC<ListBoxProps> = (props) => {
                   className={classNames(cls.option, {
                     [popupCls.active]: active,
                     [popupCls.disabled]: item.disabled,
+                    [popupCls.selected]: selected,
                   })}
                 >
-                  {selected && "!!!! "}
+                  {selected}
                   {item.content}
                 </li>
               )}
@@ -90,4 +99,4 @@ export const Listbox: FC<ListBoxProps> = (props) => {
       </HListbox>
     </HStack>
   );
-};
+}
