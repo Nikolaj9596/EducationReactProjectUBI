@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Card, classNames, Text, CardTheme, AppLink } from "../../../../shared";
+import { Card, classNames, Text, AppLink } from "../../../../shared";
 import cls from "./NotificationItem.module.scss";
 import { Notification } from "../../model/types/notification";
 
@@ -12,7 +12,7 @@ export const NotificationItem: FC<NotificationItemProps> = memo((props) => {
   const { className, item } = props;
   const content = (
     <Card
-      theme={CardTheme.OUTLINE}
+      variant={"outlined"}
       className={classNames(cls.NotificationItem, {}, [className])}
     >
       <Text title={item.title} text={item.description} />
@@ -23,7 +23,7 @@ export const NotificationItem: FC<NotificationItemProps> = memo((props) => {
     return (
       <AppLink to={item.href} className={cls.link}>
         <Card
-          theme={CardTheme.OUTLINE}
+          variant={"outlined"}
           className={classNames(cls.NotificationItem, {}, [className])}
         >
           <Text title={item.title} text={item.description} />

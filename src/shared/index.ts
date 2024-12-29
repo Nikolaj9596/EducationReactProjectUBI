@@ -19,16 +19,17 @@ export { rtkApi } from "./api/rtkApi";
 
 //ui
 export type {
+  TabItem,
   TextAlign,
   TextSize,
   TextVariant,
   SelectOption,
   DropdownItem,
-  TabItem,
   DropdownDirection,
   AppLinkVariant,
   ButtonSize,
   ButtonColor,
+  FlexDirection,
 } from "./ui";
 export {
   Overlay,
@@ -49,10 +50,10 @@ export {
   HStack,
   Listbox,
   Dropdown,
-  CardTheme,
   Popover,
   Drawer,
   StarRating,
   Modal,
   AppLogo,
+  Flex,
 } from "./ui";
