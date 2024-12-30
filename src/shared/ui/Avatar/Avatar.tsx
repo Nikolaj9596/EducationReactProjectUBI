@@ -9,7 +9,6 @@ interface AvatarProps {
   alt?: string;
 }
 
-/**@deprecate**/
 export const Avatar: FC<AvatarProps> = (props) => {
   const { className, src, size, alt } = props;
   const styles = useMemo<CSSProperties>(() => {

@@ -18,7 +18,7 @@ export { Button } from "./Button/Button";
 export { Loader } from "./deprecated/Loader/Loader";
 export { Modal } from "./Modal/Modal";
 export { Portal } from "./Portal/Portal";
-export { Input } from "./deprecated/Input/Input";
+export { Input } from "./Input/Input";
 export { Text } from "./Text/Text";
 export { Skeleton } from "./Skeleton/Skeleton";
 export { Icon } from "./Icon/Icon";

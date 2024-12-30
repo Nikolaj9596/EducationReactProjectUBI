@@ -3,9 +3,10 @@ import { classNames, Mods } from "../../../../shared";
 import cls from "./Select.module.scss";
 
 export interface SelectOption<T extends string> {
-  value?: T;
-  content?: string;
+    value: T;
+    content: string;
 }
+
 
 interface SelectProps<T extends string> {
   className?: string;

@@ -1,39 +1,44 @@
 // Hook реализует бесконечный скролл
-import { MutableRefObject, useEffect } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 
 export interface UseInfiniteScrollOptions {
   callback?: () => void;
   triggerRef: MutableRefObject<HTMLElement>;
-  wrapperRef: MutableRefObject<HTMLElement>;
+  wrapperRef?: MutableRefObject<HTMLElement>;
 }
 
-export const useInfiniteScroll = (props: UseInfiniteScrollOptions) => {
-  const { callback, triggerRef, wrapperRef } = props;
+export function useInfiniteScroll({
+  callback,
+  wrapperRef,
+  triggerRef,
+}: UseInfiniteScrollOptions) {
+  const observer = useRef<IntersectionObserver | null>(null);
+
   useEffect(() => {
-    let observer: IntersectionObserver | null = null;
-    const wrapperElement = wrapperRef.current;
+    const wrapperElement = wrapperRef?.current || null;
     const triggerElement = triggerRef.current;
 
     if (callback) {
-      let options = {
+      const options = {
         root: wrapperElement,
         rootMargin: "0px",
-        threshould: 1.0,
+        threshold: 1.0,
       };
 
-      observer = new IntersectionObserver(([entry]) => {
+      observer.current = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
           callback();
         }
       }, options);
 
-      observer.observe(triggerElement);
-
-      return () => {
-        if (observer) {
-          observer.unobserve(triggerElement);
-        }
-      };
+      observer.current.observe(triggerElement);
     }
+
+    return () => {
+      if (observer.current && triggerElement) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.current.unobserve(triggerElement);
+      }
+    };
   }, [callback, triggerRef, wrapperRef]);
-};
+}

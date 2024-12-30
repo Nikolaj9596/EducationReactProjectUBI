@@ -51,6 +51,7 @@ export function ListBox<T extends string>(props: ListBoxProps<T>) {
   const selectedItem = useMemo(() => {
     return items?.find((item) => item.value === value);
   }, [items, value]);
+
   return (
     <HStack gap={"4"}>
       {label && <span>{`${label}>`}</span>}

@@ -1,13 +1,13 @@
 import { FC, memo } from "react";
-import { Button, classNames, Icon } from "../../../../shared";
+import { Button, Card, classNames, HStack, Icon } from "../../../../shared";
 import cls from "./ArticleViewSelector.module.scss";
-import { ReactComponent as ListIcon } from "../../../../shared/assets/icons/list-24-24.svg";
-import { ReactComponent as TableIcon } from "../../../../shared/assets/icons/tiled-24-24.svg";
+import { ReactComponent as ListIcon } from "../../../../shared/assets/icons/burger.svg";
+import { ReactComponent as TableIcon } from "../../../../shared/assets/icons/tile.svg";
 import { ArticleView } from "../../../../entities/Article";
 
 interface ArticleViewSelectorProps {
   className?: string;
-  view?: ArticleView;
+  view: ArticleView;
   onViewClick?: (view: ArticleView) => void;
 }
 
@@ -31,22 +31,24 @@ export const ArticleViewSelector: FC<ArticleViewSelectorProps> = memo(
     };
 
     return (
-      <div className={classNames(cls.ArticleViewSelector, {}, [className])}>
-        {viewTypes.map((viewType) => (
-          <Button
-            key={viewType.view}
-            variant={"clear"}
-            onClick={onClick(viewType.view)}
-          >
+      <Card
+        className={classNames(cls.ArticleViewSelector, {}, [className])}
+        border="round"
+      >
+        <HStack gap="8">
+          {viewTypes.map((viewType) => (
             <Icon
+              clickable
+              key={viewType.view}
+              onClick={onClick(viewType.view)}
               Svg={viewType.icon}
               className={classNames("", {
                 [cls.notSelected]: viewType.view !== view,
               })}
             />
-          </Button>
-        ))}
-      </div>
+          ))}
+        </HStack>
+      </Card>
     );
   },
 );

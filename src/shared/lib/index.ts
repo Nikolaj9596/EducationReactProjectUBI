@@ -4,3 +4,4 @@ export { addQueryParams } from "./url/addQueryParams/addQueryParams";
 export { classNames } from "./classNames/classNames";
 export { buildSelector } from "./stor/buildSelector";
 export { useForceUpdate } from "./render/forceUpdate";
+export { useDebounce } from "./hooks/useDebounce/useDebounce";
