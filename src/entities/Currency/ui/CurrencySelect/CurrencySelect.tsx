@@ -40,14 +40,4 @@ export const CurrencySelect: FC<CurrencySelectProps> = memo((props) => {
       direction={direction}
     />
   );
-  // return (
-  //   <Select
-  //     label={t("Укажите валюту")}
-  //     options={options}
-  //     value={value}
-  //     onChange={onChangeHandler}
-  //     readonly={readonly}
-  //     className={className}
-  //   />
-  // );
 });

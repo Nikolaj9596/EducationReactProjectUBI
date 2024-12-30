@@ -105,14 +105,12 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
         isLoading={isLoading}
         error={error}
         readonly={readonly}
-        callbacks={{
-          firstName: onChangeFirstName,
-          lastName: onChangeLastName,
-          middleName: onChangeMiddleName,
-          phone: onChangePhone,
-          dateBirthday: onChangeDateBirthday,
-          avatar: onChangeAvatar,
-        }}
+        onChangeFirstName={onChangeFirstName}
+        onChangeLastName={onChangeLastName}
+        onChangeMiddleName={onChangeMiddleName}
+        onChangePhone={onChangePhone}
+        onChangeDateBirthday={onChangeDateBirthday}
+        onChangeAvatar={onChangeAvatar}
       />
     </DynamicModuleLoader>
   );

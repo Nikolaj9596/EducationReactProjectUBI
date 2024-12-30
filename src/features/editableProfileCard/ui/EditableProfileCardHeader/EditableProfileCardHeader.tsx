@@ -7,7 +7,7 @@ import { FC, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../../shared/lib/hooks/useAppDispatch";
-import { Button, classNames, HStack, Text } from "../../../../shared";
+import { Button, Card, classNames, HStack, Text } from "../../../../shared";
 
 interface EditableProfileCardHeaderProps {
   className?: string;
@@ -35,31 +35,30 @@ export const EditableProfileCardHeader: FC<EditableProfileCardHeaderProps> =
     }, [dispatch]);
 
     return (
-      <HStack
-        max
-        justify="between"
-        className={classNames("", {}, [props.className])}
-      >
-        <Text title={t("Профиль")} />
-        {canEdit && (
-          <div>
-            {readonly ? (
-              <Button variant={"outline"} onClick={onEdit}>
-                {t("Редактировать")}
-              </Button>
-            ) : (
-              <HStack gap="8">
-                <Button variant={"outline"} onClick={onCancelEdit}>
-                  {t("Отменить")}
-                </Button>
-
-                <Button variant={"outline"} onClick={onSave}>
-                  {t("Сохранить")}
-                </Button>
-              </HStack>
-            )}
-          </div>
-        )}
-      </HStack>
+      <Card padding="24" fullWidth border="partial">
+        <HStack
+          max
+          justify="between"
+          className={classNames("", {}, [props.className])}
+        >
+          <Text title={t("Профиль")} />
+          {canEdit && (
+            <div>
+              {readonly ? (
+                <Button onClick={onEdit}>{t("Редактировать")}</Button>
+              ) : (
+                <HStack gap="8">
+                  <Button onClick={onCancelEdit} color="error">
+                    {t("Отменить")}
+                  </Button>
+                  <Button onClick={onSave} color="success">
+                    {t("Сохранить")}
+                  </Button>
+                </HStack>
+              )}
+            </div>
+          )}
+        </HStack>
+      </Card>
     );
   });

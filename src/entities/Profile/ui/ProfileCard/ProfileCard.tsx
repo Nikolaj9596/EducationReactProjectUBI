@@ -1,127 +1,38 @@
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  classNames,
-  Text,
-  Input,
-  Loader,
-  Avatar,
-  Mods,
-  VStack,
-  HStack,
-} from "../../../../shared";
-import cls from "./ProfileCard.module.scss";
 import { Profile } from "../../model/types/profile";
-import { ProfileEditkCallbacks } from "../../../../pages/ProfilePage/ui/ProfilePage";
-import { CurrencySelect } from "../../../Currency";
+import {
+  ProfileCardError,
+  ProfileCardRedesigned,
+  ProfileCardSkeleton,
+} from "../ProfileCardRedesigned/ProfileCardRedesigned";
 
-interface ProfileCardProps {
+export interface ProfileCardProps {
   className?: string;
   data?: Profile;
-  isLoading?: boolean;
   error?: string;
+  isLoading?: boolean;
   readonly?: boolean;
-  callbacks: ProfileEditkCallbacks;
+  onChangeLastName?: (value?: string) => void;
+  onChangeFirstName?: (value?: string) => void;
+  onChangeMiddleName?: (value?: string) => void;
+  onChangePhone?: (value?: string) => void;
+  onChangeDateBirthday?: (value?: string) => void;
+  onChangeCurrency?: (value?: string) => void;
+  onChangeUsername?: (value?: string) => void;
+  onChangeAvatar?: (value?: string) => void;
 }
 
-export const ProfileCard: FC<ProfileCardProps> = (props) => {
-  const { className, data, isLoading, error, callbacks, readonly } = props;
-  const { t } = useTranslation("profile");
+export const ProfileCard = (props: ProfileCardProps) => {
+  const { isLoading, error } = props;
+  const { t } = useTranslation();
 
   if (isLoading) {
-    return (
-      <HStack
-        max
-        justify={"center"}
-        className={classNames(cls.ProfileCard, { [cls.loading]: true }, [
-          className,
-        ])}
-      >
-        <Loader />
-      </HStack>
-    );
+    return <ProfileCardSkeleton />;
   }
 
   if (error) {
-    console.log(error);
-    return (
-      <HStack
-        justify={"center"}
-        max
-        className={classNames(cls.ProfileCard, {}, [className, cls.error])}
-      >
-        <Text
-          variant={"error"}
-          title={t("Произошла ошибка при загрузки профиля")}
-          text={t("Попробуйте обновить страницу")}
-          align={"center"}
-        />
-      </HStack>
-    );
+    return <ProfileCardError />;
   }
 
-  const mods: Mods = {
-    [cls.editing]: !readonly,
-  };
-
-  return (
-    <VStack
-      gap={"8"}
-      max
-      className={classNames(cls.ProfileCard, mods, [className])}
-    >
-      {data?.avatar && (
-        <HStack justify={"center"} max className={cls.avatarWrapper}>
-          <Avatar size={150} src={data?.avatar} />
-        </HStack>
-      )}
-      <Input
-        value={data?.lastName}
-        placeholder={t("Фамилия")}
-        className={cls.input}
-        onChange={callbacks.lastName}
-        readonly={readonly}
-      />
-      <Input
-        value={data?.firstName}
-        placeholder={t("Имя")}
-        className={cls.input}
-        onChange={callbacks.firstName}
-        readonly={readonly}
-      />
-      <Input
-        value={data?.middleName}
-        placeholder={t("Отчество")}
-        className={cls.input}
-        onChange={callbacks.middleName}
-        readonly={readonly}
-      />
-      <Input
-        value={data?.phone}
-        placeholder={t("Номер телофона")}
-        className={cls.input}
-        onChange={callbacks.phone}
-        readonly={readonly}
-      />
-      <Input
-        value={data?.dateBirthday}
-        placeholder={t("Дата рождения")}
-        className={cls.input}
-        onChange={callbacks.dateBirthday}
-        readonly={readonly}
-      />
-      <Input
-        value={data?.avatar}
-        placeholder={t("Аватарка")}
-        className={cls.input}
-        onChange={callbacks.avatar}
-        readonly={readonly}
-      />
-      <CurrencySelect
-        readonly={readonly}
-        className={cls.input}
-        direction={"bottom left"}
-      />
-    </VStack>
-  );
+  return <ProfileCardRedesigned {...props} />;
 };

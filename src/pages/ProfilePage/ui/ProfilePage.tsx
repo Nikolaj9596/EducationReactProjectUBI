@@ -8,15 +8,6 @@ interface ProfilePageProps {
   className?: string;
 }
 
-export interface ProfileEditkCallbacks {
-  firstName: (value: string) => void;
-  lastName: (value: string) => void;
-  middleName: (value: string) => void;
-  phone: (value: string) => void;
-  dateBirthday: (value: string) => void;
-  avatar: (value: string) => void;
-}
-
 const ProfilePage: FC<ProfilePageProps> = (props) => {
   const { id } = useParams<{ id: string }>();
   return (
