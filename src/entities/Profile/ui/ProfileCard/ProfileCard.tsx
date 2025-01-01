@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { Profile } from "../../model/types/profile";
 import {
   ProfileCardError,
@@ -24,7 +23,6 @@ export interface ProfileCardProps {
 
 export const ProfileCard = (props: ProfileCardProps) => {
   const { isLoading, error } = props;
-  const { t } = useTranslation();
 
   if (isLoading) {
     return <ProfileCardSkeleton />;

@@ -38,7 +38,6 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
         right={<FiltersContainer />}
         content={
           <Page
-            data-testid="ArticlesPage"
             onScrollEnd={onLoadNextPart}
             className={classNames(cls.ArticlesPage, {}, [className])}
           >

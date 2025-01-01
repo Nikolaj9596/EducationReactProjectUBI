@@ -2,6 +2,7 @@ export { Flex } from "./Stack/Flex/Flex";
 export type { FlexDirection } from "./Stack/Flex/Flex";
 export { Overlay } from "./Overlay/Overlay";
 export { AppLogo } from "./AppLogo/AppLogo";
+export { AppImage } from "./AppImage/AppImage";
 export { StarRating } from "./deprecated/StarRating/StarRating";
 export { Drawer } from "./deprecated/Drawer/Drawer";
 export { Select } from "./deprecated/Select/Select";

@@ -57,4 +57,5 @@ export {
   Modal,
   AppLogo,
   Flex,
+  AppImage,
 } from "./ui";

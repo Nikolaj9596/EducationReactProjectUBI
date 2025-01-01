@@ -4,20 +4,24 @@ import {
   ArticleTextBlock,
   ArticleView,
 } from "../../model/types/article";
-import { FC, HTMLAttributeAnchorTarget, memo} from "react";
+import { FC, HTMLAttributeAnchorTarget, memo } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  AppImage,
   AppLink,
   Avatar,
   Button,
   Card,
   classNames,
+  HStack,
   Icon,
+  Skeleton,
   Text,
+  VStack,
 } from "../../../../shared";
 import cls from "./ArticleListItem.module.scss";
-import { ReactComponent as EyeIcon } from "../../../../shared/assets/icons/eye-20-20.svg";
-import { ArticleTextBlockComponent } from "../ArticleTextBlockComponent/ArticleTextBlockComponent";
+import { ReactComponent as EyeIcon } from "../../../../shared/assets/icons/eye.svg";
+import { getRouteArticleDetails } from "../../../../shared/const/router";
 
 interface ArticleListItemProps {
   className?: string;
@@ -29,74 +33,84 @@ interface ArticleListItemProps {
 export const ArticleListItem: FC<ArticleListItemProps> = memo((props) => {
   const { className, article, view, target = "_blank" } = props;
   const { t } = useTranslation("article");
-  const types = <Text text={article.type.join(", ")} className={cls.types} />;
-  const views = (
+  const userInfo = (
     <>
-      <Text text={String(article.views)} className={cls.views} />
-      <Icon Svg={EyeIcon} />
+      <Avatar size={32} src={article.author.avatar} className={cls.avatar} />
+      <Text bold text={article.author.userName} />
     </>
   );
 
+  const views = (
+    <HStack gap="8">
+      <Icon Svg={EyeIcon} />
+      <Text text={String(article.views)} className={cls.views} />
+    </HStack>
+  );
+
   if (view === ArticleView.LIST) {
-    let textBlock = article.blocks.find(
+    const textBlock = article.blocks.find(
       (block) => block.type === ArticleBlockType.TEXT,
     ) as ArticleTextBlock;
+
     return (
-      <div
+      <Card
+        padding="24"
+        max
         className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
       >
-        <Card className={cls.card}>
-          <div className={cls.header}>
-            <Avatar
-              size={30}
-              src={article.author.avatar}
-              className={cls.avatar}
-            />
-            <Text text={article.author.userName} className={cls.userName} />
-            <Text text={article.createdAt} className={cls.date} />
-          </div>
-          <Text title={article.title} className={cls.title} />
-          {types}
-          <img src={article.img} className={cls.img} alt={article.title} />
-          {textBlock && (
-            <ArticleTextBlockComponent
-              block={textBlock}
+        <VStack max gap="16">
+          <HStack gap="8" max>
+            {userInfo}
+            <Text text={article.createdAt} />
+          </HStack>
+          <Text title={article.title} bold />
+          <Text title={article.subtitle} size="s" />
+          <AppImage
+            fallback={<Skeleton width="100%" height={250} />}
+            src={article.img}
+            className={cls.img}
+            alt={article.title}
+          />
+          {textBlock?.paragraphs && (
+            <Text
               className={cls.textBlock}
+              text={textBlock.paragraphs.slice(0, 2).join(" ")}
             />
           )}
-          <div className={cls.footer}>
-            <AppLink target={target}
-              //TODO: Remove it
-              // to={RoutePath.article_details + article.id}
-              to={"/articles/" + article.id}
-            >
-              <Button variant={"outline"}>
-                {t("Читать далее...")}
-              </Button>
+          <HStack max justify="between">
+            <AppLink target={target} to={getRouteArticleDetails(article.id)}>
+              <Button variant="outline">{t("Читать далее...")}</Button>
             </AppLink>
             {views}
-          </div>
-        </Card>
-      </div>
+          </HStack>
+        </VStack>
+      </Card>
     );
   }
+
   return (
     <AppLink
       target={target}
-      // to={RoutePath.article_details + article.id}
-      to={"/articles/" + article.id}
+      to={getRouteArticleDetails(article.id)}
       className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
     >
-      <Card className={cls.card}>
-        <div className={cls.imageWrapper}>
-          <img className={cls.img} src={article.img} alt={article.title} />
-          <Text text={article.createdAt} className={cls.date} />
-        </div>
-        <div className={cls.infoWrapper}>
-          {types}
-          {views}
-        </div>
-        <Text text={article.title} className={cls.title} />
+      <Card className={cls.card} border="partial" padding="0">
+        <AppImage
+          fallback={<Skeleton width="100%" height={200} />}
+          alt={article.title}
+          src={article.img}
+          className={cls.img}
+        />
+        <VStack className={cls.info} gap="4">
+          <Text title={article.title} className={cls.title} />
+          <VStack gap="4" className={cls.footer} max>
+            <HStack justify="between" max>
+              <Text text={article.createdAt} className={cls.date} />
+              {views}
+            </HStack>
+            <HStack gap="4">{userInfo}</HStack>
+          </VStack>
+        </VStack>
       </Card>
     </AppLink>
   );
