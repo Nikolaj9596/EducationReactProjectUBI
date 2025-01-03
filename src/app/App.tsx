@@ -23,7 +23,7 @@ const App = () => {
   }
 
   return (
-    <div className={classNames("app", {}, [theme])}>
+    <div id={"app"} className={classNames("app", {}, [theme])}>
       <Suspense fallback="loadding...">
         <MainLayout
           header={<Navbar />}

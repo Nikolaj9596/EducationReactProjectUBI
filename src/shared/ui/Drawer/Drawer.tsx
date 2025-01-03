@@ -1,10 +1,10 @@
 import { FC, memo, ReactNode, useCallback, useEffect } from "react";
-import { classNames, Portal, Overlay, useTheme } from "../../../../shared";
+import { classNames, Portal, Overlay, useTheme } from "../../../shared";
 import cls from "./Drawer.module.scss";
 import {
   AnimationProvider,
   useAnimationLibs,
-} from "../../../../shared/lib/components/AnimationProvider";
+} from "../../../shared/lib/components/AnimationProvider";
 
 interface DrawerProps {
   className?: string;
@@ -16,7 +16,6 @@ interface DrawerProps {
 
 const height = window.innerHeight - 300;
 
-/**@deprecate**/
 const DrawerContent: FC<DrawerProps> = memo((props) => {
   const { className, children, onClose, isOpen, lazy } = props;
   const { theme } = useTheme();
@@ -77,7 +76,7 @@ const DrawerContent: FC<DrawerProps> = memo((props) => {
   const display = y.to((py) => (py < height ? "block" : "none"));
 
   return (
-    <Portal>
+    <Portal element={document.getElementById("app") ?? document.body}>
       <div
         className={classNames(cls.Drawer, { [cls.opened]: isOpen }, [
           className,

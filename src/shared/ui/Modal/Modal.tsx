@@ -11,7 +11,6 @@ interface ModalProps {
   lazy?: boolean;
 }
 
-/**@deprecate**/
 export const Modal: FC<ModalProps> = (props) => {
   const {
     className = cls.Modal,
@@ -36,7 +35,7 @@ export const Modal: FC<ModalProps> = (props) => {
     return null;
   }
   return (
-    <Portal>
+    <Portal element={document.getElementById("app") ?? document.body}>
       <div className={classNames(cls.Modal, mods, [className])}>
         <Overlay onClick={close} />
         <div className={cls.content}>{children}</div>

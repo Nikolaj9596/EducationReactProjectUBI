@@ -4,7 +4,7 @@ export { Overlay } from "./Overlay/Overlay";
 export { AppLogo } from "./AppLogo/AppLogo";
 export { AppImage } from "./AppImage/AppImage";
 export { StarRating } from "./deprecated/StarRating/StarRating";
-export { Drawer } from "./deprecated/Drawer/Drawer";
+export { Drawer } from "./Drawer/Drawer";
 export { Select } from "./deprecated/Select/Select";
 export type { SelectOption } from "./deprecated/Select/Select";
 export type { DropdownDirection } from "../types/ui";
