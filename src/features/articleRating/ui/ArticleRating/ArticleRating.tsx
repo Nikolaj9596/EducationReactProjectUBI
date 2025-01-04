@@ -1,30 +1,30 @@
-import { classNames, Skeleton } from "../../../../shared";
 import { useTranslation } from "react-i18next";
-import cls from "./ArticleRating.module.scss";
 import { memo, useCallback } from "react";
-import { RatingCard } from "../../../../entities/Rating";
 import { useSelector } from "react-redux";
-import { getUserAuthData } from "../../../../entities/User";
 import {
-  useAddRatingArticleMutation,
-  useGetArticleRatingQuery,
+  useGetArticleRating,
+  useRateArticle,
 } from "../../api/articleRatingApi";
+import { getUserAuthData } from "../../../../entities/User";
+import { Skeleton } from "../../../../shared";
+import { RatingCard } from "../../../../entities/Rating";
 
-interface ArticleRatingProps {
+export interface ArticleRatingProps {
   className?: string;
   articleId: string;
 }
 
-export const ArticleRating = memo((props: ArticleRatingProps) => {
+const ArticleRating = memo((props: ArticleRatingProps) => {
   const { className, articleId } = props;
   const { t } = useTranslation();
   const userData = useSelector(getUserAuthData);
 
-  const { data, isLoading } = useGetArticleRatingQuery({
+  const { data, isLoading } = useGetArticleRating({
     articleId,
     userId: userData?.id ?? "",
   });
-  const [rateArticleMutation] = useAddRatingArticleMutation();
+  const [rateArticleMutation] = useRateArticle();
+
   const handleRateArticle = useCallback(
     (starsCount: number, feedback?: string) => {
       try {
@@ -35,10 +35,11 @@ export const ArticleRating = memo((props: ArticleRatingProps) => {
           feedback,
         });
       } catch (e) {
+        // handle error
         console.log(e);
       }
     },
-    [articleId, rateArticleMutation, userData],
+    [articleId, rateArticleMutation, userData?.id],
   );
 
   const onAccept = useCallback(
@@ -56,17 +57,17 @@ export const ArticleRating = memo((props: ArticleRatingProps) => {
   );
 
   if (isLoading) {
-    return <Skeleton width={"100%"} height={120} />;
+    return <Skeleton width="100%" height={120} />;
   }
-  //TODO: remove in prod ??
+
   const rating = data?.[0];
 
   return (
     <RatingCard
-      onAccept={onAccept}
       onCancel={onCancel}
+      onAccept={onAccept}
       rate={rating?.rate}
-      className={classNames(cls.ArticleRating, {}, [className])}
+      className={className}
       title={t("Оцените статью")}
       feedbackTitle={t(
         "Оставьте свой отзыв о статье, это поможет улучшить качество",
@@ -75,3 +76,5 @@ export const ArticleRating = memo((props: ArticleRatingProps) => {
     />
   );
 });
+
+export default ArticleRating;

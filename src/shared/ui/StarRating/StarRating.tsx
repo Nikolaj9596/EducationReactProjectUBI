@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
-import { classNames, Icon } from "../../../../shared";
+import { classNames, Icon } from "../../../shared";
 import cls from "./StarRating.module.scss";
-import { ReactComponent as StarIcon } from "../../../../shared/assets/icons/star.svg";
+import { ReactComponent as StarIcon } from "../../../shared/assets/icons/star.svg";
 
 interface StarRatingProps {
   className?: string;
@@ -12,7 +12,6 @@ interface StarRatingProps {
 
 const stars = [1, 2, 3, 4, 5];
 
-/**@deprecate**/
 export const StarRating = memo((props: StarRatingProps) => {
   const { className, size = 30, selectedStars = 0, onSelect } = props;
   const [currentStarsCount, setCurrentStarsCount] = useState(selectedStars);
@@ -40,20 +39,22 @@ export const StarRating = memo((props: StarRatingProps) => {
 
   return (
     <div className={classNames(cls.StarRating, {}, [className])}>
-      {stars.map((starNumber) => (
-        <Icon
-          className={classNames(cls.starIcon, { [cls.selected]: isSelected }, [
+      {stars.map((starNumber) => {
+        const commonProps = {
+          className: classNames(cls.starIcon, { [cls.selected]: isSelected }, [
             currentStarsCount >= starNumber ? cls.hovered : cls.normal,
-          ])}
-          Svg={StarIcon}
-          key={starNumber}
-          width={size}
-          height={size}
-          onMouseLeave={onLeave}
-          onMouseEnter={onHover(starNumber)}
-          onClick={onClick(starNumber)}
-        />
-      ))}
+          ]),
+          Svg: StarIcon,
+          key: starNumber,
+          width: size,
+          height: size,
+          onMouseLeave: onLeave,
+          onMouseEnter: onHover(starNumber),
+          onClick: onClick(starNumber),
+          "data-selected": currentStarsCount >= starNumber,
+        };
+        return <Icon clickable={!isSelected} {...commonProps} />;
+      })}
     </div>
   );
 });

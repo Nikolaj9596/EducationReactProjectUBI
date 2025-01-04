@@ -17,6 +17,7 @@ import {
   DynamicModuleLoader,
   ReducersList,
   HStack,
+  Card,
 } from "../../../../shared";
 import cls from "./AddCommentForm.module.scss";
 
@@ -43,24 +44,29 @@ const AddCommentForm: FC<AddCommentFormProps> = memo((props) => {
     [dispatch],
   );
 
-  const onSentHendler = useCallback(() => {
+  const onSendHandler = useCallback(() => {
     onSentComment(text || "");
     onCommentTextChange("");
   }, [onSentComment, text, onCommentTextChange]);
 
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <HStack max justify={"between"} className={classNames(cls.AddCommentForm, {}, [className])}>
-        <Input
-          className={cls.input}
-          placeholder={t("Введите тексе комментария")}
-          value={text}
-          onChange={onCommentTextChange}
-        />
-        <Button variant={"outline"} onClick={onSentHendler}>
-          {t("Отправить")}
-        </Button>
-      </HStack>
+      <Card padding="24" border="partial" fullWidth>
+        <HStack
+          justify="between"
+          max
+          gap="16"
+          className={classNames(cls.AddCommentForm, {}, [className])}
+        >
+          <Input
+            className={cls.input}
+            placeholder={t("Введите текст комментария")}
+            value={text}
+            onChange={onCommentTextChange}
+          />
+          <Button onClick={onSendHandler}>{t("Отправить")}</Button>
+        </HStack>
+      </Card>
     </DynamicModuleLoader>
   );
 });
