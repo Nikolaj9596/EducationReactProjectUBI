@@ -1,10 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { FC, Fragment, memo, ReactNode } from "react";
-import {
-  classNames,
-  Button,
-  AppLink,
-} from "../../../../../shared";
+import { classNames, Button, AppLink } from "../../../../../shared";
 import cls from "./Dropdown.module.scss";
 import popupCls from "../../styles/popup.module.scss";
 import { mapDirectionClass } from "../../styles/const";
@@ -24,18 +20,16 @@ interface DropdownProps {
   trigger: ReactNode;
 }
 
-/**@deprecate**/
 export const Dropdown: FC<DropdownProps> = memo((props) => {
-  const { className, direction = "bottom left", items, trigger } = props;
+  const { className, trigger, items, direction = "bottom right" } = props;
+  const menuClasses = [mapDirectionClass[direction], popupCls.menu];
   return (
     <Menu
       as="div"
       className={classNames(cls.Dropdown, {}, [className, popupCls.popup])}
     >
       <MenuButton className={popupCls.trigger}>{trigger}</MenuButton>
-      <MenuItems
-        className={classNames(cls.menu, {}, [mapDirectionClass[direction]])}
-      >
+      <MenuItems className={classNames(cls.menu, {}, menuClasses)}>
         {items.map((item, index) => {
           const content = ({ active }: { active: boolean }) => (
             <Button

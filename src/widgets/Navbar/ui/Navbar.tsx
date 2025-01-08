@@ -1,13 +1,5 @@
 import { FC, memo, useCallback, useState } from "react";
-import {
-  Button,
-  Text,
-  AppLink,
-  AppLinkVariant,
-  TextVariant,
-  HStack,
-  classNames,
-} from "../../../shared";
+import { Button, HStack, classNames } from "../../../shared";
 import cls from "./Navbar.module.scss";
 import { useTranslation } from "react-i18next";
 import { LoginModal } from "../../../features/AuthByUserName";
@@ -48,11 +40,7 @@ export const Navbar: FC<NavbarProps> = memo(({ className }) => {
     <header
       className={classNames(cls.navbar, {}, [className ? className : ""])}
     >
-      <Button
-        variant={"clear"}
-        className={cls.links}
-        onClick={onShowModal}
-      >
+      <Button variant={"clear"} className={cls.links} onClick={onShowModal}>
         {t("Войти")}
       </Button>
       {isAuthModal && (
